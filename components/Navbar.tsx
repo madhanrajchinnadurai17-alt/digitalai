@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Sparkles, LayoutDashboard, Eye, History, LogOut, Activity, ArrowRight, Zap, Menu, X } from 'lucide-react';
+import { 
+  Sparkles, 
+  LayoutDashboard, 
+  Eye, 
+  History, 
+  LogOut, 
+  Activity, 
+  ArrowRight, 
+  Zap, 
+  Menu, 
+  X,
+  CalendarDays,
+  Palette
+} from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { SystemStatusModal } from './SystemStatusModal';
 
@@ -11,11 +24,11 @@ export function Navbar() {
   const [showStatusModal, setShowStatusModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const isLandingPage = router.pathname === '/';
-
   const appNavItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/preview', label: 'Preview & Post', icon: Eye },
+    { href: '/calendar', label: '30-Day Calendar', icon: CalendarDays },
+    { href: '/brand-kit', label: 'Brand Kit', icon: Palette },
+    { href: '/preview', label: 'Studio Preview', icon: Eye },
     { href: '/history', label: 'Post History', icon: History },
   ];
 
@@ -23,6 +36,7 @@ export function Navbar() {
     { href: '/#features', label: 'Features' },
     { href: '/#how-it-works', label: 'How It Works' },
     { href: '/#demo', label: 'Live Demo' },
+    { href: '/calendar', label: 'Calendar' },
     { href: '/dashboard', label: 'App Cockpit' },
   ];
 
@@ -46,11 +60,11 @@ export function Navbar() {
                       MarkAI
                     </span>
                     <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
-                      MVP
+                      Phase 2
                     </span>
                   </div>
                   <span className="text-[11px] text-slate-400 font-medium hidden sm:block">
-                    AI Auto-Poster for Small Business
+                    AI Marketing Automation for Small Business
                   </span>
                 </div>
               </Link>
@@ -63,44 +77,25 @@ export function Navbar() {
             </div>
 
             {/* Navigation Links */}
-            <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
-              {user ? (
-                appNavItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = router.pathname === item.href;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-                        isActive
-                          ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md shadow-fuchsia-600/25'
-                          : 'text-slate-300 hover:text-white hover:bg-white/[0.06]'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      {item.label}
-                    </Link>
-                  );
-                })
-              ) : (
-                landingNavItems.map((item) => {
-                  const isActive = router.pathname === item.href;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
-                        isActive
-                          ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md'
-                          : 'text-slate-300 hover:text-white hover:bg-white/[0.06]'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })
-              )}
+            <nav className="hidden lg:flex items-center gap-1 p-1 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+              {(user ? appNavItems : landingNavItems).map((item) => {
+                const isActive = router.pathname === item.href;
+                const Icon = (item as any).icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
+                      isActive
+                        ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md shadow-fuchsia-600/25'
+                        : 'text-slate-300 hover:text-white hover:bg-white/[0.06]'
+                    }`}
+                  >
+                    {Icon && <Icon className="w-3.5 h-3.5" />}
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Right Action Area */}
@@ -155,7 +150,7 @@ export function Navbar() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl text-slate-300 md:hidden bg-white/5 border border-white/10"
+                className="p-2 rounded-xl text-slate-300 lg:hidden bg-white/5 border border-white/10"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -165,17 +160,21 @@ export function Navbar() {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 bg-[#0E0927]/95 backdrop-blur-2xl p-4 space-y-2 animate-fadeIn">
-            {(user ? appNavItems : landingNavItems).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/10 transition"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="lg:hidden border-t border-white/10 bg-[#0E0927]/95 backdrop-blur-2xl p-4 space-y-2 animate-fadeIn">
+            {(user ? appNavItems : landingNavItems).map((item) => {
+              const Icon = (item as any).icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/10 transition"
+                >
+                  {Icon && <Icon className="w-4 h-4 text-fuchsia-400" />}
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
             {!user && (
               <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
                 <Link

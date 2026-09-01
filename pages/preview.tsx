@@ -17,7 +17,12 @@ import {
   AlertCircle, 
   Instagram, 
   Copy,
-  Check
+  Check,
+  Layers,
+  Film,
+  Music,
+  Video,
+  ChevronRight
 } from 'lucide-react';
 
 export default function PreviewPage() {
@@ -28,12 +33,14 @@ export default function PreviewPage() {
     publishToInstagram, 
     saveAsDraft, 
     isPosting,
-    currentPostRecord 
+    currentPostRecord,
+    selectedFormat 
   } = usePost();
 
   const [caption, setCaption] = useState('');
   const [currentImageData, setCurrentImageData] = useState<string>('');
   const [copied, setCopied] = useState(false);
+  const [copiedSlides, setCopiedSlides] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [postResult, setPostResult] = useState<{
     open: boolean;
@@ -58,6 +65,24 @@ export default function PreviewPage() {
     navigator.clipboard.writeText(caption);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleCopySlides = () => {
+    if (generatedPost?.carousel_slides) {
+      const formatted = generatedPost.carousel_slides
+        .map(s => `[SLIDE ${s.slide_number}] ${s.headline}\n${s.body}\n(Visual Cue: ${s.visual_cue})`)
+        .join('\n\n');
+      navigator.clipboard.writeText(formatted);
+      setCopiedSlides(true);
+      setTimeout(() => setCopiedSlides(false), 2000);
+    } else if (generatedPost?.reels_script) {
+      const r = generatedPost.reels_script;
+      const formatted = `HOOK: ${r.hook}\nDURATION: ${r.duration}\nMUSIC: ${r.music_suggestion}\n\nSCENES:\n` +
+        r.scenes.map(s => `[${s.timestamp}] Visual: ${s.visual_action}\nAudio: ${s.spoken_audio}\nOn-Screen Text: ${s.on_screen_text}`).join('\n\n');
+      navigator.clipboard.writeText(formatted);
+      setCopiedSlides(true);
+      setTimeout(() => setCopiedSlides(false), 2000);
+    }
   };
 
   const handleSaveDraft = async () => {
@@ -109,6 +134,8 @@ export default function PreviewPage() {
     return null;
   }
 
+  const format = generatedPost.format || selectedFormat || 'single_image';
+
   return (
     <Layout title="Preview & Post — MarkAI">
       <div className="max-w-6xl mx-auto space-y-8">
@@ -126,14 +153,14 @@ export default function PreviewPage() {
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
-                  Step 2 of 2 · Preview & Post
+                  Step 2 of 2 · {format === 'carousel' ? 'Carousel Outline' : format === 'reels_script' ? 'Reels Storyboard' : 'Preview & Post'}
                 </span>
                 {currentPostRecord?.status && (
                   <StatusBadge status={currentPostRecord.status} size="sm" />
                 )}
               </div>
               <h1 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
-                Post Cockpit for {currentProfile.business_name}
+                Content Cockpit for {currentProfile.business_name}
               </h1>
             </div>
           </div>
@@ -184,7 +211,7 @@ export default function PreviewPage() {
             </div>
             <div>
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
-                Post Theme Hook
+                Campaign Hook
               </span>
               <p className="text-xs font-semibold text-slate-200 mt-0.5 line-clamp-1">
                 {generatedPost.post_theme}
@@ -212,7 +239,7 @@ export default function PreviewPage() {
             </div>
             <div>
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
-                Visual Concept Idea
+                Visual Concept
               </span>
               <p className="text-xs font-semibold text-slate-300 mt-0.5 line-clamp-1">
                 {generatedPost.visual_idea}
@@ -221,81 +248,245 @@ export default function PreviewPage() {
           </div>
         </div>
 
-        {/* Split Cockpit: Left Caption Editor | Right Canvas Graphic */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* Left: Editable Caption Area */}
-          <div className="lg:col-span-6 space-y-4">
-            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 flex flex-col h-full">
-              <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-3">
+        {/* Dynamic Multi-Format Cockpit */}
+        {format === 'carousel' ? (
+          /* Multi-Slide Carousel Outline View */
+          <div className="space-y-6">
+            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
+              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Instagram Caption & Copy
+                  <Layers className="w-5 h-5 text-fuchsia-400" />
+                  <span className="text-sm font-extrabold text-white uppercase tracking-wider">
+                    Structured Carousel Slide Deck ({generatedPost.carousel_slides?.length || 5} Slides)
                   </span>
-                  <span className="text-[11px] text-fuchsia-400 font-semibold">(Editable)</span>
                 </div>
                 <button
-                  onClick={handleCopyCaption}
-                  className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
-                  title="Copy caption to clipboard"
+                  onClick={handleCopySlides}
+                  className="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5"
                 >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400 text-[11px] font-bold">Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span className="text-[11px] font-medium">Copy</span>
-                    </>
-                  )}
+                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedSlides ? 'Deck Copied' : 'Copy Slide Outline'}</span>
                 </button>
               </div>
 
-              <div className="flex-1">
-                <textarea
-                  rows={14}
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
-                  className="w-full h-full min-h-[330px] bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition resize-none font-sans"
-                  placeholder="Your generated caption will appear here..."
-                />
-              </div>
+              {/* Slide Deck Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {generatedPost.carousel_slides?.map((slide) => (
+                  <div
+                    key={slide.slide_number}
+                    className="p-5 rounded-2xl bg-space-950/80 border border-white/10 flex flex-col justify-between space-y-3 hover:border-fuchsia-500/40 transition group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between text-xs font-mono font-bold text-fuchsia-400 mb-2">
+                        <span>SLIDE 0{slide.slide_number}</span>
+                        {slide.slide_number === 1 && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300">
+                            HOOK
+                          </span>
+                        )}
+                        {slide.slide_number === 5 && (
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                            CTA
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="text-xs font-bold text-white leading-snug group-hover:text-fuchsia-200">
+                        {slide.headline}
+                      </h4>
+                      <p className="text-[11px] text-slate-300 mt-2 leading-relaxed">
+                        {slide.body}
+                      </p>
+                    </div>
 
-              <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
-                <div className="flex items-center gap-2">
-                  <Hash className="w-3.5 h-3.5 text-fuchsia-400" />
-                  <span>{generatedPost.hashtags?.length || 0} Hashtags Included</span>
-                </div>
-                <span>{caption.length} characters</span>
+                    <div className="pt-3 border-t border-white/10 text-[10px] text-slate-500 italic">
+                      🎬 Visual: {slide.visual_cue}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Right: Auto-generated Branded Graphic Overlay Canvas */}
-          <div className="lg:col-span-6 space-y-4">
+            {/* Accompanying Caption Editor */}
             <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-              <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">
-                    Branded Text-Overlay Creative
-                  </span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
-                    1080 × 1080
-                  </span>
-                </div>
+              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                  Instagram Caption (Carousel Intro)
+                </span>
+                <button
+                  onClick={handleCopyCaption}
+                  className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Copied' : 'Copy Caption'}</span>
+                </button>
               </div>
-
-              {/* High-Resolution HTML5 Canvas Component */}
-              <GraphicCanvas
-                businessName={currentProfile.business_name}
-                themeTitle={generatedPost.post_theme}
-                onImageReady={(dataUrl) => setCurrentImageData(dataUrl)}
+              <textarea
+                rows={5}
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                className="w-full bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed focus:outline-none focus:border-brand-fuchsia resize-none"
               />
             </div>
           </div>
-        </div>
+        ) : format === 'reels_script' ? (
+          /* Reels / Video Script Storyboard View */
+          <div className="space-y-6">
+            <div className="card-glass rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/10 space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30">
+                    <Film className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-extrabold text-white">Reels & Short Video Script Storyboard</h3>
+                    <div className="flex items-center gap-3 text-xs text-slate-400 mt-0.5">
+                      <span>Duration: <strong className="text-white">{generatedPost.reels_script?.duration || '20s'}</strong></span>
+                      <span>·</span>
+                      <span className="flex items-center gap-1 text-amber-300">
+                        <Music className="w-3.5 h-3.5" /> {generatedPost.reels_script?.music_suggestion || 'Upbeat Kinetic Lofi'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleCopySlides}
+                  className="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5"
+                >
+                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedSlides ? 'Script Copied' : 'Copy Full Script'}</span>
+                </button>
+              </div>
+
+              {/* 3-Second Hook Callout */}
+              <div className="p-4 rounded-2xl bg-rose-950/30 border border-rose-500/30 flex items-start gap-3">
+                <div className="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 text-xs font-extrabold uppercase">
+                  3-Sec Hook
+                </div>
+                <p className="text-xs sm:text-sm font-bold text-white">
+                  "{generatedPost.reels_script?.hook || generatedPost.post_theme}"
+                </p>
+              </div>
+
+              {/* Scene Breakdown Storyboard */}
+              <div className="space-y-3">
+                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
+                  Scene-by-Scene Visual & Audio Storyboard:
+                </span>
+
+                <div className="grid grid-cols-1 gap-3">
+                  {generatedPost.reels_script?.scenes.map((scene, idx) => (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-2xl bg-space-950/80 border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
+                    >
+                      <div className="md:col-span-2 flex items-center gap-2">
+                        <span className="px-2.5 py-1 rounded-xl bg-white/[0.05] text-xs font-mono font-bold text-fuchsia-300 border border-white/10">
+                          {scene.timestamp}
+                        </span>
+                      </div>
+                      <div className="md:col-span-4 text-xs text-slate-300">
+                        <strong className="text-slate-100 block text-[11px] uppercase mb-0.5">🎬 Visual Action:</strong>
+                        {scene.visual_action}
+                      </div>
+                      <div className="md:col-span-4 text-xs text-amber-200">
+                        <strong className="text-amber-400 block text-[11px] uppercase mb-0.5">🎙️ Voiceover / Spoken:</strong>
+                        {scene.spoken_audio}
+                      </div>
+                      <div className="md:col-span-2 text-[11px] font-bold text-white bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/15 text-center">
+                        {scene.on_screen_text}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Accompanying Caption */}
+            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
+              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                  Reels Post Caption & Viral Hashtags
+                </span>
+                <button
+                  onClick={handleCopyCaption}
+                  className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copied ? 'Copied' : 'Copy'}</span>
+                </button>
+              </div>
+              <textarea
+                rows={4}
+                value={caption}
+                onChange={(e) => setCaption(e.target.value)}
+                className="w-full bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed focus:outline-none focus:border-brand-fuchsia resize-none"
+              />
+            </div>
+          </div>
+        ) : (
+          /* Default: Single Image Post with HTML5 Canvas Studio */
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-6 space-y-4">
+              <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 flex flex-col h-full">
+                <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">
+                      Instagram Caption & Copy
+                    </span>
+                    <span className="text-[11px] text-fuchsia-400 font-semibold">(Editable)</span>
+                  </div>
+                  <button
+                    onClick={handleCopyCaption}
+                    className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                  >
+                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copied ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+
+                <div className="flex-1">
+                  <textarea
+                    rows={14}
+                    value={caption}
+                    onChange={(e) => setCaption(e.target.value)}
+                    className="w-full h-full min-h-[330px] bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition resize-none font-sans"
+                    placeholder="Your generated caption will appear here..."
+                  />
+                </div>
+
+                <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <Hash className="w-3.5 h-3.5 text-fuchsia-400" />
+                    <span>{generatedPost.hashtags?.length || 0} Hashtags Included</span>
+                  </div>
+                  <span>{caption.length} characters</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 space-y-4">
+              <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
+                <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">
+                      Branded Text-Overlay Creative
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
+                      1080 × 1080
+                    </span>
+                  </div>
+                </div>
+
+                <GraphicCanvas
+                  businessName={currentProfile.business_name}
+                  themeTitle={generatedPost.post_theme}
+                  onImageReady={(dataUrl) => setCurrentImageData(dataUrl)}
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Post Result Feedback Modal */}
         {postResult.open && (
@@ -341,9 +532,6 @@ export default function PreviewPage() {
                   <h3 className="text-xl font-extrabold text-white">Publishing Issue</h3>
                   <p className="text-xs text-rose-300 mt-2">
                     {postResult.error}
-                  </p>
-                  <p className="text-[11px] text-slate-400 mt-3">
-                    In pitch demo mode, MarkAI handles sandbox posting automatically. Check your Meta Graph API credentials if testing live production tokens.
                   </p>
                   <button
                     onClick={() => setPostResult({ open: false, success: false })}

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Anthropic from '@anthropic-ai/sdk';
-import { BusinessProfile, GeneratedPost } from '@/lib/types';
+import { BusinessProfile, GeneratedPost, PostFormat, BrandKit } from '@/lib/types';
 import { generateFallbackPost } from '@/lib/mockData';
 
 const anthropicApiKey = process.env.ANTHROPIC_API_KEY;
@@ -13,7 +13,20 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { business_name, industry, description, target_audience, tone } = req.body as BusinessProfile;
+  const { 
+    business_name, 
+    industry, 
+    description, 
+    target_audience, 
+    tone,
+    format = 'single_image',
+    brandKit,
+    campaign_topic
+  } = req.body as BusinessProfile & {
+    format?: PostFormat;
+    brandKit?: BrandKit;
+    campaign_topic?: string;
+  };
 
   if (!business_name || !industry || !description) {
     return res.status(400).json({ error: 'Missing required business profile fields' });
@@ -34,44 +47,114 @@ export default async function handler(
         apiKey: anthropicApiKey,
       });
 
-      const systemPrompt = `You are MarkAI, an expert social media strategist and copywriter for small businesses.
-Your task is to generate high-converting, authentic, engaging Instagram content based on a small business profile.
+      let formatSpecificSchema = '';
+      if (format === 'carousel') {
+        formatSpecificSchema = `,
+  "carousel_slides": [
+    {
+      "slide_number": 1,
+      "headline": "Slide 1 Hook / Headline",
+      "body": "Curiosity hook text to encourage swiping",
+      "visual_cue": "Description of layout and imagery for slide 1"
+    },
+    {
+      "slide_number": 2,
+      "headline": "01 / Step or Tip 1",
+      "body": "Actionable explanation or benefit",
+      "visual_cue": "Diagram, icon, or macro product detail"
+    },
+    {
+      "slide_number": 3,
+      "headline": "02 / Step or Tip 2",
+      "body": "Insight or behind-the-scenes detail",
+      "visual_cue": "Comparison or illustration"
+    },
+    {
+      "slide_number": 4,
+      "headline": "03 / Step or Tip 3",
+      "body": "Core takeaway or solution",
+      "visual_cue": "Key metric or customer transformation"
+    },
+    {
+      "slide_number": 5,
+      "headline": "Save This Post & Follow for More",
+      "body": "Clear call to action with bio link instruction",
+      "visual_cue": "Branded bookmark and share icons"
+    }
+  ]`;
+      } else if (format === 'reels_script') {
+        formatSpecificSchema = `,
+  "reels_script": {
+    "hook": "Spoken 3-second hook that stops viewers from scrolling",
+    "duration": "15-30 seconds",
+    "music_suggestion": "Suggested trending audio genre and tempo (e.g. Upbeat Lofi 120 BPM)",
+    "scenes": [
+      {
+        "timestamp": "0:00 - 0:03",
+        "visual_action": "Action taking place on camera (e.g. rapid zoom on product)",
+        "spoken_audio": "Exact words spoken by creator/founder",
+        "on_screen_text": "Bold text overlay in center"
+      },
+      {
+        "timestamp": "0:04 - 0:10",
+        "visual_action": "B-roll demonstration showing key benefit",
+        "spoken_audio": "Voiceover explaining why this solves the problem",
+        "on_screen_text": "Key takeaway keyword"
+      },
+      {
+        "timestamp": "0:11 - 0:18",
+        "visual_action": "Founder presenting finished product with natural smile",
+        "spoken_audio": "Value proposition and why customers love it",
+        "on_screen_text": "Crafted with passion ✨"
+      },
+      {
+        "timestamp": "0:19 - 0:25",
+        "visual_action": "Pointer gesture to bio link with seamless loop",
+        "spoken_audio": "Call to action instruction",
+        "on_screen_text": "LINK IN BIO 🚀"
+      }
+    ]
+  }`;
+      }
 
-Output format MUST be strictly a valid JSON object without any markdown wrapping (no \`\`\`json or \`\`\`), with exactly these fields:
+      const systemPrompt = `You are MarkAI, an expert social media strategist, copywriter, and creative director for small businesses.
+Your task is to generate high-converting, authentic, engaging content tailored to the requested format: ${format}.
+
+${brandKit?.brand_voice_guidelines ? `Brand Voice Guidelines: "${brandKit.brand_voice_guidelines}"` : ''}
+${brandKit?.dos_list?.length ? `Mandatory Brand Do's: ${brandKit.dos_list.join(', ')}` : ''}
+${brandKit?.donts_list?.length ? `Strict Brand Don'ts (Never do these): ${brandKit.donts_list.join(', ')}` : ''}
+
+Output format MUST be strictly a valid JSON object without any markdown wrapping (no \`\`\`json or \`\`\`), matching this schema:
 {
-  "post_theme": "A punchy 4-8 word headline or campaign hook for graphic overlay",
-  "caption": "A compelling 3-4 paragraph Instagram caption with appropriate emojis, line breaks, story hook, value proposition, and a clear call to action",
+  "format": "${format}",
+  "post_theme": "A punchy 4-8 word headline or campaign hook",
+  "caption": "Compelling Instagram caption with emojis, line breaks, story value, and call to action",
   "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5", "#tag6", "#tag7"],
-  "visual_idea": "A 1-sentence creative visual concept description for the photo/graphic",
-  "best_time": "The recommended day and time window for maximum engagement (e.g. Tuesday at 11:30 AM & Thursday at 6:00 PM)"
+  "visual_idea": "Creative visual concept description",
+  "best_time": "Optimal day and time window for engagement"${formatSpecificSchema}
 }`;
 
-      const userPrompt = `Generate a high-impact Instagram post for this small business:
-- Business Name: ${profile.business_name}
+      const userPrompt = `Generate a high-impact Instagram ${format.replace('_', ' ')} for:
+- Business: ${profile.business_name}
 - Industry: ${profile.industry}
-- Product/Service Description: ${profile.description}
+- Description: ${profile.description}
 - Target Audience: ${profile.target_audience}
-- Desired Tone: ${profile.tone} (e.g., casual, formal, playful, bold, inspiring)
+- Tone: ${profile.tone}
+${campaign_topic ? `- Campaign Occasion / Focus: ${campaign_topic}` : ''}
 
-Make sure the caption is tailored to this tone and audience. Return strictly JSON.`;
+Strictly return JSON matching the schema.`;
 
       const response = await anthropic.messages.create({
         model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 1000,
+        max_tokens: 1500,
         temperature: 0.7,
         system: systemPrompt,
-        messages: [
-          {
-            role: 'user',
-            content: userPrompt,
-          },
-        ],
+        messages: [{ role: 'user', content: userPrompt }],
       });
 
       const contentBlock = response.content[0];
       if (contentBlock.type === 'text') {
         let rawText = contentBlock.text.trim();
-        // Remove markdown backticks if present
         if (rawText.startsWith('```')) {
           rawText = rawText.replace(/^```(json)?\n?/, '').replace(/\n?```$/, '');
         }
@@ -80,7 +163,7 @@ Make sure the caption is tailored to this tone and audience. Return strictly JSO
           const parsed = JSON.parse(rawText) as GeneratedPost;
           return res.status(200).json({
             success: true,
-            data: parsed,
+            data: { ...parsed, format },
             source: 'anthropic-claude'
           });
         } catch (jsonErr) {
@@ -89,16 +172,14 @@ Make sure the caption is tailored to this tone and audience. Return strictly JSO
       }
     } catch (apiErr: any) {
       console.error('Anthropic API Error:', apiErr?.message || apiErr);
-      // Fallback gracefully so demo doesn't crash during presentation
     }
   }
 
-  // Graceful Mock Fallback (if no API key provided or API error)
-  const fallback = generateFallbackPost(profile);
+  // Smart Mock Fallback
+  const fallback = generateFallbackPost(profile, format, brandKit);
   return res.status(200).json({
     success: true,
     data: fallback,
-    source: 'demo-smart-generator',
-    note: 'Generated using local smart generator (add ANTHROPIC_API_KEY for live Claude 3.5 Sonnet responses).'
+    source: 'demo-smart-generator'
   });
 }

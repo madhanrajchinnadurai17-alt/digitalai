@@ -1,5 +1,6 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { BusinessProfile, PostRecord } from './types';
+import { BusinessProfile, PostRecord, BrandKit, CalendarEvent } from './types';
+import { DEFAULT_BRAND_KIT, generate30DayCalendarPresets, DEMO_PRESET_PROFILES } from './mockData';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -14,9 +15,11 @@ export const supabase: SupabaseClient | null = isSupabaseConfigured
   ? createClient(supabaseUrl, supabaseAnonKey)
   : null;
 
-// Local / Offline fallback storage for post history & profiles
+// Local / Offline storage keys
 const LOCAL_STORAGE_POSTS_KEY = 'markai_demo_posts';
 const LOCAL_STORAGE_PROFILE_KEY = 'markai_demo_profile';
+const LOCAL_STORAGE_BRAND_KIT_KEY = 'markai_demo_brand_kit';
+const LOCAL_STORAGE_CALENDAR_KEY = 'markai_demo_calendar_events';
 
 export async function fetchPostHistory(userId: string = 'demo-user'): Promise<PostRecord[]> {
   if (supabase) {
@@ -35,7 +38,6 @@ export async function fetchPostHistory(userId: string = 'demo-user'): Promise<Po
     }
   }
 
-  // Fallback to localStorage or in-memory
   if (typeof window !== 'undefined') {
     try {
       const stored = localStorage.getItem(LOCAL_STORAGE_POSTS_KEY);
@@ -56,6 +58,7 @@ export async function savePostToDatabase(post: Omit<PostRecord, 'id' | 'created_
     user_id: post.user_id || 'demo-user',
     business_name: post.business_name,
     industry: post.industry || '',
+    format: post.format || 'single_image',
     caption: post.caption,
     hashtags: post.hashtags || [],
     visual_idea: post.visual_idea || '',
@@ -63,6 +66,8 @@ export async function savePostToDatabase(post: Omit<PostRecord, 'id' | 'created_
     post_theme: post.post_theme || '',
     image_data: post.image_data,
     image_url: post.image_url,
+    carousel_slides: post.carousel_slides,
+    reels_script: post.reels_script,
     status: post.status || 'Draft',
     instagram_media_id: post.instagram_media_id,
     error_message: post.error_message,
@@ -87,7 +92,6 @@ export async function savePostToDatabase(post: Omit<PostRecord, 'id' | 'created_
     }
   }
 
-  // Save to localStorage fallback
   if (typeof window !== 'undefined') {
     try {
       const current = await fetchPostHistory(post.user_id);
@@ -132,7 +136,6 @@ export async function updatePostStatus(
     }
   }
 
-  // Local storage update
   if (typeof window !== 'undefined') {
     try {
       const stored = localStorage.getItem(LOCAL_STORAGE_POSTS_KEY);
@@ -195,4 +198,97 @@ export async function getUserProfile(userId: string = 'demo-user'): Promise<Busi
   }
 
   return null;
+}
+
+// Brand Kit Persistence
+export async function getBrandKit(userId: string = 'demo-user'): Promise<BrandKit> {
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('brand_kits')
+        .select('*')
+        .eq('user_id', userId)
+        .single();
+      if (!error && data) return data as BrandKit;
+    } catch (err) {
+      console.warn('Supabase brand kit get error:', err);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem(LOCAL_STORAGE_BRAND_KIT_KEY);
+    if (stored) return JSON.parse(stored);
+  }
+
+  return DEFAULT_BRAND_KIT;
+}
+
+export async function saveBrandKit(brandKit: BrandKit): Promise<BrandKit> {
+  const record: BrandKit = {
+    ...brandKit,
+    user_id: brandKit.user_id || 'demo-user',
+    updated_at: new Date().toISOString()
+  };
+
+  if (supabase) {
+    try {
+      await supabase
+        .from('brand_kits')
+        .upsert(record);
+    } catch (err) {
+      console.warn('Supabase brand kit save error:', err);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(LOCAL_STORAGE_BRAND_KIT_KEY, JSON.stringify(record));
+  }
+
+  return record;
+}
+
+// Content Calendar Persistence
+export async function getCalendarEvents(userId: string = 'demo-user', profile?: BusinessProfile): Promise<CalendarEvent[]> {
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('content_calendar')
+        .select('*')
+        .eq('user_id', userId)
+        .order('date', { ascending: true });
+      if (!error && data && data.length > 0) return data as CalendarEvent[];
+    } catch (err) {
+      console.warn('Supabase calendar get error:', err);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    const stored = localStorage.getItem(LOCAL_STORAGE_CALENDAR_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (parsed.length > 0) return parsed;
+    }
+  }
+
+  // Generate default September 2026 festival events if none exist
+  const presets = generate30DayCalendarPresets(profile || DEMO_PRESET_PROFILES[0].profile);
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(LOCAL_STORAGE_CALENDAR_KEY, JSON.stringify(presets));
+  }
+  return presets;
+}
+
+export async function saveCalendarEvents(events: CalendarEvent[], userId: string = 'demo-user'): Promise<void> {
+  if (supabase) {
+    try {
+      const payload = events.map(e => ({ ...e, user_id: userId }));
+      await supabase.from('content_calendar').upsert(payload);
+    } catch (err) {
+      console.warn('Supabase calendar save error:', err);
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(LOCAL_STORAGE_CALENDAR_KEY, JSON.stringify(events));
+  }
 }

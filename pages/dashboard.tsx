@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Layout } from '@/components/Layout';
 import { usePost } from '@/context/PostContext';
 import { useAuth } from '@/context/AuthContext';
-import { BusinessProfile, ToneType } from '@/lib/types';
+import { BusinessProfile, ToneType, PostFormat } from '@/lib/types';
 import { DEMO_PRESET_PROFILES } from '@/lib/mockData';
 import { 
   Sparkles, 
@@ -14,7 +15,11 @@ import {
   Zap, 
   CheckCircle2, 
   Lightbulb,
-  Cpu
+  Cpu,
+  Layers,
+  Film,
+  Image as ImageIcon,
+  Palette
 } from 'lucide-react';
 
 const TONE_OPTIONS: { value: ToneType; label: string; description: string; emoji: string }[] = [
@@ -28,13 +33,26 @@ const TONE_OPTIONS: { value: ToneType; label: string; description: string; emoji
 export default function DashboardPage() {
   const router = useRouter();
   const { user } = useAuth();
-  const { currentProfile, setCurrentProfile, generatePost, isGenerating } = usePost();
+  const { 
+    currentProfile, 
+    setCurrentProfile, 
+    brandKit, 
+    setBrandKit, 
+    generatePost, 
+    isGenerating,
+    selectedFormat,
+    setSelectedFormat 
+  } = usePost();
+
   const [formData, setFormData] = useState<BusinessProfile>(currentProfile);
   const [error, setError] = useState<string | null>(null);
 
-  const handlePresetSelect = (preset: BusinessProfile) => {
-    setFormData(preset);
-    setCurrentProfile(preset);
+  const handlePresetSelect = (preset: typeof DEMO_PRESET_PROFILES[0]) => {
+    setFormData(preset.profile);
+    setCurrentProfile(preset.profile);
+    if (preset.brandKit) {
+      setBrandKit(preset.brandKit);
+    }
   };
 
   const handleChange = (field: keyof BusinessProfile, value: string) => {
@@ -54,7 +72,7 @@ export default function DashboardPage() {
 
     try {
       setCurrentProfile(formData);
-      await generatePost(formData);
+      await generatePost(formData, selectedFormat);
       router.push('/preview');
     } catch (err: any) {
       console.error(err);
@@ -74,16 +92,19 @@ export default function DashboardPage() {
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
                   Step 1 of 2 · Content Engine
                 </span>
-                <span className="text-xs text-slate-500 hidden sm:inline">|</span>
-                <span className="text-xs text-slate-400 hidden sm:inline">
-                  Single End-to-End MVP Flow
-                </span>
+                <Link
+                  href="/brand-kit"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-violet-500/15 text-violet-300 border border-violet-500/30 hover:bg-violet-500/25 transition"
+                >
+                  <Palette className="w-3.5 h-3.5" />
+                  <span>Brand Kit Active</span>
+                </Link>
               </div>
               <h1 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
-                Business Profile & AI Generation
+                Business Profile & Multi-Format AI
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
-                Define your small business profile. MarkAI uses Anthropic Claude to craft high-impact captions, tailored hashtags, and visual graphic concepts.
+                Define your profile and select your format. MarkAI uses Anthropic Claude to craft on-brand copy, carousel slide outlines, and viral Reels scripts.
               </p>
             </div>
 
@@ -98,7 +119,7 @@ export default function DashboardPage() {
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => handlePresetSelect(p.profile)}
+                    onClick={() => handlePresetSelect(p)}
                     className="px-3 py-1.5 text-xs font-bold rounded-xl bg-white/[0.05] hover:bg-white/10 text-slate-200 border border-white/10 hover:border-fuchsia-500/40 transition"
                   >
                     {p.label.split(' ')[0]} {p.profile.business_name.split(' ')[0]}
@@ -106,6 +127,55 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Format Selector Bar */}
+        <div className="card-glass rounded-2xl p-3 sm:p-4 border border-white/10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-fuchsia-400" />
+            <span>Select Target Post Format:</span>
+          </span>
+
+          <div className="grid grid-cols-3 gap-2 w-full sm:w-auto">
+            <button
+              type="button"
+              onClick={() => setSelectedFormat('single_image')}
+              className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition ${
+                selectedFormat === 'single_image'
+                  ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg'
+                  : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10'
+              }`}
+            >
+              <ImageIcon className="w-4 h-4" />
+              <span>Single Post</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedFormat('carousel')}
+              className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition ${
+                selectedFormat === 'carousel'
+                  ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg'
+                  : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10'
+              }`}
+            >
+              <Layers className="w-4 h-4" />
+              <span>Carousel Outline</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedFormat('reels_script')}
+              className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition ${
+                selectedFormat === 'reels_script'
+                  ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg'
+                  : 'bg-white/[0.04] text-slate-400 hover:text-white border border-white/10'
+              }`}
+            >
+              <Film className="w-4 h-4" />
+              <span>Reels Script</span>
+            </button>
           </div>
         </div>
 
@@ -223,7 +293,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Submit / Generate Button */}
+                {/* Submit Button */}
                 <div className="pt-3">
                   <button
                     type="submit"
@@ -233,19 +303,16 @@ export default function DashboardPage() {
                     {isGenerating ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Claude AI is Crafting Post & Visuals...</span>
+                        <span>Claude AI is Crafting {selectedFormat.replace('_', ' ')}...</span>
                       </>
                     ) : (
                       <>
                         <Sparkles className="w-5 h-5 text-amber-300" />
-                        <span>Generate AI Post & Branded Graphic</span>
+                        <span>Generate AI {selectedFormat === 'carousel' ? 'Carousel Outline' : selectedFormat === 'reels_script' ? 'Reels Script' : 'Post & Graphic'}</span>
                         <ArrowRight className="w-5 h-5 ml-1" />
                       </>
                     )}
                   </button>
-                  <p className="text-center text-[11px] text-slate-500 mt-2 font-medium">
-                    ⚡ Calls Anthropic Claude API backend route · Never exposes keys to browser
-                  </p>
                 </div>
               </form>
             </div>
@@ -253,61 +320,57 @@ export default function DashboardPage() {
 
           {/* Right: Live Prompt Preview & Info */}
           <div className="lg:col-span-5 space-y-6">
-            {/* Live Profile Summary Card */}
             <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-              <div className="flex items-center gap-2 pb-4 border-b border-white/10 text-xs font-bold text-slate-200 uppercase tracking-wider">
-                <Lightbulb className="w-4 h-4 text-amber-300" />
-                <span>Prompt Context (Fed to Claude AI)</span>
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+                <span className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                  <Lightbulb className="w-4 h-4 text-amber-300" />
+                  <span>Prompt Context Memory</span>
+                </span>
+                <Link href="/brand-kit" className="text-[11px] font-semibold text-fuchsia-400 hover:text-fuchsia-300">
+                  Edit Brand Kit →
+                </Link>
               </div>
 
               <div className="mt-4 space-y-3 text-xs">
                 <div>
                   <span className="text-slate-500 block text-[11px] font-medium">Brand Name:</span>
-                  <span className="text-slate-100 font-bold">{formData.business_name || 'Not specified'}</span>
+                  <span className="text-slate-100 font-bold">{formData.business_name}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px] font-medium">Industry:</span>
-                  <span className="text-slate-100 font-semibold">{formData.industry || 'Not specified'}</span>
+                  <span className="text-slate-500 block text-[11px] font-medium">Format:</span>
+                  <span className="text-fuchsia-400 font-bold uppercase">{selectedFormat.replace('_', ' ')}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px] font-medium">Core Value Proposition:</span>
-                  <span className="text-slate-300 font-normal line-clamp-3">
-                    {formData.description || 'Not specified'}
+                  <span className="text-slate-500 block text-[11px] font-medium">Brand Guidelines Injected:</span>
+                  <span className="text-slate-300 font-normal line-clamp-2">
+                    {brandKit.brand_voice_guidelines || 'Active'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px] font-medium">Selected Tone:</span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 font-bold capitalize mt-0.5 border border-fuchsia-500/30">
-                    {formData.tone}
+                  <span className="text-slate-500 block text-[11px] font-medium">Active Brand Rules:</span>
+                  <span className="text-emerald-400 font-medium">
+                    {brandKit.dos_list.length} Do's · {brandKit.donts_list.length} Don'ts
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* AI Generation Flow Info */}
-            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 bg-gradient-to-br from-space-900/90 to-violet-950/40">
+            {/* Link to Calendar CTA */}
+            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 bg-gradient-to-br from-space-900/90 to-amber-950/30">
               <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-fuchsia-400" />
-                <span>What MarkAI Generates in Step 2:</span>
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                <span>Plan Ahead for September 2026</span>
               </h4>
-              <ul className="mt-3.5 space-y-2.5 text-xs text-slate-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>Instagram Copy:</strong> Hook, story value, and call-to-action</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>Targeted Hashtags:</strong> Niche & high-reach discoverability tags</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>Branded Graphic:</strong> Instant HTML5 canvas banner with headline overlay</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span><strong>1-Click Publishing:</strong> Push directly to Instagram Business account</span>
-                </li>
-              </ul>
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                Use the 30-Day Content Calendar to automatically generate seasonal campaigns for Fall Launch, College Pitch Day, and Coffee Day.
+              </p>
+              <Link
+                href="/calendar"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-bold transition"
+              >
+                <span>Open Content Calendar</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
         </div>
