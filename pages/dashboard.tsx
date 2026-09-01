@@ -9,15 +9,12 @@ import {
   Sparkles, 
   Building2, 
   Tag, 
-  FileText, 
   Users, 
-  Volume2, 
   ArrowRight, 
   Zap, 
   CheckCircle2, 
-  Layers,
-  HelpCircle,
-  Lightbulb
+  Lightbulb,
+  Cpu
 } from 'lucide-react';
 
 const TONE_OPTIONS: { value: ToneType; label: string; description: string; emoji: string }[] = [
@@ -69,12 +66,12 @@ export default function DashboardPage() {
     <Layout title="Dashboard — Business Profile & AI Post Generator">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        {/* Top Header & Demo Presets Bar */}
-        <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl p-6 shadow-xl backdrop-blur-md">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Top Header Card */}
+        <div className="card-glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
                   Step 1 of 2 · Content Engine
                 </span>
                 <span className="text-xs text-slate-500 hidden sm:inline">|</span>
@@ -82,19 +79,19 @@ export default function DashboardPage() {
                   Single End-to-End MVP Flow
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1.5 tracking-tight">
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
                 Business Profile & AI Generation
               </h1>
-              <p className="text-sm text-slate-400 mt-1 max-w-2xl">
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
                 Define your small business profile. MarkAI uses Anthropic Claude to craft high-impact captions, tailored hashtags, and visual graphic concepts.
               </p>
             </div>
 
-            {/* Quick Demo Fill Buttons */}
-            <div className="flex flex-col items-start md:items-end gap-1.5">
-              <span className="text-xs font-medium text-slate-400 flex items-center gap-1">
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
-                Quick Pitch Presets:
+            {/* Quick Demo Presets */}
+            <div className="flex flex-col items-start lg:items-end gap-2">
+              <span className="text-xs font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
+                <Zap className="w-3.5 h-3.5 text-amber-300" />
+                Pitch Competition Presets:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {DEMO_PRESET_PROFILES.map((p, idx) => (
@@ -102,7 +99,7 @@ export default function DashboardPage() {
                     key={idx}
                     type="button"
                     onClick={() => handlePresetSelect(p.profile)}
-                    className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-brand-500/40 transition"
+                    className="px-3 py-1.5 text-xs font-bold rounded-xl bg-white/[0.05] hover:bg-white/10 text-slate-200 border border-white/10 hover:border-fuchsia-500/40 transition"
                   >
                     {p.label.split(' ')[0]} {p.profile.business_name.split(' ')[0]}
                   </button>
@@ -117,18 +114,18 @@ export default function DashboardPage() {
           
           {/* Left: Form Controls */}
           <div className="lg:col-span-7">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-7 shadow-2xl">
+            <div className="card-glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10">
               <form onSubmit={handleGenerate} className="space-y-5">
                 
                 {error && (
-                  <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-xs text-rose-300">
+                  <div className="p-3.5 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-xs text-rose-300">
                     {error}
                   </div>
                 )}
 
                 {/* 1. Business Name */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
                     1. Business Name <span className="text-rose-400">*</span>
                   </label>
                   <div className="relative">
@@ -138,7 +135,7 @@ export default function DashboardPage() {
                       value={formData.business_name}
                       onChange={(e) => handleChange('business_name', e.target.value)}
                       placeholder="e.g. Brew & Bean Specialty Coffee"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+                      className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
                       required
                     />
                   </div>
@@ -146,7 +143,7 @@ export default function DashboardPage() {
 
                 {/* 2. Industry */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
                     2. Industry / Category <span className="text-rose-400">*</span>
                   </label>
                   <div className="relative">
@@ -155,8 +152,8 @@ export default function DashboardPage() {
                       type="text"
                       value={formData.industry}
                       onChange={(e) => handleChange('industry', e.target.value)}
-                      placeholder="e.g. Specialty Coffee, Fitness Apparel, Artisan Bakery"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+                      placeholder="e.g. Specialty Coffee, Fitness Apparel, Clean Skincare"
+                      className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
                       required
                     />
                   </div>
@@ -164,7 +161,7 @@ export default function DashboardPage() {
 
                 {/* 3. Product / Service Description */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
                     3. Product or Service Description <span className="text-rose-400">*</span>
                   </label>
                   <div className="relative">
@@ -173,7 +170,7 @@ export default function DashboardPage() {
                       value={formData.description}
                       onChange={(e) => handleChange('description', e.target.value)}
                       placeholder="What makes your product special? Mention key benefits, unique selling points, or offers..."
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition resize-none"
+                      className="w-full bg-space-950/80 border border-white/10 rounded-xl p-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition resize-none"
                       required
                     />
                   </div>
@@ -181,7 +178,7 @@ export default function DashboardPage() {
 
                 {/* 4. Target Audience */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
                     4. Target Audience
                   </label>
                   <div className="relative">
@@ -190,15 +187,15 @@ export default function DashboardPage() {
                       type="text"
                       value={formData.target_audience}
                       onChange={(e) => handleChange('target_audience', e.target.value)}
-                      placeholder="e.g. Local coffee lovers, remote workers, gym goers aged 20-35"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+                      placeholder="e.g. Coffee lovers, remote workers, athletes aged 20-38"
+                      className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
                     />
                   </div>
                 </div>
 
-                {/* 5. Tone Dropdown */}
+                {/* 5. Tone of Voice */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
                     5. Brand Tone of Voice
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -209,15 +206,15 @@ export default function DashboardPage() {
                           key={t.value}
                           type="button"
                           onClick={() => handleChange('tone', t.value)}
-                          className={`flex items-start gap-2.5 p-3 rounded-xl border text-left transition ${
+                          className={`flex items-start gap-2.5 p-3 rounded-2xl border text-left transition ${
                             isSelected
-                              ? 'bg-brand-500/10 border-brand-500 text-white ring-1 ring-brand-500/40'
-                              : 'bg-slate-950/50 border-slate-800 text-slate-400 hover:border-slate-700'
+                              ? 'bg-fuchsia-500/15 border-fuchsia-400 text-white ring-1 ring-fuchsia-400/40 shadow-lg'
+                              : 'bg-space-950/50 border-white/[0.06] text-slate-400 hover:border-white/20'
                           }`}
                         >
                           <span className="text-xl flex-shrink-0">{t.emoji}</span>
                           <div>
-                            <p className="text-xs font-semibold text-slate-200">{t.label}</p>
+                            <p className="text-xs font-bold text-slate-200">{t.label}</p>
                             <p className="text-[11px] text-slate-400 leading-tight mt-0.5">{t.description}</p>
                           </div>
                         </button>
@@ -231,11 +228,11 @@ export default function DashboardPage() {
                   <button
                     type="submit"
                     disabled={isGenerating}
-                    className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-brand-600 via-indigo-600 to-pink-600 hover:from-brand-500 hover:to-pink-500 text-white font-bold text-base shadow-xl shadow-brand-600/30 transition transform active:scale-[0.99] flex items-center justify-center gap-2.5 disabled:opacity-50"
+                    className="btn-primary w-full py-4 px-6 rounded-2xl text-sm sm:text-base font-extrabold shadow-xl"
                   >
                     {isGenerating ? (
                       <>
-                        <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                         <span>Claude AI is Crafting Post & Visuals...</span>
                       </>
                     ) : (
@@ -246,7 +243,7 @@ export default function DashboardPage() {
                       </>
                     )}
                   </button>
-                  <p className="text-center text-[11px] text-slate-500 mt-2">
+                  <p className="text-center text-[11px] text-slate-500 mt-2 font-medium">
                     ⚡ Calls Anthropic Claude API backend route · Never exposes keys to browser
                   </p>
                 </div>
@@ -254,33 +251,33 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {/* Right: Live Prompt Preview & Feature Cards */}
+          {/* Right: Live Prompt Preview & Info */}
           <div className="lg:col-span-5 space-y-6">
             {/* Live Profile Summary Card */}
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
-              <div className="flex items-center gap-2 pb-4 border-b border-slate-800 text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                <Lightbulb className="w-4 h-4 text-amber-400" />
-                <span>Profile Context (Fed to Claude AI)</span>
+            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
+              <div className="flex items-center gap-2 pb-4 border-b border-white/10 text-xs font-bold text-slate-200 uppercase tracking-wider">
+                <Lightbulb className="w-4 h-4 text-amber-300" />
+                <span>Prompt Context (Fed to Claude AI)</span>
               </div>
 
               <div className="mt-4 space-y-3 text-xs">
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Brand Name:</span>
-                  <span className="text-slate-200 font-medium">{formData.business_name || 'Not specified'}</span>
+                  <span className="text-slate-500 block text-[11px] font-medium">Brand Name:</span>
+                  <span className="text-slate-100 font-bold">{formData.business_name || 'Not specified'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Industry:</span>
-                  <span className="text-slate-200 font-medium">{formData.industry || 'Not specified'}</span>
+                  <span className="text-slate-500 block text-[11px] font-medium">Industry:</span>
+                  <span className="text-slate-100 font-semibold">{formData.industry || 'Not specified'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Core Value:</span>
-                  <span className="text-slate-300 font-normal line-clamp-2">
+                  <span className="text-slate-500 block text-[11px] font-medium">Core Value Proposition:</span>
+                  <span className="text-slate-300 font-normal line-clamp-3">
                     {formData.description || 'Not specified'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Selected Tone:</span>
-                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 font-semibold capitalize mt-0.5">
+                  <span className="text-slate-500 block text-[11px] font-medium">Selected Tone:</span>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 font-bold capitalize mt-0.5 border border-fuchsia-500/30">
                     {formData.tone}
                   </span>
                 </div>
@@ -288,10 +285,10 @@ export default function DashboardPage() {
             </div>
 
             {/* AI Generation Flow Info */}
-            <div className="bg-gradient-to-br from-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 bg-gradient-to-br from-space-900/90 to-violet-950/40">
               <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-brand-400" />
-                What MarkAI Generates in Step 2:
+                <Cpu className="w-4 h-4 text-fuchsia-400" />
+                <span>What MarkAI Generates in Step 2:</span>
               </h4>
               <ul className="mt-3.5 space-y-2.5 text-xs text-slate-300">
                 <li className="flex items-start gap-2">

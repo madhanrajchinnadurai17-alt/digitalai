@@ -39,35 +39,36 @@ export default function LoginPage() {
   return (
     <Layout title="Sign In — MarkAI">
       <div className="max-w-md mx-auto py-8">
-        {/* Pitch competition header card */}
-        <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-brand-900/40 via-indigo-900/30 to-purple-900/40 border border-brand-500/30 text-center">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-300 text-xs font-semibold mb-2">
+        
+        {/* Pitch competition fast-access banner */}
+        <div className="mb-6 p-5 rounded-3xl bg-gradient-to-r from-violet-950/60 via-fuchsia-950/50 to-amber-950/40 border border-fuchsia-500/30 text-center shadow-xl backdrop-blur-xl">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-2">
             <Zap className="w-3.5 h-3.5" /> Pitch Competition Demo Mode
           </div>
           <p className="text-xs text-slate-300">
-            For judges and fast evaluation, use the one-click demo login below to test the full flow immediately.
+            For judges and fast evaluation, use one-click demo login to access the full cockpit instantly.
           </p>
           <button
             type="button"
             onClick={handleDemoLogin}
-            className="mt-3 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-brand-600/30 transition flex items-center justify-center gap-2"
+            className="btn-primary mt-3 w-full py-3 px-4 rounded-xl text-xs font-bold shadow-lg"
           >
-            <Sparkles className="w-4 h-4" />
-            Instant Pitch Demo Login
+            <Sparkles className="w-4 h-4 text-amber-300" />
+            <span>Instant Pitch Demo Login</span>
           </button>
         </div>
 
-        {/* Auth Box */}
-        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
+        {/* Auth Glass Card */}
+        <div className="card-glass rounded-3xl p-7 sm:p-8 shadow-2xl border border-white/10">
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-white tracking-tight">Welcome to MarkAI</h1>
+            <h1 className="text-2xl font-extrabold text-white tracking-tight">Welcome Back</h1>
             <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Sign in with your business account to generate & auto-post content
+              Sign in with your business account to manage & auto-post content
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-start gap-2.5 text-xs text-rose-300">
+            <div className="mb-5 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-start gap-2.5 text-xs text-rose-300">
               <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -75,7 +76,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
                 Email Address
               </label>
               <div className="relative">
@@ -85,14 +86,14 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@company.com"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+                  className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
@@ -102,7 +103,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
+                  className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
                   required
                 />
               </div>
@@ -111,7 +112,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-sm transition shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2 mt-2 disabled:opacity-50"
+              className="btn-primary w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold mt-2"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -124,10 +125,10 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-slate-800 text-center">
+          <div className="mt-6 pt-5 border-t border-white/10 text-center">
             <p className="text-xs text-slate-400">
               Don't have an account?{' '}
-              <Link href="/signup" className="text-brand-400 hover:text-brand-300 font-medium transition">
+              <Link href="/signup" className="text-fuchsia-400 hover:text-fuchsia-300 font-bold transition">
                 Create an account
               </Link>
             </p>

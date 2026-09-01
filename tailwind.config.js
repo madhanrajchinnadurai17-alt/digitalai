@@ -10,36 +10,44 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-          950: '#2e1065',
+        space: {
+          950: '#070512',
+          900: '#0E0927',
+          850: '#140D36',
+          800: '#1B1247',
+          700: '#2A1D6B',
         },
-        instagram: {
-          purple: '#833ab4',
-          red: '#fd1d1d',
-          orange: '#fcb045',
+        brand: {
+          violet: '#8B5CF6',
+          fuchsia: '#D946EF',
+          amber: '#F59E0B',
+          orange: '#F97316',
+          cyan: '#06B6D4',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      boxShadow: {
+        'glow-violet': '0 0 35px -5px rgba(139, 92, 246, 0.35)',
+        'glow-fuchsia': '0 0 35px -5px rgba(217, 70, 239, 0.35)',
+        'glow-amber': '0 0 35px -5px rgba(245, 158, 11, 0.35)',
+        'glow-card': '0 20px 40px -15px rgba(14, 9, 39, 0.8)',
       },
       animation: {
         'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'gradient': 'gradient 6s ease infinite',
+        'float': 'float 5s ease-in-out infinite',
+        'shimmer': 'shimmer 2.5s infinite linear',
       },
       keyframes: {
-        gradient: {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
         }
       }
     },

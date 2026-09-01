@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { GraphicTheme } from '@/lib/types';
 import { GRAPHIC_THEMES } from '@/lib/mockData';
 import { renderBrandedGraphic } from '@/lib/canvasUtils';
-import { Download, Palette, Sparkles, RefreshCw } from 'lucide-react';
+import { Download, Palette, Sparkles } from 'lucide-react';
 
 interface GraphicCanvasProps {
   businessName: string;
@@ -50,33 +50,33 @@ export function GraphicCanvas({
   return (
     <div className="flex flex-col gap-4">
       {/* Visual Canvas Container */}
-      <div className="relative aspect-square w-full max-w-[440px] mx-auto rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 flex items-center justify-center group">
+      <div className="relative aspect-square w-full max-w-[430px] mx-auto rounded-3xl overflow-hidden border border-white/15 shadow-2xl bg-space-950 flex items-center justify-center group">
         <canvas
           ref={canvasRef}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.01]"
         />
 
-        {/* Overlay Action Bar */}
-        <div className="absolute bottom-3 right-3 flex items-center gap-2 opacity-90 hover:opacity-100 transition">
+        {/* Overlay Download Button */}
+        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-2 opacity-90 group-hover:opacity-100 transition">
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-950/80 hover:bg-slate-900 text-white backdrop-blur-md border border-slate-700 shadow-lg transition"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/20 shadow-xl transition"
             title="Download PNG graphic"
           >
             <Download className="w-3.5 h-3.5" />
-            Download
+            <span>Download PNG</span>
           </button>
         </div>
       </div>
 
       {/* Theme Style Selector */}
-      <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
-        <div className="flex items-center justify-between mb-2.5">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-            <Palette className="w-4 h-4 text-brand-400" />
+      <div className="p-4 rounded-2xl bg-space-950/60 border border-white/[0.08]">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2 text-xs font-bold text-slate-200">
+            <Palette className="w-4 h-4 text-fuchsia-400" />
             <span>Creative Theme & Color Palette</span>
           </div>
-          <span className="text-[11px] text-slate-400 font-medium">{selectedTheme.name}</span>
+          <span className="text-[11px] text-fuchsia-300 font-semibold">{selectedTheme.name}</span>
         </div>
 
         <div className="grid grid-cols-5 gap-2">
@@ -86,18 +86,18 @@ export function GraphicCanvas({
               <button
                 key={theme.id}
                 onClick={() => setSelectedTheme(theme)}
-                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-lg border transition ${
+                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-xl border transition ${
                   isSelected
-                    ? 'border-brand-400 bg-brand-500/10 ring-1 ring-brand-400/40'
-                    : 'border-slate-800 hover:border-slate-700 bg-slate-950/40'
+                    ? 'border-fuchsia-400 bg-fuchsia-500/15 ring-2 ring-fuchsia-400/40 shadow-lg'
+                    : 'border-white/5 hover:border-white/20 bg-white/[0.02]'
                 }`}
                 title={theme.name}
               >
                 <div
-                  className="w-full h-7 rounded-md border border-white/20 shadow-inner"
+                  className="w-full h-8 rounded-lg border border-white/20 shadow-inner"
                   style={{ background: theme.background }}
                 />
-                <span className="text-[10px] text-slate-400 truncate max-w-full font-medium">
+                <span className="text-[10px] text-slate-300 truncate max-w-full font-semibold">
                   {theme.name.split(' ')[0]}
                 </span>
               </button>
