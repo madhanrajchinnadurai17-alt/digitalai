@@ -1,4 +1,19 @@
-import { BusinessProfile, GeneratedPost, GraphicTheme, BrandKit, CalendarEvent, PostFormat } from './types';
+import { 
+  BusinessProfile, 
+  GeneratedPost, 
+  GraphicTheme, 
+  BrandKit, 
+  CalendarEvent, 
+  PostFormat,
+  ConnectedPlatformAccount,
+  AnalyticsMetricSummary,
+  ScheduledPostRecord,
+  VideoProject,
+  VideoTemplateArchetype,
+  WebsiteData,
+  StrategyRecommendation,
+  AutopilotCampaign
+} from './types';
 
 export const DEFAULT_BRAND_KIT: BrandKit = {
   primary_color: '#8B5CF6',
@@ -165,7 +180,7 @@ export const GRAPHIC_THEMES: GraphicTheme[] = [
   },
 ];
 
-// Fallback multi-format content generator
+// Multi-Format Content Generator Fallback
 export function generateFallbackPost(
   profile: BusinessProfile,
   format: PostFormat = 'single_image',
@@ -284,93 +299,20 @@ export function generateFallbackPost(
 export function generate30DayCalendarPresets(profile: BusinessProfile): CalendarEvent[] {
   const name = profile.business_name || 'Our Brand';
   const year = 2026;
-  const month = 8; // September (0-indexed = 8)
 
-  const occasions: { day: number; occasion: string; title: string; hook: string; format: PostFormat }[] = [
-    {
-      day: 2,
-      occasion: 'Fall Season Kickoff',
-      title: 'Autumn Seasonal Menu & Product Reveal',
-      hook: 'Fall flavors & autumn gear are officially here! 🍂',
-      format: 'carousel'
-    },
-    {
-      day: 5,
-      occasion: 'Labor Day Weekend',
-      title: 'Long Weekend Holiday Special Spotlight',
-      hook: 'Your long weekend essentials checklist is here 🎒',
-      format: 'single_image'
-    },
-    {
-      day: 7,
-      occasion: 'Labor Day',
-      title: 'Celebrating Hard Work & Community Dedication',
-      hook: 'To the creators, makers, and dreamers who never stop 🛠️',
-      format: 'single_image'
-    },
-    {
-      day: 9,
-      occasion: '🏆 MarkAI College Pitch Day (Sept 9)',
-      title: 'Behind the Scenes: Innovation & Small Business Pitch',
-      hook: 'Big milestone today! Pitching our vision on stage 🚀',
-      format: 'reels_script'
-    },
-    {
-      day: 12,
-      occasion: 'Customer Appreciation Saturday',
-      title: 'Community Spotlight & VIP Review Feature',
-      hook: 'Why our regulars keep coming back week after week 💬',
-      format: 'carousel'
-    },
-    {
-      day: 15,
-      occasion: 'National Online Learning Day',
-      title: '3 Pro Tips: Master Your Daily Workflow',
-      hook: 'The 3 mistakes you might be making right now 💡',
-      format: 'carousel'
-    },
-    {
-      day: 18,
-      occasion: 'Friday Flash Feature',
-      title: 'Quick 15-Second Product Speedrun',
-      hook: 'Watch how fast this transforms your morning routine ⚡',
-      format: 'reels_script'
-    },
-    {
-      day: 21,
-      occasion: 'World Gratitude Day',
-      title: 'Giving Thanks: Exclusive VIP Promo Code',
-      hook: 'A heartfelt thank you to our first 1,000 supporters ❤️',
-      format: 'single_image'
-    },
-    {
-      day: 22,
-      occasion: 'Autumn Equinox (First Day of Fall)',
-      title: 'Embrace The Cozy Shift: Limited Edition Release',
-      hook: 'Welcome to crisp air, warm drinks, and fresh momentum 🍁',
-      format: 'single_image'
-    },
-    {
-      day: 25,
-      occasion: 'Maker Friday BTS',
-      title: 'Raw Behind the Scenes Studio Tour',
-      hook: 'Everything that happens before we ship an order 📦',
-      format: 'reels_script'
-    },
-    {
-      day: 29,
-      occasion: '☕ International Coffee Day Eve',
-      title: 'The Science of Perfect Single-Origin Roasting',
-      hook: 'How to brew cafe-quality pour-over at home like a pro ☕',
-      format: 'carousel'
-    },
-    {
-      day: 30,
-      occasion: 'Q3 Wrap-Up & Milestone Recap',
-      title: 'What We Accomplished Together This Month',
-      hook: 'September wrap-up: New launches, reviews, and what is next 📈',
-      format: 'single_image'
-    }
+  const occasions = [
+    { day: 2, occasion: 'Fall Season Kickoff', title: 'Autumn Seasonal Menu & Product Reveal', hook: 'Fall flavors & autumn gear are officially here! 🍂', format: 'carousel' as PostFormat },
+    { day: 5, occasion: 'Labor Day Weekend', title: 'Long Weekend Holiday Special Spotlight', hook: 'Your long weekend essentials checklist is here 🎒', format: 'single_image' as PostFormat },
+    { day: 7, occasion: 'Labor Day', title: 'Celebrating Hard Work & Community Dedication', hook: 'To the creators, makers, and dreamers who never stop 🛠️', format: 'single_image' as PostFormat },
+    { day: 9, occasion: '🏆 MarkAI College Pitch Day (Sept 9)', title: 'Behind the Scenes: Innovation & Small Business Pitch', hook: 'Big milestone today! Pitching our vision on stage 🚀', format: 'reels_script' as PostFormat },
+    { day: 12, occasion: 'Customer Appreciation Saturday', title: 'Community Spotlight & VIP Review Feature', hook: 'Why our regulars keep coming back week after week 💬', format: 'carousel' as PostFormat },
+    { day: 15, occasion: 'National Online Learning Day', title: '3 Pro Tips: Master Your Daily Workflow', hook: 'The 3 mistakes you might be making right now 💡', format: 'carousel' as PostFormat },
+    { day: 18, occasion: 'Friday Flash Feature', title: 'Quick 15-Second Product Speedrun', hook: 'Watch how fast this transforms your morning routine ⚡', format: 'reels_script' as PostFormat },
+    { day: 21, occasion: 'World Gratitude Day', title: 'Giving Thanks: Exclusive VIP Promo Code', hook: 'A heartfelt thank you to our first 1,000 supporters ❤️', format: 'single_image' as PostFormat },
+    { day: 22, occasion: 'Autumn Equinox (First Day of Fall)', title: 'Embrace The Cozy Shift: Limited Edition Release', hook: 'Welcome to crisp air, warm drinks, and fresh momentum 🍁', format: 'single_image' as PostFormat },
+    { day: 25, occasion: 'Maker Friday BTS', title: 'Raw Behind the Scenes Studio Tour', hook: 'Everything that happens before we ship an order 📦', format: 'reels_script' as PostFormat },
+    { day: 29, occasion: '☕ International Coffee Day Eve', title: 'The Science of Perfect Single-Origin Roasting', hook: 'How to brew cafe-quality pour-over at home like a pro ☕', format: 'carousel' as PostFormat },
+    { day: 30, occasion: 'Q3 Wrap-Up & Milestone Recap', title: 'What We Accomplished Together This Month', hook: 'September wrap-up: New launches, reviews, and what is next 📈', format: 'single_image' as PostFormat }
   ];
 
   return occasions.map((item, idx) => {
@@ -389,3 +331,261 @@ export function generate30DayCalendarPresets(profile: BusinessProfile): Calendar
     };
   });
 }
+
+// ==========================================
+// PHASE 3: MULTI-PLATFORM & ANALYTICS PRESETS
+// ==========================================
+export const DEFAULT_CONNECTED_PLATFORMS: ConnectedPlatformAccount[] = [
+  {
+    platform: 'instagram',
+    connected: true,
+    account_name: 'Brew & Bean Specialty Coffee',
+    account_handle: '@brewandbeancoffee',
+    permissions: ['pages_show_list', 'instagram_basic', 'instagram_content_publish'],
+    last_synced: 'Just now'
+  },
+  {
+    platform: 'facebook',
+    connected: true,
+    account_name: 'Brew & Bean Cafe & Roastery',
+    account_handle: 'fb.com/brewandbeancafe',
+    permissions: ['pages_manage_posts', 'pages_read_engagement'],
+    last_synced: '5 mins ago'
+  },
+  {
+    platform: 'linkedin',
+    connected: false,
+    account_name: 'Brew & Bean Coffee Co.',
+    account_handle: 'linkedin.com/company/brew-and-bean',
+    permissions: ['w_member_social', 'w_organization_social'],
+    last_synced: 'Not connected'
+  },
+  {
+    platform: 'twitter',
+    connected: true,
+    account_name: 'Brew & Bean Co.',
+    account_handle: '@brewandbean',
+    permissions: ['tweet.read', 'tweet.write', 'users.read'],
+    last_synced: '1 hour ago'
+  }
+];
+
+export const DEFAULT_ANALYTICS_DATA: AnalyticsMetricSummary = {
+  total_reach: 48920,
+  total_impressions: 114500,
+  avg_engagement_rate: 6.4,
+  total_likes: 3840,
+  total_comments: 542,
+  total_shares: 890,
+  follower_growth: 18.5,
+  platform_breakdown: {
+    instagram: { reach: 24500, engagement: 7.8, posts: 14 },
+    facebook: { reach: 14200, engagement: 4.6, posts: 11 },
+    linkedin: { reach: 3800, engagement: 5.2, posts: 4 },
+    twitter: { reach: 6420, engagement: 4.1, posts: 18 }
+  },
+  top_performing_posts: [
+    { title: 'Morning Ritual: Single-Origin Pour Over Spotlight', format: 'single_image', platform: 'instagram', reach: 8400, engagement: 8.9 },
+    { title: '5 Secrets to Elevating Your Specialty Coffee Experience', format: 'carousel', platform: 'instagram', reach: 6900, engagement: 9.4 },
+    { title: 'Behind the Scenes: Roasting First Batch at Sunrise', format: 'reels_script', platform: 'facebook', reach: 5200, engagement: 7.1 },
+    { title: 'Autumn Seasonal Drink Announcement & Recipe Hook', format: 'single_image', platform: 'twitter', reach: 4100, engagement: 5.8 }
+  ]
+};
+
+export const DEFAULT_SCHEDULED_POSTS: ScheduledPostRecord[] = [
+  {
+    id: 'sched_1',
+    user_id: 'demo-user',
+    business_name: 'Brew & Bean Specialty Coffee',
+    caption: 'Weekend mornings call for single-origin pour overs and fresh croissants. ☕🥐 Stop by this Saturday for live barista tasting sessions!',
+    platforms: ['instagram', 'facebook'],
+    scheduled_timestamp: new Date(Date.now() + 86400000 * 2).toISOString(),
+    status: 'pending',
+    created_at: new Date().toISOString()
+  },
+  {
+    id: 'sched_2',
+    user_id: 'demo-user',
+    business_name: 'Brew & Bean Specialty Coffee',
+    caption: 'Big announcement dropping this Tuesday at 9 AM. Here is a sneak peek at our Autumn limited release beans. 🍂🔥',
+    platforms: ['instagram', 'twitter'],
+    scheduled_timestamp: new Date(Date.now() + 86400000 * 4).toISOString(),
+    status: 'pending',
+    created_at: new Date().toISOString()
+  }
+];
+
+// ==========================================
+// PHASE 4: VIDEO STUDIO PRESETS
+// ==========================================
+export const DEFAULT_VIDEO_PROJECTS: VideoProject[] = [
+  {
+    id: 'vid_spotlight_1',
+    title: 'Flagship Single-Origin Roast Spotlight',
+    archetype: 'product_spotlight',
+    aspect_ratio: '9:16',
+    duration_total: 12,
+    audio_track: 'Upbeat Lofi Kinetic Groove (120 BPM)',
+    created_at: new Date().toISOString(),
+    scenes: [
+      {
+        id: 's1',
+        duration_seconds: 4,
+        title_text: 'YOUR MORNING UPGRADE',
+        subtitle_text: 'Small-batch single origin micro-roast',
+        bg_gradient: 'linear-gradient(135deg, #7C3AED 0%, #D946EF 100%)',
+        badge_text: 'BREW & BEAN',
+        zoom_effect: 'in'
+      },
+      {
+        id: 's2',
+        duration_seconds: 4,
+        title_text: 'HAND-ROASTED PERFECTION',
+        subtitle_text: 'Sweet caramel notes & silky brightness',
+        bg_gradient: 'linear-gradient(135deg, #F97316 0%, #EC4899 100%)',
+        badge_text: '100% ARABICA',
+        zoom_effect: 'out'
+      },
+      {
+        id: 's3',
+        duration_seconds: 4,
+        title_text: 'TAP LINK IN BIO',
+        subtitle_text: 'Fresh roast bags shipping daily nationwide',
+        bg_gradient: 'linear-gradient(135deg, #064E3B 0%, #10B981 100%)',
+        badge_text: 'ORDER TODAY',
+        zoom_effect: 'pan'
+      }
+    ]
+  },
+  {
+    id: 'vid_tips_1',
+    title: '3 Pour-Over Mistakes You Are Making',
+    archetype: 'quick_tips',
+    aspect_ratio: '9:16',
+    duration_total: 12,
+    audio_track: 'Chillhop Modern Beat (115 BPM)',
+    created_at: new Date().toISOString(),
+    scenes: [
+      {
+        id: 's1',
+        duration_seconds: 4,
+        title_text: 'STOP BURNING YOUR COFFEE',
+        subtitle_text: '3 brewing rules you need right now',
+        bg_gradient: 'linear-gradient(135deg, #1E1B4B 0%, #4338CA 100%)',
+        badge_text: 'PRO BARISTA TIP',
+        zoom_effect: 'in'
+      },
+      {
+        id: 's2',
+        duration_seconds: 4,
+        title_text: 'RULE 1: WATER AT 200°F',
+        subtitle_text: 'Boiling water destroys delicate aromatics',
+        bg_gradient: 'linear-gradient(135deg, #2E1065 0%, #7C3AED 100%)',
+        badge_text: 'STEP 01',
+        zoom_effect: 'out'
+      },
+      {
+        id: 's3',
+        duration_seconds: 4,
+        title_text: 'FOLLOW FOR MORE TIPS',
+        subtitle_text: 'Grab fresh beans via link in bio',
+        bg_gradient: 'linear-gradient(135deg, #F59E0B 0%, #EA580C 100%)',
+        badge_text: '@BREWANDBEAN',
+        zoom_effect: 'pan'
+      }
+    ]
+  }
+];
+
+// ==========================================
+// PHASE 5: AI ONE-PAGE WEBSITE PRESETS
+// ==========================================
+export const DEFAULT_WEBSITE_DATA: WebsiteData = {
+  id: 'site_brew_bean',
+  slug: 'brew-and-bean',
+  business_name: 'Brew & Bean Specialty Coffee',
+  industry: 'Specialty Cafe & Micro-Roastery',
+  template_type: 'cafe',
+  primary_color: '#7C3AED',
+  secondary_color: '#F59E0B',
+  hero: {
+    headline: 'Artisanal Coffee Roasted With Uncompromising Passion',
+    tagline: 'Experience single-origin pour overs, velvety organic matcha, and house-made pastries in the heart of the city.',
+    cta_button_text: 'Explore Cafe Menu',
+    hero_image_url: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&auto=format&fit=crop&q=80'
+  },
+  about: {
+    title: 'Crafted in Small Batches, Served With Warmth',
+    story: 'Founded in 2024, Brew & Bean started with a simple belief: morning routines deserve extraordinary quality. Every batch of single-origin green coffee is ethically sourced from family-run farms in Colombia, Ethiopia, and Guatemala, then micro-roasted in-house to preserve peak floral and chocolate tasting notes.',
+    bullet_points: [
+      '100% Ethically Sourced Single-Origin Beans',
+      'Fresh Roasted Weekly In Small 10kg Batches',
+      'Plant-Based Oat, Almond, and Organic Dairy Options',
+      'Complimentary Ultra-Fast Fiber Wi-Fi for Remote Workers'
+    ]
+  },
+  offerings: [
+    { id: '1', name: 'Ethiopian Yirgacheffe Pour Over', price: '$5.50', description: 'Floral jasmine aromatics, sweet bergamot, crisp peach finish.', badge: 'Bestseller' },
+    { id: '2', name: 'Ceremonial Uji Matcha Latte', price: '$6.00', description: 'First-harvest Kyoto matcha whisked with velvety steamed oat milk.', badge: 'Popular' },
+    { id: '3', name: 'House Vanilla Cold Foam Cold Brew', price: '$5.75', description: '18-hour slow steeped cold brew topped with Madagascar vanilla cream.' },
+    { id: '4', name: 'Fresh Flaky Butter Croissant', price: '$4.25', description: 'Baked daily at 6 AM using imported French cultured butter.' }
+  ],
+  testimonials: [
+    { name: 'Elena Rostova', role: 'Daily Regular', comment: 'The pour over here ruined all other coffee for me. Hands down the smoothest roast in town!', rating: 5 },
+    { name: 'Marcus Chen', role: 'Remote Software Engineer', comment: 'Cozy seating, fast Wi-Fi, and baristas who genuinely care about the craft. My go-to workspace.', rating: 5 },
+    { name: 'Sarah Jenkins', role: 'Food Critic', comment: 'Brew & Bean is elevating third-wave coffee culture without the pretension. Truly exceptional.', rating: 5 }
+  ],
+  contact_email: 'hello@brewandbean.demo',
+  contact_phone: '+1 (555) 234-5678',
+  address: '142 Market Street, Downtown Arts District',
+  hours: 'Mon - Fri: 7:00 AM - 6:00 PM | Sat - Sun: 8:00 AM - 7:00 PM',
+  published: true,
+  published_url: 'https://brew-and-bean.markai.site',
+  created_at: new Date().toISOString()
+};
+
+// ==========================================
+// PHASE 6: AUTONOMOUS CMO AGENT PRESETS
+// ==========================================
+export const DEFAULT_STRATEGY_RECOMMENDATIONS: StrategyRecommendation[] = [
+  {
+    id: 'strat_1',
+    category: 'format',
+    title: 'Increase Carousel Educational Content (+20%)',
+    insight: 'Your 5-slide educational carousels generated 3.4x more saves and 85% higher profile visits compared to single-image promos.',
+    action_item: 'Schedule 2 educational carousel breakdowns per week on Tuesdays & Thursdays.',
+    expected_impact: '+45% Increase in Bookmark Saves',
+    impact_score: 92
+  },
+  {
+    id: 'strat_2',
+    category: 'timing',
+    title: 'Shift Morning Publishing to 8:15 AM Window',
+    insight: 'Commute-hour engagement peaks sharply between 8:00 AM and 8:30 AM for your local cafe demographic.',
+    action_item: 'Auto-schedule morning announcements to 8:15 AM instead of 10:00 AM.',
+    expected_impact: '+28% Higher First-Hour Impressions',
+    impact_score: 86
+  },
+  {
+    id: 'strat_3',
+    category: 'growth',
+    title: 'Launch Autumn Seasonal Hashtag Cluster',
+    insight: 'Hashtags like #FallCoffeeLaunch and #AutumnVibes are surging with 240% week-over-week discovery volume.',
+    action_item: 'Deploy targeted Autumn hashtag cluster across upcoming September posts.',
+    expected_impact: '+1,200 New Non-Follower Reach',
+    impact_score: 79
+  }
+];
+
+export const DEFAULT_AUTOPILOT_CAMPAIGN: AutopilotCampaign = {
+  id: 'auto_sept_2026',
+  name: 'September 2026 Omnichannel Autopilot',
+  month: 'September 2026',
+  total_posts_planned: 16,
+  platforms_targeted: ['instagram', 'facebook', 'twitter'],
+  status: 'active',
+  generated_posts_count: 16,
+  scheduled_posts_count: 12,
+  weekly_digest_summary: 'MarkAI Autonomous CMO has generated and distributed 16 campaigns across Instagram, Facebook, and Twitter. Projected monthly reach: 55,000+ targeted impressions.',
+  created_at: new Date().toISOString()
+};

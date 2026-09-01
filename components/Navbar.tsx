@@ -13,7 +13,12 @@ import {
   Menu, 
   X,
   CalendarDays,
-  Palette
+  Palette,
+  Share2,
+  BarChart3,
+  Film,
+  Globe,
+  Bot
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { SystemStatusModal } from './SystemStatusModal';
@@ -26,10 +31,14 @@ export function Navbar() {
 
   const appNavItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/calendar', label: '30-Day Calendar', icon: CalendarDays },
+    { href: '/calendar', label: 'Calendar', icon: CalendarDays },
+    { href: '/video-studio', label: 'Video Studio', icon: Film },
+    { href: '/platforms', label: 'Channels', icon: Share2 },
+    { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+    { href: '/website-builder', label: 'Website', icon: Globe },
+    { href: '/agent', label: 'AI Agent', icon: Bot },
     { href: '/brand-kit', label: 'Brand Kit', icon: Palette },
-    { href: '/preview', label: 'Studio Preview', icon: Eye },
-    { href: '/history', label: 'Post History', icon: History },
+    { href: '/history', label: 'History', icon: History },
   ];
 
   const landingNavItems = [
@@ -37,12 +46,13 @@ export function Navbar() {
     { href: '/#how-it-works', label: 'How It Works' },
     { href: '/#demo', label: 'Live Demo' },
     { href: '/calendar', label: 'Calendar' },
-    { href: '/dashboard', label: 'App Cockpit' },
+    { href: '/agent', label: 'CMO Agent' },
+    { href: '/dashboard', label: 'Cockpit' },
   ];
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-[#070512]/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-[#070512]/85 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-18">
             
@@ -60,24 +70,18 @@ export function Navbar() {
                       MarkAI
                     </span>
                     <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
-                      Phase 2
+                      Full Suite
                     </span>
                   </div>
                   <span className="text-[11px] text-slate-400 font-medium hidden sm:block">
-                    AI Marketing Automation for Small Business
+                    Digital Marketing Automation Engine
                   </span>
                 </div>
               </Link>
-
-              {/* Pitch Demo Badge */}
-              <div className="hidden xl:flex items-center gap-2 ml-4 px-3 py-1 rounded-full bg-space-900/90 border border-white/10 text-[11px] text-slate-300 shadow-inner">
-                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                <span className="font-medium text-amber-300">Pitch Demo · Sept 9, 2026</span>
-              </div>
             </div>
 
             {/* Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1 p-1 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+            <nav className="hidden xl:flex items-center gap-1 p-1 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
               {(user ? appNavItems : landingNavItems).map((item) => {
                 const isActive = router.pathname === item.href;
                 const Icon = (item as any).icon;
@@ -100,7 +104,6 @@ export function Navbar() {
 
             {/* Right Action Area */}
             <div className="flex items-center gap-3">
-              {/* System Health Button */}
               <button
                 onClick={() => setShowStatusModal(true)}
                 title="System Status"
@@ -113,7 +116,7 @@ export function Navbar() {
               {user ? (
                 <div className="flex items-center gap-3">
                   <div className="hidden lg:flex flex-col text-right">
-                    <span className="text-xs font-bold text-slate-200 truncate max-w-[130px]">
+                    <span className="text-xs font-bold text-slate-200 truncate max-w-[120px]">
                       {user.displayName || user.email}
                     </span>
                     <span className="text-[10px] text-fuchsia-400 font-medium">
@@ -147,10 +150,10 @@ export function Navbar() {
                 </div>
               )}
 
-              {/* Mobile Menu Toggle */}
+              {/* Mobile / Tablet Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-xl text-slate-300 lg:hidden bg-white/5 border border-white/10"
+                className="p-2 rounded-xl text-slate-300 xl:hidden bg-white/5 border border-white/10"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -158,17 +161,20 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile / Tablet Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-white/10 bg-[#0E0927]/95 backdrop-blur-2xl p-4 space-y-2 animate-fadeIn">
+          <div className="xl:hidden border-t border-white/10 bg-[#0E0927]/95 backdrop-blur-2xl p-4 space-y-1.5 max-h-[85vh] overflow-y-auto animate-fadeIn">
             {(user ? appNavItems : landingNavItems).map((item) => {
               const Icon = (item as any).icon;
+              const isActive = router.pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/10 transition"
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+                    isActive ? 'bg-fuchsia-500/20 text-white' : 'text-slate-200 hover:bg-white/10'
+                  }`}
                 >
                   {Icon && <Icon className="w-4 h-4 text-fuchsia-400" />}
                   <span>{item.label}</span>
