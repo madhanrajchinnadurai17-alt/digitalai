@@ -22,14 +22,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const systemPrompt = `You are MarkAI's intelligent Voice-to-Business Profile extraction engine.
 You receive a raw, spoken audio transcript from a small business owner.
-The transcript may be conversational, messy, accented, or code-mixed in English, Tamil, or Tanglish (e.g., "Namma cafe-la fresh filter coffee and organic snacks kudukrom...").
+The transcript may be conversational, messy, accented, or code-mixed in English, Tamil, or Tanglish (e.g. "Namma cafe-la fresh filter coffee and organic snacks kudukrom...", "Ennoda boutique-la organic handloom sarees sell panrom...", "Chennai-la cloud kitchen run panrom for briyani & meals...").
 
-Your task is to analyze the transcript and extract a clean, structured Business Profile object.
+Your task is to analyze the transcript and extract a clean, structured Business Profile object in professional English.
 
 Rules:
 1. "business_name": Extract the brand/business name. If not explicitly stated, generate a creative, fitting brand name based on what they do.
-2. "industry": Determine the industry/category (e.g., "Food & Beverage / Cafe", "Fashion & Apparel", "Fitness & Wellness", "B2B Tech").
-3. "description": Write a clean, 2-3 sentence product/service description in professional English that captures all the key features, unique value, and specialties mentioned.
+2. "industry": Determine the industry/category (e.g., "Food & Beverage / Specialty Cafe", "Fashion & Handloom Apparel", "Beauty & Personal Care", "Fitness & Wellness", "Software & Technology").
+3. "description": Write a clean, 2-3 sentence product/service description in polished English that captures all the key features, unique value, and specialties mentioned.
 4. "target_audience": Identify or infer the target demographic (e.g., "Coffee lovers, college students, and remote workers").
 5. "tone": Pick the most fitting brand tone from: "casual", "formal", "playful", "bold", "inspiring".
 
@@ -82,40 +82,53 @@ Output format MUST be strictly a valid JSON object without any markdown code blo
 
   // Intelligent Fallback Parser for Offline / Sandbox Demo
   const text = transcript.toLowerCase();
-  let business_name = 'Madras Artisan Cafe';
+  let business_name = 'Kaapi & Crumb Co.';
   let industry = 'Food & Beverage / Specialty Cafe';
-  let description = 'Traditional filter coffee brewed with freshly ground chicory beans, accompanied by artisanal sourdough toasts and fresh butter baked goods.';
+  let description = 'Authentic Kumbakonam-style degree filter coffee roasted with chicory, paired with European butter croissants and fresh baked snacks.';
   let target_audience = 'Coffee lovers, college students, and remote working professionals';
-  let tone: ToneType = 'playful';
+  let tone: ToneType = 'casual';
 
-  if (text.includes('fit') || text.includes('gym') || text.includes('wear') || text.includes('apparel') || text.includes('cloth')) {
-    business_name = 'UrbanPulse Activewear';
+  if (text.includes('saree') || text.includes('boutique') || text.includes('handloom') || text.includes('silk') || text.includes('kurti') || text.includes('textile')) {
+    business_name = 'Nila Handloom & Silks';
+    industry = 'Fashion & Handloom Apparel';
+    description = 'Hand-woven organic cotton and pure Kanchipuram silk sarees crafted directly by traditional master weavers in Tamil Nadu.';
+    target_audience = 'Festive shoppers, bridal parties, and traditional handloom enthusiasts';
+    tone = 'inspiring';
+  } else if (text.includes('briyani') || text.includes('biryani') || text.includes('meals') || text.includes('kitchen') || text.includes('hotel') || text.includes('restaurant')) {
+    business_name = 'Anjappar Heritage Kitchen';
+    industry = 'Food & Beverage / Regional Cuisine';
+    description = 'Authentic firewood dum biryani and Chettinad specialties made with heirloom hand-pounded masalas and zero artificial additives.';
+    target_audience = 'Foodies, families, and authentic regional cuisine lovers';
+    tone = 'bold';
+  } else if (text.includes('fit') || text.includes('gym') || text.includes('wear') || text.includes('apparel') || text.includes('athleisure')) {
+    business_name = 'FitPulse Activewear';
     industry = 'Fitness Apparel & Lifestyle';
-    description = 'High-performance sweat-wicking activewear and everyday athleisure crafted from sustainable recycled fabrics.';
-    target_audience = 'Fitness enthusiasts, runners, and gym-goers aged 18-35';
+    description = 'High-performance sweat-wicking activewear and gym hoodies crafted from sustainable recycled ocean fabrics.';
+    target_audience = 'Fitness enthusiasts, runners, and athletes aged 18-35';
     tone = 'bold';
   } else if (text.includes('skin') || text.includes('beauty') || text.includes('organic') || text.includes('soap') || text.includes('oil')) {
-    business_name = 'Aura Organics Skincare';
+    business_name = 'GlowLab Botanical Skincare';
     industry = 'Clean Beauty & Wellness';
-    description = 'Handcrafted 100% natural botanical skincare, barrier-repair moisturizers, and cold-pressed herbal face oils.';
+    description = 'Clean, dermatologist-tested vegan botanical serums, barrier-repair moisturizers, and cold-pressed herbal face oils.';
     target_audience = 'Wellness advocates and eco-conscious skincare lovers';
     tone = 'inspiring';
   } else if (text.includes('tech') || text.includes('software') || text.includes('agency') || text.includes('app') || text.includes('cloud')) {
-    business_name = 'NovaTech Cloud Solutions';
+    business_name = 'Apex Cloud Solutions';
     industry = 'Software & Technology Services';
-    description = 'Modern cloud architecture, custom web app development, and AI workflow automation for scaling businesses.';
+    description = 'Modern cloud infrastructure, custom full-stack web applications, and AI workflow automation for scaling businesses.';
     target_audience = 'Founders, CTOs, and growing startups looking to scale';
     tone = 'formal';
-  } else if (text.includes('cafe') || text.includes('coffee') || text.includes('tea') || text.includes('tea kadai') || text.includes('food') || text.includes('bakes')) {
+  } else if (text.includes('cafe') || text.includes('coffee') || text.includes('tea') || text.includes('kaapi') || text.includes('kadai') || text.includes('bakes')) {
     business_name = 'Kaapi & Crumb Co.';
     industry = 'Food & Beverage / Specialty Cafe';
-    description = 'Authentic Kumbakonam-style degree filter coffee paired with fresh European croissants and evening snacks.';
+    description = 'Traditional Kumbakonam-style filter coffee brewed fresh with chicory beans, accompanied by artisanal pastries and bun butter jam.';
     target_audience = 'Filter coffee enthusiasts, students, and neighborhood families';
-    tone = 'casual';
+    tone = 'playful';
   } else {
     // General extraction
-    business_name = transcript.split(' ').slice(0, 3).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') + ' Brand';
-    description = `Specialized provider delivering quality ${transcript.slice(0, 120)}...`;
+    const firstWords = transcript.split(' ').filter(w => w.length > 2).slice(0, 3).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    business_name = firstWords ? `${firstWords} Co.` : 'My Local Business';
+    description = `Premium local business delivering specialty offerings: ${transcript.slice(0, 140)}...`;
   }
 
   return res.status(200).json({

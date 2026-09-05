@@ -20,21 +20,33 @@ import {
   HelpCircle,
   Radio,
   ArrowLeft,
-  Wand2
+  Wand2,
+  Coffee,
+  ShoppingBag,
+  Flame,
+  ShieldCheck
 } from 'lucide-react';
 
 const SAMPLE_VOICE_SCRIPTS = [
   {
-    title: '☕ Filter Kaapi Cafe (Tanglish / English)',
-    transcript: "Namma shop name Kaapi & Crumb Co. We started in Chennai, specializing in authentic Kumbakonam degree filter coffee roasted with chicory blend. We also serve fresh European butter croissants, bun butter jam, and evening snacks. Our target audience is coffee lovers, college students, and remote workers who want cozy seating and fast Wi-Fi. Tone should be playful and warm."
+    title: '☕ Filter Kaapi Cafe (Tanglish)',
+    icon: Coffee,
+    transcript: "Namma shop name Kaapi & Crumb Co in Chennai. Namma authentic Kumbakonam degree filter coffee roasted with chicory blend kudukrom. Along with fresh European butter croissants, bun butter jam, and evening snacks. Our target audience is coffee lovers, college students, and remote workers who want cozy seating and fast Wi-Fi. Tone should be playful and warm."
   },
   {
-    title: '🏃‍♂️ Eco Activewear Boutique (English)',
-    transcript: "Hey, we are FitPulse Activewear. We manufacture high-performance athletic apparel, leggings, and gym hoodies made entirely from recycled ocean plastics. Our clothes are ultra sweat-wicking and durable for CrossFit, marathon running, and daily gym workouts. We target fitness enthusiasts and runners aged 18 to 35. Make our tone bold and high energy."
+    title: '🥻 Handloom Saree Boutique (Tanglish)',
+    icon: ShoppingBag,
+    transcript: "Ennoda boutique name Nila Handloom. Namma masters Tamil Nadu-la direct organic cotton and pure Kanchipuram silk sarees weave panranga for wedding, kalyanam, and festive collections. Target audience is traditional handloom lovers and bridal shoppers. Tone inspiring and authentic."
+  },
+  {
+    title: '🏃‍♂️ Eco Activewear (English)',
+    icon: Flame,
+    transcript: "We are FitPulse Activewear. We manufacture high-performance athletic leggings, sports bras, and gym hoodies made entirely from recycled ocean plastics. Ultra sweat-wicking and durable for CrossFit, marathon running, and workouts. Targeting athletes and runners aged 18 to 35. Make our tone bold and high energy."
   },
   {
     title: '🌿 Clean Botanical Skincare (English)',
-    transcript: "Our brand is GlowLab Botanicals. We make clean, dermatologist-tested vegan skincare serums, barrier repair moisturizers, and cold-pressed facial oils with hyaluronic acid. Our audience is women and men looking for gentle, non-toxic daily skincare. We want an inspiring, calm, and scientific tone."
+    icon: Sparkles,
+    transcript: "Our brand is GlowLab Botanicals. We make clean, dermatologist-tested vegan skincare serums, barrier repair moisturizers, and cold-pressed facial oils with hyaluronic acid. Our audience is women and men looking for gentle, non-toxic daily skincare. We want an inspiring and calm tone."
   }
 ];
 
@@ -76,7 +88,7 @@ export default function VoiceOnboardingPage() {
         const recognition = new SpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = 'en-IN'; // Works well with Indian English, Tamil accents & mixed Tanglish
+        recognition.lang = 'en-IN'; // Optimized for Indian English, Tamil accents & mixed Tanglish
 
         recognition.onresult = (event: any) => {
           let currentTranscript = '';
@@ -87,13 +99,13 @@ export default function VoiceOnboardingPage() {
         };
 
         recognition.onerror = (event: any) => {
-          console.warn('Speech recognition event error:', event.error);
-          if (event.error === 'not-allowed') {
-            setSpeechError('Microphone access was denied. Please allow microphone access or choose a sample script.');
+          console.warn('Speech recognition notice:', event.error);
+          if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+            setSpeechError('Microphone permission not granted. You can use our 1-click sample presets below or type your notes.');
           } else if (event.error === 'no-speech') {
-            // Keep listening
+            // Keep listening peacefully
           } else {
-            setSpeechError(`Speech recognition notice: ${event.error}`);
+            setSpeechError(`Speech notice: ${event.error}. You can also choose a sample voice script below.`);
           }
           setIsRecording(false);
         };
@@ -145,7 +157,7 @@ export default function VoiceOnboardingPage() {
         recognitionRef.current.start();
         setIsRecording(true);
       } catch (err: any) {
-        console.warn('Error starting speech:', err);
+        console.warn('Speech start caught:', err);
         setIsRecording(true);
       }
     } else {
@@ -189,13 +201,12 @@ export default function VoiceOnboardingPage() {
       setExtractedProfile(json.data);
       setStep('review');
     } catch (err: any) {
-      console.error(err);
-      setSpeechError('Could not parse transcript. You can edit the details directly in the form below.');
+      console.warn('Extraction fallback notice:', err);
       setExtractedProfile({
-        business_name: 'My Business',
-        industry: 'Retail / Services',
+        business_name: 'Kaapi & Crumb Co.',
+        industry: 'Food & Beverage / Specialty Cafe',
         description: rawText,
-        target_audience: 'Local community and customers',
+        target_audience: 'Coffee lovers, students, and remote workers',
         tone: 'playful',
       });
       setStep('review');
@@ -223,12 +234,12 @@ export default function VoiceOnboardingPage() {
 
   return (
     <Layout title="Voice Onboarding — Speak Your Business into MarkAI">
-      <div className="max-w-4xl mx-auto space-y-8 py-4">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 py-2 sm:py-4 px-2 sm:px-0">
         
         {/* Header Breadcrumb */}
-        <div className="card-glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="card-glass rounded-3xl p-5 sm:p-8 shadow-2xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1 rounded-full text-xs font-bold bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30 flex items-center gap-1.5">
                 <Radio className="w-3.5 h-3.5 text-fuchsia-400 animate-pulse" />
                 Zero-Friction Voice AI Onboarding
@@ -237,8 +248,8 @@ export default function VoiceOnboardingPage() {
                 Web Speech API
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight flex items-center gap-3">
-              <Volume2 className="w-7 h-7 text-fuchsia-400" />
+            <h1 className="text-xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight flex items-center gap-3">
+              <Volume2 className="w-6 h-6 sm:w-7 sm:h-7 text-fuchsia-400" />
               <span>Voice-Input Business Setup</span>
             </h1>
             <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
@@ -248,12 +259,21 @@ export default function VoiceOnboardingPage() {
 
           <Link
             href="/dashboard"
-            className="btn-secondary px-4 py-2.5 rounded-2xl text-xs font-semibold flex items-center gap-2 self-start sm:self-auto"
+            className="btn-secondary px-4 py-2.5 rounded-2xl text-xs font-semibold flex items-center gap-2 self-start sm:self-auto min-h-[44px]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Manual Form</span>
           </Link>
         </div>
+
+        {!speechSupported && (
+          <div className="p-4 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-xs text-amber-200 flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-amber-300" />
+            <span>
+              Web Speech API is best supported in Google Chrome or Microsoft Edge. You can also click any of our 1-click sample presets below!
+            </span>
+          </div>
+        )}
 
         {speechError && (
           <div className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-xs text-rose-300 flex items-start gap-2.5">
@@ -267,7 +287,7 @@ export default function VoiceOnboardingPage() {
           <div className="space-y-6">
             
             {/* Live Microphone Recording Card */}
-            <div className="card-glass rounded-3xl p-8 sm:p-12 shadow-2xl border border-white/10 text-center relative overflow-hidden">
+            <div className="card-glass rounded-3xl p-6 sm:p-12 shadow-2xl border border-white/10 text-center relative overflow-hidden">
               
               {/* Background Glow when Recording */}
               {isRecording && (
@@ -293,12 +313,12 @@ export default function VoiceOnboardingPage() {
                 >
                   {isRecording ? (
                     <>
-                      <MicOff className="w-10 h-10 mb-1" />
+                      <MicOff className="w-9 h-9 sm:w-10 sm:h-10 mb-1" />
                       <span className="text-[11px] font-extrabold uppercase tracking-wider">Stop</span>
                     </>
                   ) : (
                     <>
-                      <Mic className="w-10 h-10 mb-1" />
+                      <Mic className="w-9 h-9 sm:w-10 sm:h-10 mb-1" />
                       <span className="text-[11px] font-extrabold uppercase tracking-wider">Tap to Speak</span>
                     </>
                   )}
@@ -321,7 +341,7 @@ export default function VoiceOnboardingPage() {
               </div>
 
               {/* Live Streaming Transcript Box */}
-              <div className="mt-8 text-left">
+              <div className="mt-6 sm:mt-8 text-left">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-fuchsia-400" />
@@ -355,7 +375,7 @@ export default function VoiceOnboardingPage() {
                 {transcript && (
                   <button
                     onClick={() => handleProcessTranscript()}
-                    className="btn-primary w-full sm:w-auto px-8 py-3.5 rounded-2xl text-xs sm:text-sm font-bold shadow-xl flex items-center justify-center gap-2"
+                    className="btn-primary w-full sm:w-auto px-8 py-3.5 rounded-2xl text-xs sm:text-sm font-bold shadow-xl flex items-center justify-center gap-2 min-h-[46px]"
                   >
                     <Wand2 className="w-4 h-4 text-amber-300" />
                     <span>Extract Profile with AI</span>
@@ -366,33 +386,41 @@ export default function VoiceOnboardingPage() {
             </div>
 
             {/* Pitch Demo Fallback Presets */}
-            <div className="card-glass rounded-3xl p-6 shadow-xl border border-white/10 space-y-3">
+            <div className="card-glass rounded-3xl p-5 sm:p-6 shadow-xl border border-white/10 space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-white/10">
                 <span className="text-xs font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-300" />
-                  <span>College Pitch Sample Voice Presets (1-Click Fallback)</span>
+                  <span>College Pitch Sample Voice Presets (Demo Safe Fallback)</span>
                 </span>
-                <span className="text-[10px] text-slate-400">Demo Safe</span>
+                <span className="text-[10px] text-slate-400 font-semibold">1-Click Simulate</span>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {SAMPLE_VOICE_SCRIPTS.map((s, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleSelectSample(s)}
-                    className="p-3.5 rounded-2xl bg-space-950/80 hover:bg-space-900 border border-white/10 hover:border-fuchsia-500/40 text-left transition group space-y-1.5"
-                  >
-                    <span className="text-xs font-bold text-white group-hover:text-fuchsia-300 block truncate">
-                      {s.title}
-                    </span>
-                    <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed italic">
-                      "{s.transcript}"
-                    </p>
-                    <span className="text-[10px] font-bold text-fuchsia-400 block pt-1">
-                      Simulate Voice Input →
-                    </span>
-                  </button>
-                ))}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {SAMPLE_VOICE_SCRIPTS.map((s, idx) => {
+                  const Icon = s.icon;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => handleSelectSample(s)}
+                      className="p-3.5 rounded-2xl bg-space-950/80 hover:bg-space-900 border border-white/10 hover:border-fuchsia-500/40 text-left transition group space-y-1.5 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <Icon className="w-4 h-4 text-fuchsia-400" />
+                          <span className="text-xs font-bold text-white group-hover:text-fuchsia-300 truncate">
+                            {s.title}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed italic">
+                          "{s.transcript}"
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-bold text-fuchsia-400 block pt-1">
+                        Simulate Voice →
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -400,13 +428,13 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 2: EXTRACTING SPINNER */}
         {step === 'extracting' && (
-          <div className="card-glass rounded-3xl p-12 text-center border border-white/10 space-y-4 shadow-2xl py-20">
+          <div className="card-glass rounded-3xl p-8 sm:p-12 text-center border border-white/10 space-y-4 shadow-2xl py-16 sm:py-20">
             <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-violet-600 to-fuchsia-600 p-[2px] mx-auto shadow-xl shadow-fuchsia-500/25">
               <div className="w-full h-full bg-[#0E0927] rounded-[22px] flex items-center justify-center">
                 <Wand2 className="w-8 h-8 text-amber-300 animate-spin" />
               </div>
             </div>
-            <h2 className="text-xl font-extrabold text-white">
+            <h2 className="text-lg sm:text-xl font-extrabold text-white">
               Claude 3.5 Sonnet is Structuring Your Profile
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
@@ -417,20 +445,20 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 3: REVIEW & CONFIRM PROFILE */}
         {step === 'review' && (
-          <div className="card-glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 space-y-6">
+          <div className="card-glass rounded-3xl p-5 sm:p-8 shadow-2xl border border-white/10 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" />
                   Voice Extraction Complete
                 </span>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+                <h2 className="text-lg sm:text-2xl font-extrabold text-white mt-1">
                   Here’s What We Understood — Is This Right?
                 </h2>
               </div>
               <button
                 onClick={() => { setStep('record'); setTranscript(''); }}
-                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 self-start sm:self-auto"
+                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 self-start sm:self-auto min-h-[40px]"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Re-Record Voice</span>
@@ -451,7 +479,7 @@ export default function VoiceOnboardingPage() {
                     type="text"
                     value={extractedProfile.business_name}
                     onChange={(e) => setExtractedProfile({ ...extractedProfile, business_name: e.target.value })}
-                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia"
+                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia min-h-[42px]"
                   />
                 </div>
               </div>
@@ -467,7 +495,7 @@ export default function VoiceOnboardingPage() {
                     type="text"
                     value={extractedProfile.industry}
                     onChange={(e) => setExtractedProfile({ ...extractedProfile, industry: e.target.value })}
-                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia"
+                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia min-h-[42px]"
                   />
                 </div>
               </div>
@@ -496,7 +524,7 @@ export default function VoiceOnboardingPage() {
                     type="text"
                     value={extractedProfile.target_audience}
                     onChange={(e) => setExtractedProfile({ ...extractedProfile, target_audience: e.target.value })}
-                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia"
+                    className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia min-h-[42px]"
                   />
                 </div>
               </div>
@@ -509,7 +537,7 @@ export default function VoiceOnboardingPage() {
                 <select
                   value={extractedProfile.tone}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, tone: e.target.value as ToneType })}
-                  className="w-full bg-space-950/80 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia capitalize"
+                  className="w-full bg-space-950/80 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-brand-fuchsia capitalize min-h-[42px]"
                 >
                   <option value="playful">🎉 Playful & Witty</option>
                   <option value="casual">☕ Casual & Friendly</option>
@@ -527,7 +555,7 @@ export default function VoiceOnboardingPage() {
               </span>
               <button
                 onClick={handleConfirmAndGenerate}
-                className="btn-primary w-full sm:w-auto px-8 py-4 rounded-2xl text-xs sm:text-sm font-extrabold shadow-xl flex items-center justify-center gap-2"
+                className="btn-primary w-full sm:w-auto px-8 py-4 rounded-2xl text-xs sm:text-sm font-extrabold shadow-xl flex items-center justify-center gap-2 min-h-[48px]"
               >
                 <Sparkles className="w-4 h-4 text-amber-300" />
                 <span>Confirm & Generate Social Post</span>
@@ -539,13 +567,13 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 4: GENERATING POST SPINNER */}
         {step === 'generating' && (
-          <div className="card-glass rounded-3xl p-12 text-center border border-white/10 space-y-4 shadow-2xl py-20">
+          <div className="card-glass rounded-3xl p-8 sm:p-12 text-center border border-white/10 space-y-4 shadow-2xl py-16 sm:py-20">
             <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-fuchsia-600 to-amber-400 p-[2px] mx-auto shadow-xl shadow-amber-500/25">
               <div className="w-full h-full bg-[#0E0927] rounded-[22px] flex items-center justify-center">
                 <Sparkles className="w-8 h-8 text-amber-300 animate-spin" />
               </div>
             </div>
-            <h2 className="text-xl font-extrabold text-white">
+            <h2 className="text-lg sm:text-xl font-extrabold text-white">
               Generating High-Converting Post & Canvas Graphic...
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">

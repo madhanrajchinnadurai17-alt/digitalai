@@ -51,15 +51,19 @@ export default function PreviewPage() {
     error?: string;
   }>({ open: false, success: false });
 
-  // Sync initial generated content
+  // Sync initial generated content with fallback safety
   useEffect(() => {
     if (generatedPost) {
       const fullText = `${generatedPost.caption}\n\n${generatedPost.hashtags.join(' ')}`;
       setCaption(fullText);
     } else {
-      router.replace('/dashboard');
+      // Fallback post generation so page never crashes on fresh direct navigation
+      import('@/lib/mockData').then(({ generateFallbackPost }) => {
+        const fallback = generateFallbackPost(currentProfile, selectedFormat || 'single_image');
+        setCaption(`${fallback.caption}\n\n${fallback.hashtags.join(' ')}`);
+      });
     }
-  }, [generatedPost, router]);
+  }, [generatedPost, currentProfile, selectedFormat]);
 
   const handleCopyCaption = () => {
     navigator.clipboard.writeText(caption);
@@ -130,11 +134,16 @@ export default function PreviewPage() {
     }
   };
 
-  if (!generatedPost) {
-    return null;
-  }
+  const activePost = generatedPost || {
+    format: selectedFormat || 'single_image',
+    post_theme: `Transforming ${currentProfile.industry} with ${currentProfile.business_name}`,
+    caption: `Experience premium quality with ${currentProfile.business_name}. Handcrafted with passion and intention. ✨`,
+    hashtags: ['#SmallBusiness', '#HandcraftedQuality', '#LocalFavorite', `#${currentProfile.business_name.replace(/\s+/g, '')}`],
+    visual_idea: 'High-contrast branded graphic with signature color overlay',
+    best_time: 'Tuesday & Thursday at 8:15 AM'
+  };
 
-  const format = generatedPost.format || selectedFormat || 'single_image';
+  const format = activePost.format || selectedFormat || 'single_image';
 
   return (
     <Layout title="Preview & Post — MarkAI">
@@ -214,7 +223,7 @@ export default function PreviewPage() {
                 Campaign Hook
               </span>
               <p className="text-xs font-semibold text-slate-200 mt-0.5 line-clamp-1">
-                {generatedPost.post_theme}
+                {activePost.post_theme}
               </p>
             </div>
           </div>
@@ -228,7 +237,7 @@ export default function PreviewPage() {
                 Optimal Posting Window
               </span>
               <p className="text-xs font-semibold text-emerald-300 mt-0.5">
-                {generatedPost.best_time}
+                {activePost.best_time}
               </p>
             </div>
           </div>
@@ -242,7 +251,7 @@ export default function PreviewPage() {
                 Visual Concept
               </span>
               <p className="text-xs font-semibold text-slate-300 mt-0.5 line-clamp-1">
-                {generatedPost.visual_idea}
+                {activePost.visual_idea}
               </p>
             </div>
           </div>
@@ -257,7 +266,7 @@ export default function PreviewPage() {
                 <div className="flex items-center gap-2">
                   <Layers className="w-5 h-5 text-fuchsia-400" />
                   <span className="text-sm font-extrabold text-white uppercase tracking-wider">
-                    Structured Carousel Slide Deck ({generatedPost.carousel_slides?.length || 5} Slides)
+                    Structured Carousel Slide Deck ({activePost.carousel_slides?.length || 5} Slides)
                   </span>
                 </div>
                 <button
@@ -271,7 +280,7 @@ export default function PreviewPage() {
 
               {/* Slide Deck Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {generatedPost.carousel_slides?.map((slide) => (
+                {activePost.carousel_slides?.map((slide) => (
                   <div
                     key={slide.slide_number}
                     className="p-5 rounded-2xl bg-space-950/80 border border-white/10 flex flex-col justify-between space-y-3 hover:border-fuchsia-500/40 transition group"
@@ -340,10 +349,10 @@ export default function PreviewPage() {
                   <div>
                     <h3 className="text-base font-extrabold text-white">Reels & Short Video Script Storyboard</h3>
                     <div className="flex items-center gap-3 text-xs text-slate-400 mt-0.5">
-                      <span>Duration: <strong className="text-white">{generatedPost.reels_script?.duration || '20s'}</strong></span>
+                      <span>Duration: <strong className="text-white">{activePost.reels_script?.duration || '20s'}</strong></span>
                       <span>·</span>
                       <span className="flex items-center gap-1 text-amber-300">
-                        <Music className="w-3.5 h-3.5" /> {generatedPost.reels_script?.music_suggestion || 'Upbeat Kinetic Lofi'}
+                        <Music className="w-3.5 h-3.5" /> {activePost.reels_script?.music_suggestion || 'Upbeat Kinetic Lofi'}
                       </span>
                     </div>
                   </div>
@@ -364,7 +373,7 @@ export default function PreviewPage() {
                   3-Sec Hook
                 </div>
                 <p className="text-xs sm:text-sm font-bold text-white">
-                  "{generatedPost.reels_script?.hook || generatedPost.post_theme}"
+                  "{activePost.reels_script?.hook || activePost.post_theme}"
                 </p>
               </div>
 
@@ -375,7 +384,7 @@ export default function PreviewPage() {
                 </span>
 
                 <div className="grid grid-cols-1 gap-3">
-                  {generatedPost.reels_script?.scenes.map((scene, idx) => (
+                  {activePost.reels_script?.scenes?.map((scene, idx) => (
                     <div
                       key={idx}
                       className="p-4 rounded-2xl bg-space-950/80 border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
@@ -458,7 +467,7 @@ export default function PreviewPage() {
                 <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
                   <div className="flex items-center gap-2">
                     <Hash className="w-3.5 h-3.5 text-fuchsia-400" />
-                    <span>{generatedPost.hashtags?.length || 0} Hashtags Included</span>
+                    <span>{activePost.hashtags?.length || 0} Hashtags Included</span>
                   </div>
                   <span>{caption.length} characters</span>
                 </div>
@@ -480,7 +489,7 @@ export default function PreviewPage() {
 
                 <GraphicCanvas
                   businessName={currentProfile.business_name}
-                  themeTitle={generatedPost.post_theme}
+                  themeTitle={activePost.post_theme}
                   onImageReady={(dataUrl) => setCurrentImageData(dataUrl)}
                 />
               </div>
