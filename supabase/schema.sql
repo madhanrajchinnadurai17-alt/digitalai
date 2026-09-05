@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS public.posts (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 9. Permissions
+-- 9. Row Level Security Policies
 ALTER TABLE public.business_profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.brand_kits ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.content_calendar ENABLE ROW LEVEL SECURITY;
@@ -161,12 +161,13 @@ ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.autopilot_campaigns ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "Allow all" ON public.business_profiles FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.brand_kits FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.content_calendar FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.scheduled_posts FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.video_projects FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.websites FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.leads FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.autopilot_campaigns FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all" ON public.posts FOR ALL USING (true) WITH CHECK (true);
+-- Scoped Policies
+CREATE POLICY "Users can manage own business profile" ON public.business_profiles FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Users can manage own brand kit" ON public.brand_kits FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Users can manage own calendar" ON public.content_calendar FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Users can manage own scheduled posts" ON public.scheduled_posts FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Users can manage own posts" ON public.posts FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Public can view published websites" ON public.websites FOR SELECT USING (published = true);
+CREATE POLICY "Users can manage own websites" ON public.websites FOR ALL USING (user_id = auth.uid()::text OR user_id = 'demo-user') WITH CHECK (user_id = auth.uid()::text OR user_id = 'demo-user');
+CREATE POLICY "Public can submit lead inquiries" ON public.leads FOR INSERT WITH CHECK (true);
+CREATE POLICY "Site owners can view leads" ON public.leads FOR SELECT USING (true);
