@@ -93,6 +93,13 @@ export default function DashboardPage() {
                   Step 1 of 2 · Content Engine
                 </span>
                 <Link
+                  href="/voice-onboarding"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30 hover:bg-fuchsia-500/30 transition shadow-sm"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                  <span>🎙️ Speak via Voice AI</span>
+                </Link>
+                <Link
                   href="/brand-kit"
                   className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-violet-500/15 text-violet-300 border border-violet-500/30 hover:bg-violet-500/25 transition"
                 >

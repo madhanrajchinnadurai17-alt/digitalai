@@ -18,7 +18,8 @@ import {
   BarChart3,
   Film,
   Globe,
-  Bot
+  Bot,
+  Mic
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { SystemStatusModal } from './SystemStatusModal';
@@ -31,6 +32,7 @@ export function Navbar() {
 
   const appNavItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { href: '/voice-onboarding', label: 'Voice Setup', icon: Mic, highlight: true },
     { href: '/calendar', label: 'Calendar', icon: CalendarDays },
     { href: '/video-studio', label: 'Video Studio', icon: Film },
     { href: '/platforms', label: 'Channels', icon: Share2 },
@@ -45,6 +47,7 @@ export function Navbar() {
     { href: '/#features', label: 'Features' },
     { href: '/#how-it-works', label: 'How It Works' },
     { href: '/#demo', label: 'Live Demo' },
+    { href: '/voice-onboarding', label: '🎙️ Voice AI', highlight: true },
     { href: '/calendar', label: 'Calendar' },
     { href: '/agent', label: 'CMO Agent' },
     { href: '/dashboard', label: 'Cockpit' },
@@ -70,7 +73,7 @@ export function Navbar() {
                       MarkAI
                     </span>
                     <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
-                      Full Suite
+                      Voice AI Active
                     </span>
                   </div>
                   <span className="text-[11px] text-slate-400 font-medium hidden sm:block">
@@ -92,6 +95,8 @@ export function Navbar() {
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
                       isActive
                         ? 'bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-md shadow-fuchsia-600/25'
+                        : (item as any).highlight
+                        ? 'bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30 hover:bg-fuchsia-500/25'
                         : 'text-slate-300 hover:text-white hover:bg-white/[0.06]'
                     }`}
                   >
@@ -134,6 +139,13 @@ export function Navbar() {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
+                  <Link
+                    href="/voice-onboarding"
+                    className="px-3 py-1.5 rounded-xl text-xs font-bold bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30 hover:bg-fuchsia-500/30 transition hidden sm:inline-flex items-center gap-1.5"
+                  >
+                    <Mic className="w-3.5 h-3.5 text-fuchsia-400" />
+                    <span>Voice Setup</span>
+                  </Link>
                   <Link
                     href="/login"
                     className="btn-secondary px-3.5 py-1.5 rounded-xl text-xs font-semibold hidden sm:inline-flex"
@@ -183,6 +195,14 @@ export function Navbar() {
             })}
             {!user && (
               <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+                <Link
+                  href="/voice-onboarding"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn-primary w-full py-2.5 rounded-xl text-xs text-center flex items-center justify-center gap-1.5"
+                >
+                  <Mic className="w-4 h-4" />
+                  <span>Voice AI Onboarding</span>
+                </Link>
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
