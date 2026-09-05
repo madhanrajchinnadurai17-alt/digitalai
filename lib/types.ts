@@ -206,6 +206,42 @@ export interface VideoProject {
 }
 
 // ==========================================
+// GUIDED VIDEO CREATOR TYPES (GEMINI MULTIMODAL)
+// ==========================================
+export type GuidedVideoTemplate = 'product_spotlight' | 'before_after' | 'bts_story';
+
+export interface ShotFeedback {
+  matches: boolean;
+  score: number; // 1-100
+  feedback: string;
+  tip: string;
+}
+
+export interface GuidedShot {
+  shot_number: number;
+  title: string;
+  instruction: string;
+  camera_angle: string;
+  lighting_tip: string;
+  duration_seconds: number;
+  voiceover_script: string;
+  uploaded_image?: string;
+  ai_feedback?: ShotFeedback;
+  status: 'pending' | 'uploading' | 'analyzing' | 'approved';
+}
+
+export interface GuidedVideoProject {
+  id: string;
+  user_id?: string;
+  title: string;
+  template: GuidedVideoTemplate;
+  music_track: string;
+  shots: GuidedShot[];
+  assembled_at?: string;
+  created_at: string;
+}
+
+// ==========================================
 // PHASE 5: AI ONE-PAGE WEBSITE BUILDER TYPES
 // ==========================================
 export type WebsiteTemplateType = 'cafe' | 'retail' | 'services' | 'fitness';

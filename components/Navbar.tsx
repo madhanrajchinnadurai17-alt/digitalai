@@ -19,6 +19,7 @@ import {
   Film,
   Globe,
   Bot,
+  Clapperboard,
   Mic
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -32,7 +33,8 @@ export function Navbar() {
 
   const appNavItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/voice-onboarding', label: 'Voice Setup', icon: Mic, highlight: true },
+    { href: '/voice-onboarding', label: 'Voice Setup', icon: Mic },
+    { href: '/video-creator', label: 'Guided Video', icon: Clapperboard, highlight: true },
     { href: '/calendar', label: 'Calendar', icon: CalendarDays },
     { href: '/video-studio', label: 'Video Studio', icon: Film },
     { href: '/platforms', label: 'Channels', icon: Share2 },
@@ -47,7 +49,8 @@ export function Navbar() {
     { href: '/#features', label: 'Features' },
     { href: '/#how-it-works', label: 'How It Works' },
     { href: '/#demo', label: 'Live Demo' },
-    { href: '/voice-onboarding', label: '🎙️ Voice AI', highlight: true },
+    { href: '/voice-onboarding', label: '🎙️ Voice AI' },
+    { href: '/video-creator', label: '🎬 Video Creator', highlight: true },
     { href: '/calendar', label: 'Calendar' },
     { href: '/agent', label: 'CMO Agent' },
     { href: '/dashboard', label: 'Cockpit' },

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.27.3",
+    "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.45.4",
     "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
