@@ -65,147 +65,129 @@ export default function LandingPage() {
     <Layout title="MarkAI — Voice-First AI Social Media Engine for Local Business">
       
       {/* 1. HERO SECTION */}
-      <section className="pt-8 pb-16 sm:pt-14 sm:pb-20 text-center relative">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-kanchipuram-light border border-kanchipuram-border text-xs font-medium text-kanchipuram mb-6">
-          <Sparkles className="w-4 h-4 text-tumbler" />
-          <span>Theervu&apos;athon Pitch Competition MVP · Demo Live</span>
+      <section className="pt-10 pb-16 sm:pt-16 sm:pb-24 border-b border-grey/30 text-left">
+        <div className="max-w-4xl">
+          <div className="text-xs font-mono text-grey mb-4">
+            [MarkAI — Autonomous Social Marketing for Micro-Enterprises]
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl font-serif font-bold tracking-tight leading-[1.1] text-ink">
+            Speak your business.<br />
+            Publish on-brand social copy in thirty seconds.
+          </h1>
+
+          <p className="text-base sm:text-lg text-grey max-w-2xl mt-6 leading-relaxed">
+            Stop struggling with caption blocks and manual graphics. Speak naturally in Tamil, English, or Tanglish — MarkAI extracts your business profile, generates branded copy and canvas creative, and publishes directly to Instagram.
+          </p>
+
+          {/* Action Row */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
+            <Link
+              href="/voice-onboarding"
+              className="btn-primary w-full sm:w-auto px-7 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2"
+            >
+              <span>Begin Voice Setup</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+
+            <button
+              onClick={handleLaunchDemo}
+              className="btn-secondary w-full sm:w-auto px-6 py-3 rounded-sm text-xs font-medium"
+            >
+              Launch Pitch Demo
+            </button>
+          </div>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold tracking-tight max-w-4xl mx-auto leading-[1.15] text-ink">
-          Turn Your Local Business Into a{' '}
-          <span className="text-kanchipuram">Social Media Powerhouse</span>{' '}
-          with MarkAI
-        </h1>
-
-        <p className="text-base sm:text-lg text-muted max-w-2xl mx-auto mt-5 leading-relaxed">
-          Stop struggling with captions and graphic design. Speak naturally in Tamil or English — MarkAI crafts on-brand copy, generates branded graphics, and auto-posts to Instagram in 30 seconds.
-        </p>
-
-        {/* Dual CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mt-8">
-          <Link
-            href="/voice-onboarding"
-            className="btn-primary w-full sm:w-auto px-7 py-3.5 rounded-xl text-sm font-semibold shadow-md flex items-center justify-center gap-2"
-          >
-            <span>Start with Voice AI</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-
-          <a
-            href="#demo"
-            className="btn-secondary w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2"
-          >
-            <Play className="w-4 h-4 text-tumbler fill-tumbler" />
-            <span>See Interactive Demo</span>
-          </a>
-
-          <button
-            onClick={handleLaunchDemo}
-            className="px-5 py-3.5 rounded-xl bg-tumbler-light hover:bg-amber-100 text-tumbler border border-tumbler-border text-xs font-semibold transition flex items-center justify-center gap-1.5 w-full sm:w-auto"
-          >
-            <Zap className="w-4 h-4" />
-            <span>Instant Pitch Demo Access</span>
-          </button>
-        </div>
-
-        {/* Hero Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-14 text-left">
-          <div className="card p-4 rounded-xl border border-border">
-            <span className="text-2xl sm:text-3xl font-display font-bold text-ink">5 Sec</span>
-            <p className="text-xs text-muted mt-0.5">Voice-to-Copy Speed</p>
+        {/* Hero Ledger Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mt-14 pt-8 border-t border-grey/20">
+          <div>
+            <span className="text-3xl font-serif font-bold text-ink">5s</span>
+            <p className="text-xs font-mono text-grey mt-1">Voice Extraction Latency</p>
           </div>
-          <div className="card p-4 rounded-xl border border-border">
-            <span className="text-2xl sm:text-3xl font-display font-bold text-kanchipuram">1-Click</span>
-            <p className="text-xs text-muted mt-0.5">Meta Graph Auto-Post</p>
+          <div>
+            <span className="text-3xl font-serif font-bold text-ink">1-Click</span>
+            <p className="text-xs font-mono text-grey mt-1">Meta Graph Publishing</p>
           </div>
-          <div className="card p-4 rounded-xl border border-border">
-            <span className="text-2xl sm:text-3xl font-display font-bold text-tumbler">1080px</span>
-            <p className="text-xs text-muted mt-0.5">Branded Canvas Studio</p>
+          <div>
+            <span className="text-3xl font-serif font-bold text-ink">1080px</span>
+            <p className="text-xs font-mono text-grey mt-1">Canvas Graphics Engine</p>
           </div>
-          <div className="card p-4 rounded-xl border border-border">
-            <span className="text-2xl sm:text-3xl font-display font-bold text-success">100%</span>
-            <p className="text-xs text-muted mt-0.5">Pitch-Ready Fallbacks</p>
+          <div>
+            <span className="text-3xl font-serif font-bold text-ink">0 cost</span>
+            <p className="text-xs font-mono text-grey mt-1">Agency Retainer Alternative</p>
           </div>
         </div>
       </section>
 
       {/* 2. PROBLEM & SOLUTION SECTION */}
-      <section className="py-14 border-t border-border" id="problem-solution">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-tumbler bg-tumbler-light px-3 py-1 rounded-full border border-tumbler-border">
-            The Micro-Business Challenge
+      <section className="py-16 border-b border-grey/30" id="problem-solution">
+        <div className="mb-12">
+          <span className="text-xs font-mono text-grey">
+            [The Micro-Enterprise Bottleneck]
           </span>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-3 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
             Why 80% of Home Businesses Struggle Online
           </h2>
-          <p className="text-sm text-muted mt-2">
-            Managing organic social presence without a dedicated marketing team is overwhelming. MarkAI fixes the 3 critical bottlenecks.
+          <p className="text-sm text-grey mt-2 max-w-xl">
+            Managing organic social media without a dedicated marketing team is overwhelming. MarkAI addresses the three primary obstacles.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Time */}
-          <div className="card rounded-2xl p-6 flex flex-col justify-between border border-border">
+          <div className="card rounded-sm p-6 flex flex-col justify-between border border-grey/30 bg-white">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-danger-light text-danger border border-danger-border flex items-center justify-center mb-4">
-                <Clock className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-semibold text-danger uppercase tracking-wider">Pain Point #1</span>
-              <h3 className="text-lg font-display font-bold text-ink mt-1">Zero Time to Create</h3>
-              <p className="text-xs text-muted mt-2 leading-relaxed">
-                Founders spend 5-10 hours every week staring at a blank screen trying to brainstorm captions, research hashtags, and remember when to post.
+              <span className="text-xs font-mono text-grey">01 / TIME</span>
+              <h3 className="text-lg font-serif font-bold text-ink mt-2">Zero Time to Create</h3>
+              <p className="text-xs text-grey mt-2 leading-relaxed">
+                Founders spend 5 to 10 hours each week staring at a blank screen trying to brainstorm captions, research hashtags, and remember when to post.
               </p>
             </div>
-            <div className="mt-5 pt-4 border-t border-border">
-              <span className="text-xs font-semibold text-success flex items-center gap-1.5 mb-1">
-                <CheckCircle2 className="w-4 h-4" /> MarkAI Solution:
+            <div className="mt-6 pt-4 border-t border-grey/20">
+              <span className="text-xs font-mono text-ink block mb-1">
+                MarkAI Remedy:
               </span>
-              <p className="text-xs text-ink-soft">
-                Speak for 30 seconds — AI generates complete high-converting copy in <strong>&lt; 5 seconds</strong>.
+              <p className="text-xs text-grey">
+                Speak for 30 seconds. Claude AI extracts and generates on-brand copy in seconds.
               </p>
             </div>
           </div>
 
           {/* Card 2: Design */}
-          <div className="card rounded-2xl p-6 flex flex-col justify-between border border-border">
+          <div className="card rounded-sm p-6 flex flex-col justify-between border border-grey/30 bg-white">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-tumbler-light text-tumbler border border-tumbler-border flex items-center justify-center mb-4">
-                <Palette className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-semibold text-tumbler uppercase tracking-wider">Pain Point #2</span>
-              <h3 className="text-lg font-display font-bold text-ink mt-1">No Design Experience</h3>
-              <p className="text-xs text-muted mt-2 leading-relaxed">
-                Canva and Photoshop require tedious manual layout tweaks. Templates often look inconsistent with local branding and festival aesthetics.
+              <span className="text-xs font-mono text-grey">02 / DESIGN</span>
+              <h3 className="text-lg font-serif font-bold text-ink mt-2">No Design Experience</h3>
+              <p className="text-xs text-grey mt-2 leading-relaxed">
+                Design tools require tedious manual layout tweaks. Templates often look inconsistent with local branding and festival aesthetics.
               </p>
             </div>
-            <div className="mt-5 pt-4 border-t border-border">
-              <span className="text-xs font-semibold text-success flex items-center gap-1.5 mb-1">
-                <CheckCircle2 className="w-4 h-4" /> MarkAI Solution:
+            <div className="mt-6 pt-4 border-t border-grey/20">
+              <span className="text-xs font-mono text-ink block mb-1">
+                MarkAI Remedy:
               </span>
-              <p className="text-xs text-ink-soft">
-                Built-in <strong>HTML5 Canvas Studio</strong> automatically renders branded text-overlay graphics with 5 curated regional palettes.
+              <p className="text-xs text-grey">
+                Built-in HTML5 Canvas Studio renders crisp 1080x1080 text-overlay graphics instantly.
               </p>
             </div>
           </div>
 
           {/* Card 3: Budget */}
-          <div className="card rounded-2xl p-6 flex flex-col justify-between border border-border">
+          <div className="card rounded-sm p-6 flex flex-col justify-between border border-grey/30 bg-white">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border flex items-center justify-center mb-4">
-                <DollarSign className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-semibold text-kanchipuram uppercase tracking-wider">Pain Point #3</span>
-              <h3 className="text-lg font-display font-bold text-ink mt-1">No Agency Budget</h3>
-              <p className="text-xs text-muted mt-2 leading-relaxed">
-                Marketing agencies charge ₹25,000 to ₹50,000/month — far out of reach for home bakers, boutique saree stores, and local cafes.
+              <span className="text-xs font-mono text-grey">03 / CAPITAL</span>
+              <h3 className="text-lg font-serif font-bold text-ink mt-2">No Agency Budget</h3>
+              <p className="text-xs text-grey mt-2 leading-relaxed">
+                Marketing agencies charge ₹25,000 to ₹50,000 per month — far out of reach for home bakers, boutique saree stores, and local cafes.
               </p>
             </div>
-            <div className="mt-5 pt-4 border-t border-border">
-              <span className="text-xs font-semibold text-success flex items-center gap-1.5 mb-1">
-                <CheckCircle2 className="w-4 h-4" /> MarkAI Solution:
+            <div className="mt-6 pt-4 border-t border-grey/20">
+              <span className="text-xs font-mono text-ink block mb-1">
+                MarkAI Remedy:
               </span>
-              <p className="text-xs text-ink-soft">
-                Full AI content creation &amp; 1-click Instagram posting at zero overhead cost.
+              <p className="text-xs text-grey">
+                Full AI content creation and direct Instagram posting at zero overhead.
               </p>
             </div>
           </div>
@@ -213,215 +195,121 @@ export default function LandingPage() {
       </section>
 
       {/* 3. HOW IT WORKS SECTION */}
-      <section className="py-14 border-t border-border" id="how-it-works">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-kanchipuram bg-kanchipuram-light px-3 py-1 rounded-full border border-kanchipuram-border">
-            Frictionless 4-Step Engine
+      <section className="py-16 border-b border-grey/30" id="how-it-works">
+        <div className="mb-12">
+          <span className="text-xs font-mono text-grey">
+            [Workflow Architecture]
           </span>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-3 tracking-tight">
-            How MarkAI Works in 30 Seconds
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+            How MarkAI Operates
           </h2>
-          <p className="text-sm text-muted mt-2">
-            No complex menus or confusing dashboards. Speak your mind and let AI do the rest.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {/* Step 1 */}
-          <div className="card rounded-2xl p-6 relative border border-border">
-            <span className="absolute top-4 right-4 text-3xl font-display font-bold text-gray-200">01</span>
-            <div className="w-10 h-10 rounded-xl bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border flex items-center justify-center mb-4">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h4 className="text-base font-display font-bold text-ink">Voice or Form</h4>
-            <p className="text-xs text-muted mt-2 leading-relaxed">
-              Speak about your shop or enter business name, offerings, audience, and preferred tone.
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+            <span className="text-xs font-mono text-grey">STAGE 01</span>
+            <h4 className="text-base font-serif font-bold text-ink mt-2">Voice Input</h4>
+            <p className="text-xs text-grey mt-2 leading-relaxed">
+              Speak about your shop in English, Tamil, or Tanglish. Web Speech API captures audio client-side.
             </p>
           </div>
 
-          {/* Step 2 */}
-          <div className="card rounded-2xl p-6 relative border border-border">
-            <span className="absolute top-4 right-4 text-3xl font-display font-bold text-gray-200">02</span>
-            <div className="w-10 h-10 rounded-xl bg-tumbler-light text-tumbler border border-tumbler-border flex items-center justify-center mb-4">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <h4 className="text-base font-display font-bold text-ink">Claude AI Engine</h4>
-            <p className="text-xs text-muted mt-2 leading-relaxed">
-              Anthropic Claude crafts story hooks, tailored copy, high-reach hashtags, and post themes.
+          <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+            <span className="text-xs font-mono text-grey">STAGE 02</span>
+            <h4 className="text-base font-serif font-bold text-ink mt-2">Claude Engine</h4>
+            <p className="text-xs text-grey mt-2 leading-relaxed">
+              Anthropic Claude 3.5 Sonnet extracts structured profile data, hooks, and formatted copy.
             </p>
           </div>
 
-          {/* Step 3 */}
-          <div className="card rounded-2xl p-6 relative border border-border">
-            <span className="absolute top-4 right-4 text-3xl font-display font-bold text-gray-200">03</span>
-            <div className="w-10 h-10 rounded-xl bg-marigold-light text-tumbler border border-tumbler-border flex items-center justify-center mb-4">
-              <Palette className="w-5 h-5" />
-            </div>
-            <h4 className="text-base font-display font-bold text-ink">Branded Graphic</h4>
-            <p className="text-xs text-muted mt-2 leading-relaxed">
-              HTML5 Canvas renders instant 1080×1080 high-res visual banner with custom color theme.
+          <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+            <span className="text-xs font-mono text-grey">STAGE 03</span>
+            <h4 className="text-base font-serif font-bold text-ink mt-2">Canvas Creative</h4>
+            <p className="text-xs text-grey mt-2 leading-relaxed">
+              HTML5 Canvas renders instant 1080×1080 high-resolution visual post without server lag.
             </p>
           </div>
 
-          {/* Step 4 */}
-          <div className="card rounded-2xl p-6 relative border border-border">
-            <span className="absolute top-4 right-4 text-3xl font-display font-bold text-gray-200">04</span>
-            <div className="w-10 h-10 rounded-xl bg-success-light text-success border border-success-border flex items-center justify-center mb-4">
-              <Instagram className="w-5 h-5" />
-            </div>
-            <h4 className="text-base font-display font-bold text-ink">1-Click Publish</h4>
-            <p className="text-xs text-muted mt-2 leading-relaxed">
-              Push directly to your Instagram Business account via Meta Graph API with live logging.
+          <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+            <span className="text-xs font-mono text-grey">STAGE 04</span>
+            <h4 className="text-base font-serif font-bold text-ink mt-2">Publish / Sandbox</h4>
+            <p className="text-xs text-grey mt-2 leading-relaxed">
+              Dispatches directly to Instagram Business account via Meta Graph API with live verification.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 4. FEATURE HIGHLIGHTS */}
-      <section className="py-14 border-t border-border" id="features">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-semibold uppercase tracking-wider text-kanchipuram bg-kanchipuram-light px-3 py-1 rounded-full border border-kanchipuram-border">
-            Engineered For Impact
+      {/* 4. LIVE INTERACTIVE DEMO TEASER */}
+      <section className="py-16 border-b border-grey/30" id="demo">
+        <div className="mb-8">
+          <span className="text-xs font-mono text-grey">
+            [Interactive Studio Sandbox]
           </span>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-3 tracking-tight">
-            Core Architecture Built for Theervu&apos;athon Pitch
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+            Preview the Studio Output
           </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="card rounded-2xl p-6 flex items-start gap-4 border border-border">
-            <div className="p-3 rounded-xl bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border flex-shrink-0">
-              <Cpu className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-display font-bold text-ink">Anthropic Claude AI Backend</h3>
-              <p className="text-xs text-muted mt-1.5 leading-relaxed">
-                Powered by Claude 3.5 Sonnet via secure server-side API routes. Generates structured JSON with hook-driven captions, viral hashtags, visual concepts, and optimal posting windows.
-              </p>
-            </div>
-          </div>
-
-          <div className="card rounded-2xl p-6 flex items-start gap-4 border border-border">
-            <div className="p-3 rounded-xl bg-tumbler-light text-tumbler border border-tumbler-border flex-shrink-0">
-              <Palette className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-display font-bold text-ink">HTML5 Canvas Graphic Generator</h3>
-              <p className="text-xs text-muted mt-1.5 leading-relaxed">
-                Fast, zero-latency creative generation. Automatically creates 1080×1080 branded text-overlay graphics with customizable color themes without paid render APIs.
-              </p>
-            </div>
-          </div>
-
-          <div className="card rounded-2xl p-6 flex items-start gap-4 border border-border">
-            <div className="p-3 rounded-xl bg-danger-light text-danger border border-danger-border flex-shrink-0">
-              <Instagram className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-display font-bold text-ink">Meta Graph API Social Posting</h3>
-              <p className="text-xs text-muted mt-1.5 leading-relaxed">
-                Direct integration with Instagram Business Content Publishing API. Supports both live production tokens and an automatic sandbox demo mode for pitch evaluations.
-              </p>
-            </div>
-          </div>
-
-          <div className="card rounded-2xl p-6 flex items-start gap-4 border border-border">
-            <div className="p-3 rounded-xl bg-success-light text-success border border-success-border flex-shrink-0">
-              <BarChart3 className="w-5 h-5" />
-            </div>
-            <div>
-              <h3 className="text-base font-display font-bold text-ink">Post History &amp; Memory</h3>
-              <p className="text-xs text-muted mt-1.5 leading-relaxed">
-                Persistent tracking of all draft, published, and scheduled posts with full timestamps, captions, thumbnail graphics, and Instagram Media IDs.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. LIVE INTERACTIVE DEMO TEASER */}
-      <section className="py-14 border-t border-border" id="demo">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tumbler-light text-tumbler text-xs font-semibold border border-tumbler-border mb-3">
-            <Zap className="w-3.5 h-3.5" /> Interactive UI Preview
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink tracking-tight">
-            See the MarkAI Cockpit in Action
-          </h2>
-          <p className="text-sm text-muted mt-2">
-            Switch between business presets to inspect real-time copy and canvas creative generation.
+          <p className="text-sm text-grey mt-2">
+            Switch between business presets to inspect generated captions and canvas layouts.
           </p>
 
           {/* Preset Switcher Tabs */}
-          <div className="flex items-center justify-center gap-2 mt-6">
+          <div className="flex items-center gap-2 mt-6">
             <button
               onClick={() => setActiveDemoTab('coffee')}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition ${
+              className={`px-3 py-1.5 rounded-sm text-xs font-mono transition ${
                 activeDemoTab === 'coffee'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-surface text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              ☕ Brew &amp; Bean Co.
+              [Brew &amp; Bean Co.]
             </button>
             <button
               onClick={() => setActiveDemoTab('fitness')}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition ${
+              className={`px-3 py-1.5 rounded-sm text-xs font-mono transition ${
                 activeDemoTab === 'fitness'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-surface text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              🏃‍♂️ FitPulse Apparel
+              [FitPulse Apparel]
             </button>
             <button
               onClick={() => setActiveDemoTab('skincare')}
-              className={`px-4 py-2 rounded-xl text-xs font-semibold transition ${
+              className={`px-3 py-1.5 rounded-sm text-xs font-mono transition ${
                 activeDemoTab === 'skincare'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-surface text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              🌿 GlowLab Skincare
+              [GlowLab Botanicals]
             </button>
           </div>
         </div>
 
         {/* Mockup Preview Card */}
-        <div className="card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto shadow-card border border-border">
-          <div className="flex items-center justify-between pb-4 border-b border-border mb-6">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-medium text-muted">markai.app/preview</span>
-            </div>
-            <button
-              onClick={handleLaunchDemo}
-              className="btn-primary px-4 py-1.5 rounded-lg text-xs font-semibold"
-            >
-              <Zap className="w-3.5 h-3.5 text-marigold" />
-              <span>Launch Live Interactive App</span>
-            </button>
-          </div>
-
+        <div className="card rounded-sm p-6 border border-grey/30 bg-white">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Left: Generated Copy Preview */}
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-kanchipuram uppercase tracking-wider">
-                  Generated Caption &amp; Hashtags
+                <span className="text-xs font-mono text-grey">
+                  [Generated Caption &amp; Hashtags]
                 </span>
-                <span className="text-[11px] font-medium text-success bg-success-light px-2 py-0.5 rounded-full border border-success-border">
-                  Optimal: {activeDemo.time}
+                <span className="text-xs font-mono text-ink">
+                  Window: {activeDemo.time}
                 </span>
               </div>
 
-              <div className="p-4 rounded-xl bg-gray-50 border border-border space-y-2.5">
-                <h4 className="text-sm font-semibold text-ink">{activeDemo.theme}</h4>
-                <p className="text-xs text-muted leading-relaxed whitespace-pre-line">
+              <div className="p-4 rounded-sm bg-white border border-grey/30 space-y-2.5">
+                <h4 className="text-sm font-serif font-bold text-ink">{activeDemo.theme}</h4>
+                <p className="text-xs text-grey leading-relaxed whitespace-pre-line font-sans">
                   {activeDemo.caption}
                 </p>
-                <div className="flex flex-wrap gap-1 pt-2 border-t border-border">
+                <div className="flex flex-wrap gap-1 pt-2 border-t border-grey/20">
                   {activeDemo.hashtags.map((tag, i) => (
-                    <span key={i} className="text-[11px] font-medium text-kanchipuram bg-kanchipuram-light px-2 py-0.5 rounded-md">
+                    <span key={i} className="text-[11px] font-mono text-ink">
                       {tag}
                     </span>
                   ))}
@@ -431,39 +319,27 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLaunchDemo}
-                  className="btn-instagram px-4 py-2.5 rounded-xl text-xs font-semibold flex-1"
+                  className="btn-primary px-4 py-2 rounded-sm text-xs font-medium"
                 >
-                  <Instagram className="w-4 h-4" />
-                  <span>Test Post to Instagram</span>
-                </button>
-                <button
-                  onClick={handleLaunchDemo}
-                  className="btn-secondary px-4 py-2.5 rounded-xl text-xs font-medium"
-                >
-                  Edit Caption
+                  Open in Cockpit
                 </button>
               </div>
             </div>
 
             {/* Right: Creative Graphic Mockup */}
             <div className="lg:col-span-5 flex justify-center">
-              <div
-                className="w-full max-w-[260px] aspect-square rounded-2xl p-5 shadow-md flex flex-col justify-between text-white relative overflow-hidden group"
-                style={{ background: activeDemo.gradient }}
-              >
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/30 backdrop-blur-md text-[10px] font-medium tracking-wider uppercase self-start">
-                  <span>{activeDemo.name}</span>
+              <div className="w-full max-w-[260px] aspect-square rounded-sm p-5 border border-ink bg-white flex flex-col justify-between text-ink">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-grey">
+                  [{activeDemo.name}]
                 </div>
                 <div>
-                  <span className="text-2xl font-serif text-white/40 block leading-none">“</span>
-                  <p className="text-sm font-bold leading-snug tracking-tight">
+                  <p className="text-sm font-serif font-bold leading-snug">
                     {activeDemo.theme}
                   </p>
-                  <div className="w-10 h-1 bg-marigold mt-2 rounded-full"></div>
                 </div>
-                <div className="flex items-center justify-between text-[9px] font-semibold text-white/90 uppercase pt-2 border-t border-white/20">
+                <div className="flex items-center justify-between text-[9px] font-mono text-grey uppercase pt-2 border-t border-grey/20">
                   <span>TAP LINK IN BIO</span>
-                  <span className="opacity-80">@markai</span>
+                  <span>@MARKAI</span>
                 </div>
               </div>
             </div>
@@ -471,31 +347,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 6. CALL TO ACTION FOOTER BANNER */}
-      <section className="py-14">
-        <div className="card rounded-2xl p-8 sm:p-12 text-center max-w-4xl mx-auto border border-kanchipuram-border bg-gradient-to-b from-kanchipuram-light/50 to-surface">
-          <div className="max-w-xl mx-auto space-y-4">
-            <span className="text-xs font-semibold uppercase tracking-wider text-kanchipuram bg-kanchipuram-light px-3 py-1 rounded-full border border-kanchipuram-border">
-              Theervu&apos;athon Pitch Ready
+      {/* 5. CALL TO ACTION FOOTER BANNER */}
+      <section className="py-16 text-left">
+        <div className="card rounded-sm p-8 sm:p-12 border border-grey/30 bg-white max-w-4xl">
+          <div className="space-y-4">
+            <span className="text-xs font-mono text-grey">
+              [Autonomous Social Marketing Platform]
             </span>
-            <h2 className="text-2xl sm:text-4xl font-display font-bold text-ink tracking-tight">
-              Ready to Automate Your Business Marketing?
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight">
+              Ready to automate your social marketing?
             </h2>
-            <p className="text-sm text-muted">
-              Join local merchants saving 10+ hours every week with MarkAI&apos;s voice-first content generation and Instagram publishing.
+            <p className="text-sm text-grey max-w-xl leading-relaxed">
+              Eliminate hours of manual social posting every week with voice-first extraction and direct Instagram publishing.
             </p>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-4 flex flex-col sm:flex-row items-center gap-3">
               <Link
                 href="/voice-onboarding"
-                className="btn-primary px-7 py-3.5 rounded-xl text-sm font-semibold w-full sm:w-auto flex items-center justify-center gap-2"
+                className="btn-primary px-7 py-2.5 rounded-sm text-xs font-medium w-full sm:w-auto"
               >
-                <span>Try Voice Setup</span>
-                <ArrowRight className="w-4 h-4" />
+                Start with Voice AI
               </Link>
               <button
                 onClick={handleLaunchDemo}
-                className="btn-secondary px-6 py-3.5 rounded-xl text-xs font-semibold w-full sm:w-auto"
+                className="btn-secondary px-6 py-2.5 rounded-sm text-xs font-medium w-full sm:w-auto"
               >
                 Instant Pitch Demo Login
               </button>

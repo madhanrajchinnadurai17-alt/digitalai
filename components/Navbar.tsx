@@ -58,35 +58,34 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-grey/30 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <Link href="/" className="flex items-center gap-2.5 group">
-                <div className="w-9 h-9 rounded-xl bg-kanchipuram flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
-                  <Sparkles className="w-4 h-4 text-marigold" />
+              <Link href="/" className="flex items-center gap-3 group">
+                <div className="w-8 h-8 rounded-sm bg-ink flex items-center justify-center text-white">
+                  <span className="font-serif font-bold text-base leading-none">M</span>
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-display font-bold text-xl text-ink tracking-tight">
+                    <span className="font-serif font-bold text-xl text-ink tracking-tight">
                       MarkAI
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-full bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border">
-                      <span className="w-1.5 h-1.5 rounded-full bg-kanchipuram animate-pulse"></span>
-                      Voice-First
+                    <span className="text-[11px] font-mono text-grey">
+                      [Voice-First]
                     </span>
                   </div>
-                  <span className="text-[11px] text-muted font-normal hidden sm:block">
-                    AI Marketing for Home &amp; Local Business
+                  <span className="text-[11px] text-grey hidden sm:block">
+                    Social Automation for Micro-Enterprises
                   </span>
                 </div>
               </Link>
             </div>
 
             {/* Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-1 p-1 rounded-xl bg-gray-50 border border-border">
+            <nav className="hidden xl:flex items-center gap-1 p-1 rounded-sm border border-grey/30 bg-white">
               {(user ? appNavItems : landingNavItems).map((item) => {
                 const isActive = router.pathname === item.href;
                 const Icon = (item as any).icon;
@@ -94,12 +93,10 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition ${
                       isActive
-                        ? 'bg-kanchipuram text-white shadow-sm'
-                        : (item as any).highlight
-                        ? 'bg-tumbler-light text-tumbler font-semibold border border-tumbler-border hover:bg-amber-100'
-                        : 'text-muted hover:text-ink hover:bg-white'
+                        ? 'bg-ink text-white'
+                        : 'text-grey hover:text-ink hover:bg-white'
                     }`}
                   >
                     {Icon && <Icon className="w-3.5 h-3.5" />}
@@ -114,27 +111,27 @@ export function Navbar() {
               <button
                 onClick={() => setShowStatusModal(true)}
                 title="System Status"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-muted hover:text-ink bg-gray-50 hover:bg-gray-100 border border-border transition"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-xs font-medium text-grey hover:text-ink border border-grey/30 transition"
               >
-                <Activity className="w-3.5 h-3.5 text-success" />
-                <span className="hidden sm:inline">Health</span>
+                <Activity className="w-3.5 h-3.5 text-ink" />
+                <span className="hidden sm:inline">System Health</span>
               </button>
 
               {user ? (
                 <div className="flex items-center gap-2.5">
                   <div className="hidden lg:flex flex-col text-right">
-                    <span className="text-xs font-semibold text-ink truncate max-w-[120px]">
+                    <span className="text-xs font-medium text-ink truncate max-w-[120px]">
                       {user.displayName || user.email?.split('@')[0]}
                     </span>
-                    <span className="text-[10px] text-muted font-medium">
-                      {user.isDemoUser ? 'Pitch Demo' : 'Account'}
+                    <span className="text-[10px] text-grey font-mono">
+                      {user.isDemoUser ? '[Demo Account]' : '[Standard]'}
                     </span>
                   </div>
 
                   <button
                     onClick={() => logout().then(() => router.push('/'))}
                     title="Sign Out"
-                    className="p-1.5 rounded-lg text-muted hover:text-danger hover:bg-danger-light border border-border transition"
+                    className="p-1.5 rounded-sm text-grey hover:text-ink border border-grey/30 transition"
                   >
                     <LogOut className="w-4 h-4" />
                   </button>
@@ -143,23 +140,22 @@ export function Navbar() {
                 <div className="flex items-center gap-2">
                   <Link
                     href="/voice-onboarding"
-                    className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border hover:bg-indigo-100 transition hidden sm:inline-flex items-center gap-1.5"
+                    className="px-3 py-1.5 rounded-sm text-xs font-medium border border-grey/30 text-ink hover:border-ink transition hidden sm:inline-flex items-center gap-1.5"
                   >
-                    <Mic className="w-3.5 h-3.5" />
+                    <Mic className="w-3.5 h-3.5 text-ink" />
                     <span>Voice Setup</span>
                   </Link>
                   <Link
                     href="/login"
-                    className="btn-secondary px-3 py-1.5 rounded-lg text-xs font-semibold hidden sm:inline-flex"
+                    className="btn-secondary px-3 py-1.5 rounded-sm text-xs hidden sm:inline-flex"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/signup"
-                    className="btn-primary px-3.5 py-1.5 rounded-lg text-xs font-semibold"
+                    className="btn-primary px-3.5 py-1.5 rounded-sm text-xs font-medium"
                   >
-                    <span>Try Free</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    Try Free
                   </Link>
                 </div>
               )}
@@ -167,7 +163,7 @@ export function Navbar() {
               {/* Mobile / Tablet Menu Toggle */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 rounded-lg text-ink xl:hidden bg-gray-50 border border-border"
+                className="p-2 rounded-sm text-ink xl:hidden border border-grey/30"
                 aria-label="Toggle Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -178,7 +174,7 @@ export function Navbar() {
 
         {/* Mobile / Tablet Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="xl:hidden border-t border-border bg-surface p-4 space-y-1.5 max-h-[85vh] overflow-y-auto shadow-lg">
+          <div className="xl:hidden border-t border-grey/30 bg-white p-4 space-y-1.5 max-h-[85vh] overflow-y-auto">
             {(user ? appNavItems : landingNavItems).map((item) => {
               const Icon = (item as any).icon;
               const isActive = router.pathname === item.href;
@@ -187,21 +183,21 @@ export function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium transition ${
-                    isActive ? 'bg-kanchipuram text-white' : 'text-ink hover:bg-gray-100'
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-sm text-sm font-medium transition ${
+                    isActive ? 'bg-ink text-white' : 'text-ink hover:bg-grey/10'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4 text-muted" />}
+                  {Icon && <Icon className="w-4 h-4 text-grey" />}
                   <span>{item.label}</span>
                 </Link>
               );
             })}
             {!user && (
-              <div className="pt-3 border-t border-border flex flex-col gap-2">
+              <div className="pt-3 border-t border-grey/30 flex flex-col gap-2">
                 <Link
                   href="/voice-onboarding"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary w-full py-2.5 rounded-xl text-xs text-center flex items-center justify-center gap-1.5"
+                  className="btn-primary w-full py-2.5 rounded-sm text-xs text-center flex items-center justify-center gap-1.5"
                 >
                   <Mic className="w-4 h-4" />
                   <span>Voice AI Onboarding</span>
@@ -209,14 +205,14 @@ export function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn-secondary w-full py-2.5 rounded-xl text-xs text-center"
+                  className="btn-secondary w-full py-2.5 rounded-sm text-xs text-center"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn-primary w-full py-2.5 rounded-xl text-xs text-center"
+                  className="btn-primary w-full py-2.5 rounded-sm text-xs text-center"
                 >
                   Create Free Account
                 </Link>

@@ -237,47 +237,45 @@ export default function VoiceOnboardingPage() {
       <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 py-2 sm:py-4 px-2 sm:px-0">
         
         {/* Header Breadcrumb */}
-        <div className="card rounded-2xl p-5 sm:p-7 shadow-card border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="card rounded-sm p-6 border border-grey/30 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border flex items-center gap-1.5">
-                <Radio className="w-3.5 h-3.5 text-kanchipuram animate-pulse" />
-                Zero-Friction Voice AI Onboarding
+              <span className="text-xs font-mono text-ink">
+                [Voice AI Onboarding]
               </span>
-              <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-gray-100 text-muted border border-border">
-                Web Speech API · Indian English / Tamil
+              <span className="text-xs font-mono text-grey">
+                Web Speech API · Indian English &amp; Tanglish
               </span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-display font-bold text-ink mt-2 tracking-tight flex items-center gap-2.5">
-              <Volume2 className="w-6 h-6 text-kanchipuram" />
-              <span>Voice-Input Business Setup</span>
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+              Describe Your Business Aloud
             </h1>
-            <p className="text-xs sm:text-sm text-muted mt-1 max-w-xl leading-relaxed">
-              No typing needed. Speak naturally about your shop in English, Tamil, or Tanglish. MarkAI extracts your profile and generates on-brand social copy in seconds.
+            <p className="text-xs sm:text-sm text-grey mt-1 max-w-xl leading-relaxed">
+              Speak naturally about your shop in English, Tamil, or Tanglish. MarkAI extracts your profile and generates on-brand social copy in seconds.
             </p>
           </div>
 
           <Link
             href="/dashboard"
-            className="btn-secondary px-4 py-2 rounded-xl text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[40px]"
+            className="btn-secondary px-4 py-2 rounded-sm text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[38px]"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-3.5 h-3.5" />
             <span>Manual Form</span>
           </Link>
         </div>
 
         {!speechSupported && (
-          <div className="p-4 rounded-xl bg-tumbler-light border border-tumbler-border text-xs text-tumbler flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-tumbler" />
+          <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-ink" />
             <span>
-              Web Speech API is best supported in Google Chrome or Microsoft Edge. You can also click any of our 1-click sample presets below!
+              Web Speech API is best supported in Google Chrome or Microsoft Edge. You can also click any of our sample presets below.
             </span>
           </div>
         )}
 
         {speechError && (
-          <div className="p-4 rounded-xl bg-danger-light border border-danger-border text-xs text-danger flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-danger" />
+          <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-ink" />
             <span>{speechError}</span>
           </div>
         )}
@@ -287,76 +285,88 @@ export default function VoiceOnboardingPage() {
           <div className="space-y-6">
             
             {/* Live Microphone Recording Card */}
-            <div className="card rounded-2xl p-6 sm:p-10 shadow-card border border-border text-center relative overflow-hidden">
+            <div className="card rounded-sm p-8 sm:p-12 border border-grey/30 bg-white text-center relative">
               
-              {/* Central Mic Button */}
-              <div className="relative inline-block mx-auto mb-6">
-                {isRecording && (
-                  <span className="absolute -inset-3 rounded-full ring-4 ring-danger/20 animate-ping" />
-                )}
-
+              {/* Central Mic Button & Waveform Hero Moment */}
+              <div className="flex flex-col items-center justify-center mb-6">
                 <button
                   onClick={isRecording ? handleStopRecording : handleStartRecording}
-                  className={`w-28 h-28 rounded-full flex flex-col items-center justify-center transition-all duration-200 shadow-md relative z-10 ${
+                  className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition border ${
                     isRecording
-                      ? 'bg-danger text-white scale-105 ring-4 ring-danger/30'
-                      : 'bg-kanchipuram text-white hover:bg-kanchipuram-hover shadow-kanchipuram/20'
+                      ? 'bg-ink text-white border-ink'
+                      : 'bg-white text-ink border-ink hover:bg-black hover:text-white'
                   }`}
                 >
                   {isRecording ? (
                     <>
-                      <MicOff className="w-8 h-8 mb-1" />
-                      <span className="text-[11px] font-display font-semibold uppercase tracking-wider">Stop</span>
+                      <MicOff className="w-7 h-7 mb-1" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider">Stop</span>
                     </>
                   ) : (
                     <>
-                      <Mic className="w-8 h-8 mb-1" />
-                      <span className="text-[11px] font-display font-semibold uppercase tracking-wider">Tap to Speak</span>
+                      <Mic className="w-7 h-7 mb-1" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider">Record</span>
                     </>
                   )}
                 </button>
+
+                {/* Vertical Audio Waveform (Single Hero Motion Moment) */}
+                {isRecording && (
+                  <div className="flex items-center justify-center gap-1.5 h-10 mt-5">
+                    {[30, 75, 45, 95, 60, 85, 40, 100, 50, 70, 35].map((h, i) => (
+                      <span
+                        key={i}
+                        className="w-1 bg-ink rounded-none animate-waveform"
+                        style={{
+                          height: `${h}%`,
+                          animationDelay: `${i * 0.09}s`,
+                          animationDuration: '0.8s'
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Status & Timer */}
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <div className="flex items-center justify-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${isRecording ? 'bg-danger animate-ping' : 'bg-muted'}`} />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-ink">
-                    {isRecording ? `Listening... (0:${recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds} / 1:00)` : 'Ready to record (Up to 60s)'}
+                  <span className={`w-2 h-2 rounded-full ${isRecording ? 'bg-ink animate-ping' : 'bg-grey'}`} />
+                  <span className="text-xs font-mono uppercase tracking-wider text-ink">
+                    {isRecording ? `Listening (0:${recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds} / 1:00)` : 'Ready to Record — Max 60 Seconds'}
                   </span>
                 </div>
-                <p className="text-xs text-muted max-w-md mx-auto">
+                <p className="text-xs text-grey max-w-md mx-auto">
                   {isRecording
                     ? 'Speak freely about your business name, what you sell, your target customers, and your brand tone.'
-                    : 'Click the mic button and describe your business in English, Tamil, or Tanglish.'}
+                    : 'Click the record button and describe your business in English, Tamil, or Tanglish.'}
                 </p>
               </div>
 
               {/* Live Streaming Transcript Box */}
-              <div className="mt-6 text-left">
+              <div className="mt-8 text-left">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[11px] font-semibold text-muted uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-kanchipuram" />
-                    Live Speech Transcript (Web Speech API)
+                  <span className="text-xs font-mono text-grey">
+                    [Live Speech Transcript]
                   </span>
                   {transcript && (
                     <button
                       onClick={() => setTranscript('')}
-                      className="text-[11px] text-muted hover:text-ink transition"
+                      className="text-xs text-grey hover:text-ink transition underline"
                     >
                       Clear
                     </button>
                   )}
                 </div>
 
-                <div className="w-full min-h-[110px] p-4 rounded-xl bg-canvas border border-border text-xs sm:text-sm text-ink leading-relaxed font-sans placeholder-muted">
+                <div className="w-full min-h-[110px] p-4 rounded-sm bg-white border border-grey/30 text-xs sm:text-sm text-ink leading-relaxed font-mono">
                   {transcript ? (
                     <p className="whitespace-pre-wrap">{transcript}</p>
                   ) : (
-                    <span className="text-muted italic">
+                    <span className="text-grey italic">
                       {isRecording
                         ? 'Speech will appear here in real time as you speak...'
-                        : 'Your transcribed voice notes will appear here. Or click one of the pitch presets below.'}
+                        : 'Your transcribed voice notes will stream here. Or click one of the presets below.'}
                     </span>
                   )}
                 </div>
@@ -367,52 +377,46 @@ export default function VoiceOnboardingPage() {
                 {transcript && (
                   <button
                     onClick={() => handleProcessTranscript()}
-                    className="btn-primary w-full sm:w-auto px-7 py-3 rounded-xl text-xs sm:text-sm font-semibold shadow-md flex items-center justify-center gap-2 min-h-[44px]"
+                    className="btn-primary w-full sm:w-auto px-7 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[42px]"
                   >
-                    <Wand2 className="w-4 h-4 text-marigold" />
                     <span>Extract Profile with Claude AI</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>
             </div>
 
             {/* Pitch Demo Fallback Presets */}
-            <div className="card rounded-2xl p-5 sm:p-6 shadow-card border border-border space-y-3">
-              <div className="flex items-center justify-between pb-2 border-b border-border">
-                <span className="text-xs font-semibold text-tumbler uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-marigold" />
-                  <span>Theervu&apos;athon Sample Voice Presets (Demo Safe Fallback)</span>
+            <div className="card rounded-sm p-6 border border-grey/30 bg-white space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+                <span className="text-xs font-mono text-ink">
+                  [Sample Voice Presets — 1-Click Fallback]
                 </span>
-                <span className="text-[10px] text-muted font-medium">1-Click Simulate</span>
+                <span className="text-xs font-mono text-grey">Tanglish / English</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                {SAMPLE_VOICE_SCRIPTS.map((s, idx) => {
-                  const Icon = s.icon;
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => handleSelectSample(s)}
-                      className="p-3.5 rounded-xl bg-gray-50 hover:bg-white border border-border hover:border-kanchipuram text-left transition group space-y-1.5 flex flex-col justify-between"
-                    >
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <Icon className="w-4 h-4 text-kanchipuram" />
-                          <span className="text-xs font-semibold text-ink group-hover:text-kanchipuram truncate">
-                            {s.title}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-muted line-clamp-2 leading-relaxed italic">
-                          &quot;{s.transcript}&quot;
-                        </p>
+                {SAMPLE_VOICE_SCRIPTS.map((s, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleSelectSample(s)}
+                    className="p-3.5 rounded-sm bg-white hover:bg-grey/5 border border-grey/30 hover:border-ink text-left transition flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <span className="text-xs font-serif font-bold text-ink truncate">
+                          {s.title}
+                        </span>
                       </div>
-                      <span className="text-[10px] font-semibold text-kanchipuram block pt-1">
-                        Simulate Voice →
-                      </span>
-                    </button>
-                  );
-                })}
+                      <p className="text-[11px] text-grey line-clamp-3 leading-relaxed">
+                        &quot;{s.transcript}&quot;
+                      </p>
+                    </div>
+                    <span className="text-[11px] font-mono text-ink block pt-3 border-t border-grey/20 mt-3">
+                      [Use Preset]
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -420,14 +424,14 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 2: EXTRACTING SPINNER */}
         {step === 'extracting' && (
-          <div className="card rounded-2xl p-8 sm:p-12 text-center border border-border space-y-4 shadow-card py-16 sm:py-20">
-            <div className="w-14 h-14 rounded-2xl bg-kanchipuram-light text-kanchipuram mx-auto flex items-center justify-center">
-              <Wand2 className="w-7 h-7 text-kanchipuram animate-spin" />
+          <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
+            <div className="w-10 h-10 rounded-sm border border-ink text-ink mx-auto flex items-center justify-center">
+              <Wand2 className="w-5 h-5 animate-spin" />
             </div>
-            <h2 className="text-lg sm:text-xl font-display font-bold text-ink">
+            <h2 className="text-xl font-serif font-bold text-ink">
               Claude 3.5 Sonnet is Structuring Your Profile
             </h2>
-            <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-grey max-w-md mx-auto leading-relaxed">
               Parsing natural language transcript, identifying business name, extracting offerings, and selecting optimal brand tone...
             </p>
           </div>
@@ -435,23 +439,22 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 3: REVIEW & CONFIRM PROFILE */}
         {step === 'review' && (
-          <div className="card rounded-2xl p-5 sm:p-8 shadow-card border border-border space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-border">
+          <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-grey/30">
               <div>
-                <span className="text-xs font-semibold text-success uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4" />
-                  Voice Extraction Complete
+                <span className="text-xs font-mono text-ink">
+                  [Voice Extraction Complete]
                 </span>
-                <h2 className="text-lg sm:text-xl font-display font-bold text-ink mt-1">
-                  Here&apos;s What We Understood — Is This Right?
+                <h2 className="text-xl font-serif font-bold text-ink mt-1">
+                  Review Extracted Profile
                 </h2>
               </div>
               <button
                 onClick={() => { setStep('record'); setTranscript(''); }}
-                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[38px]"
+                className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                <span>Re-Record Voice</span>
+                <span>Re-Record</span>
               </button>
             </div>
 
@@ -460,96 +463,86 @@ export default function VoiceOnboardingPage() {
               
               {/* Business Name */}
               <div>
-                <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                  1. Business Name
+                <label className="block text-xs font-mono text-ink mb-1.5">
+                  Business Name
                 </label>
-                <div className="relative">
-                  <Building2 className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                  <input
-                    type="text"
-                    value={extractedProfile.business_name}
-                    onChange={(e) => setExtractedProfile({ ...extractedProfile, business_name: e.target.value })}
-                    className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-kanchipuram min-h-[42px]"
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={extractedProfile.business_name}
+                  onChange={(e) => setExtractedProfile({ ...extractedProfile, business_name: e.target.value })}
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                />
               </div>
 
               {/* Industry */}
               <div>
-                <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                  2. Industry / Category
+                <label className="block text-xs font-mono text-ink mb-1.5">
+                  Industry / Category
                 </label>
-                <div className="relative">
-                  <Tag className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                  <input
-                    type="text"
-                    value={extractedProfile.industry}
-                    onChange={(e) => setExtractedProfile({ ...extractedProfile, industry: e.target.value })}
-                    className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-kanchipuram min-h-[42px]"
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={extractedProfile.industry}
+                  onChange={(e) => setExtractedProfile({ ...extractedProfile, industry: e.target.value })}
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                />
               </div>
 
               {/* Product / Service Description */}
               <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                  3. Extracted Offerings &amp; Key Details
+                <label className="block text-xs font-mono text-ink mb-1.5">
+                  Extracted Offerings &amp; Key Details
                 </label>
                 <textarea
                   rows={3}
                   value={extractedProfile.description}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, description: e.target.value })}
-                  className="w-full bg-canvas border border-border rounded-xl p-3.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-kanchipuram resize-none leading-relaxed"
+                  className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink resize-none leading-relaxed font-sans"
                 />
               </div>
 
               {/* Target Audience */}
               <div>
-                <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                  4. Target Audience
+                <label className="block text-xs font-mono text-ink mb-1.5">
+                  Target Audience
                 </label>
-                <div className="relative">
-                  <Users className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                  <input
-                    type="text"
-                    value={extractedProfile.target_audience}
-                    onChange={(e) => setExtractedProfile({ ...extractedProfile, target_audience: e.target.value })}
-                    className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-kanchipuram min-h-[42px]"
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={extractedProfile.target_audience}
+                  onChange={(e) => setExtractedProfile({ ...extractedProfile, target_audience: e.target.value })}
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                />
               </div>
 
               {/* Tone */}
               <div>
-                <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                  5. Brand Tone
+                <label className="block text-xs font-mono text-ink mb-1.5">
+                  Brand Tone
                 </label>
                 <select
                   value={extractedProfile.tone}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, tone: e.target.value as ToneType })}
-                  className="w-full bg-canvas border border-border rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-kanchipuram capitalize min-h-[42px]"
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink capitalize min-h-[40px]"
                 >
-                  <option value="playful">🎉 Playful &amp; Witty</option>
-                  <option value="casual">☕ Casual &amp; Friendly</option>
-                  <option value="bold">🔥 Bold &amp; High-Energy</option>
-                  <option value="inspiring">✨ Inspiring &amp; Authentic</option>
-                  <option value="formal">💼 Formal &amp; Professional</option>
+                  <option value="playful">Playful &amp; Witty</option>
+                  <option value="casual">Casual &amp; Friendly</option>
+                  <option value="bold">Bold &amp; Direct</option>
+                  <option value="inspiring">Inspiring &amp; Authentic</option>
+                  <option value="formal">Formal &amp; Professional</option>
                 </select>
               </div>
             </div>
 
             {/* Confirm CTA */}
-            <div className="pt-4 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs text-muted">
-                Ready to generate your first AI post &amp; graphic creative.
+            <div className="pt-4 border-t border-grey/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span className="text-xs text-grey font-mono">
+                [Profile ready for generation]
               </span>
               <button
                 onClick={handleConfirmAndGenerate}
-                className="btn-primary w-full sm:w-auto px-7 py-3 rounded-xl text-xs sm:text-sm font-semibold shadow-md flex items-center justify-center gap-2 min-h-[44px]"
+                className="btn-primary w-full sm:w-auto px-7 py-2.5 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[40px]"
               >
-                <Sparkles className="w-4 h-4 text-marigold" />
                 <span>Confirm &amp; Generate Social Post</span>
-                <ArrowRight className="w-4 h-4 ml-1" />
+                <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </button>
             </div>
           </div>
@@ -557,14 +550,14 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 4: GENERATING POST SPINNER */}
         {step === 'generating' && (
-          <div className="card rounded-2xl p-8 sm:p-12 text-center border border-border space-y-4 shadow-card py-16 sm:py-20">
-            <div className="w-14 h-14 rounded-2xl bg-kanchipuram-light text-kanchipuram mx-auto flex items-center justify-center">
-              <Sparkles className="w-7 h-7 text-marigold animate-spin" />
+          <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
+            <div className="w-10 h-10 rounded-sm border border-ink text-ink mx-auto flex items-center justify-center">
+              <Sparkles className="w-5 h-5 animate-spin" />
             </div>
-            <h2 className="text-lg sm:text-xl font-display font-bold text-ink">
-              Generating High-Converting Post &amp; Canvas Graphic...
+            <h2 className="text-xl font-serif font-bold text-ink">
+              Generating High-Converting Post &amp; Canvas Graphic
             </h2>
-            <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-grey max-w-md mx-auto leading-relaxed">
               Feeding {extractedProfile.business_name} directly into the MarkAI content engine. Preparing your preview cockpit...
             </p>
           </div>

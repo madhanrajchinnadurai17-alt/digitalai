@@ -90,66 +90,63 @@ export default function HistoryPage() {
       <div className="max-w-6xl mx-auto space-y-6">
         
         {/* Header Bar */}
-        <div className="bg-surface rounded-2xl p-6 sm:p-7 border border-border shadow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-white rounded-sm p-6 border border-grey/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-kanchipuram/5 border border-kanchipuram/15 text-xs font-semibold text-kanchipuram mb-2">
-              <History className="w-3.5 h-3.5" />
-              <span>Publishing Log</span>
+            <div className="text-xs font-mono text-grey mb-1.5">
+              [Publishing Ledger]
             </div>
-            <h1 className="text-2xl sm:text-3xl font-display font-bold text-ink tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight">
               Post History
             </h1>
-            <p className="text-xs sm:text-sm text-muted mt-1">
-              Track all AI-generated posts, draft copies, and live Instagram publishing states.
+            <p className="text-xs sm:text-sm text-grey mt-1">
+              Ledger of all AI-generated posts, draft copies, and Instagram publishing states.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <button
               onClick={loadHistory}
-              className="p-3 rounded-xl bg-canvas border border-border text-muted hover:text-ink hover:border-ink/20 transition"
-              title="Refresh post history"
+              className="p-2.5 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+              title="Refresh ledger"
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-kanchipuram' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             </button>
             <Link
               href="/dashboard"
-              className="btn-primary px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold shadow-sm flex items-center gap-2"
+              className="btn-primary px-4 py-2 rounded-sm text-xs font-medium"
             >
-              <Sparkles className="w-4 h-4 text-tumbler" />
-              <span>Create New Post</span>
+              Generate Post
             </Link>
           </div>
         </div>
 
         {/* Filter and Search Toolbar */}
-        <div className="bg-surface rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border border-border shadow-card">
+        <div className="bg-white rounded-sm p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border border-grey/30">
           {/* Status Tabs */}
           <div className="flex items-center gap-1.5 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
             {(['ALL', 'Posted', 'Draft', 'Failed'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setStatusFilter(tab)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition flex-shrink-0 ${
+                className={`px-3 py-1.5 rounded-sm text-xs font-mono transition flex-shrink-0 ${
                   statusFilter === tab
-                    ? 'bg-kanchipuram text-white shadow-sm'
-                    : 'bg-canvas text-muted hover:text-ink hover:bg-border/40 border border-border'
+                    ? 'bg-ink text-white'
+                    : 'bg-white text-grey hover:text-ink border border-grey/30'
                 }`}
               >
-                {tab === 'ALL' ? 'All Posts' : tab}
+                [{tab === 'ALL' ? 'All Records' : tab}]
               </button>
             ))}
           </div>
 
           {/* Search Input */}
           <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by keyword or theme..."
-              className="w-full bg-canvas border border-border rounded-xl pl-10 pr-3.5 py-2 text-xs text-ink placeholder:text-muted/60 focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram"
+              placeholder="Search keyword or theme..."
+              className="w-full bg-white border border-grey/30 rounded-sm px-3 py-1.5 text-xs text-ink placeholder-grey focus:outline-none focus:border-ink"
             />
           </div>
         </div>
@@ -157,34 +154,29 @@ export default function HistoryPage() {
         {/* Post List */}
         {loading ? (
           <div className="py-20 text-center">
-            <div className="w-8 h-8 border-2 border-kanchipuram border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
-            <p className="text-xs text-muted font-medium">Loading your post history...</p>
+            <p className="text-xs font-mono text-grey">Loading ledger records...</p>
           </div>
         ) : filteredPosts.length === 0 ? (
-          <div className="bg-surface rounded-2xl p-12 text-center border-2 border-dashed border-border">
-            <div className="w-14 h-14 rounded-2xl bg-kanchipuram/5 text-kanchipuram border border-kanchipuram/15 flex items-center justify-center mx-auto mb-4">
-              <History className="w-7 h-7" />
-            </div>
-            <h3 className="text-lg font-display font-bold text-ink">No posts found</h3>
-            <p className="text-xs text-muted mt-1 max-w-sm mx-auto">
+          <div className="bg-white rounded-sm p-12 text-center border border-grey/30">
+            <h3 className="text-base font-serif font-bold text-ink">No records found</h3>
+            <p className="text-xs text-grey mt-1 max-w-sm mx-auto">
               {searchQuery || statusFilter !== 'ALL'
-                ? 'Try adjusting your search or filters to see more results.'
-                : 'Start by filling out your business profile to generate your first AI Instagram post.'}
+                ? 'Adjust filter or search query.'
+                : 'Generate your first social post from the business dashboard.'}
             </p>
             <Link
               href="/dashboard"
-              className="btn-primary inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-xl text-xs font-semibold"
+              className="btn-primary inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-sm text-xs font-medium"
             >
-              <Sparkles className="w-4 h-4 text-tumbler" />
-              <span>Generate Your First Post</span>
+              Generate First Post
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-3">
             {filteredPosts.map((post) => (
               <div
                 key={post.id}
-                className="bg-surface rounded-2xl p-5 sm:p-6 shadow-card hover:shadow-card-hover border border-border transition flex flex-col md:flex-row gap-5 items-start md:items-center justify-between"
+                className="bg-white rounded-sm p-5 border border-grey/30 transition flex flex-col md:flex-row gap-5 items-start md:items-center justify-between"
               >
                 {/* Left Side: Thumbnail & Content Info */}
                 <div className="flex items-start gap-4 flex-1">
@@ -192,91 +184,70 @@ export default function HistoryPage() {
                     <img
                       src={post.image_data}
                       alt={post.post_theme || 'Generated Graphic'}
-                      className="w-20 h-20 rounded-xl object-cover border border-border flex-shrink-0 cursor-pointer hover:opacity-90 transition shadow-sm"
+                      className="w-16 h-16 rounded-sm object-cover border border-grey/30 flex-shrink-0 cursor-pointer"
                       onClick={() => setSelectedPost(post)}
                     />
                   ) : (
-                    <div className="w-20 h-20 rounded-xl bg-canvas border border-border flex flex-col items-center justify-center text-center p-1 text-muted flex-shrink-0">
-                      <Sparkles className="w-5 h-5 text-kanchipuram mb-1" />
-                      <span className="text-[9px] uppercase font-bold tracking-wide text-muted">MarkAI</span>
+                    <div className="w-16 h-16 rounded-sm bg-white border border-grey/30 flex flex-col items-center justify-center text-center p-1 text-grey flex-shrink-0">
+                      <span className="text-[10px] font-mono">[MarkAI]</span>
                     </div>
                   )}
 
-                  <div className="space-y-1.5 flex-1 min-w-0">
+                  <div className="space-y-1 flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <StatusBadge status={post.status} size="sm" />
-                      <span className="text-xs font-bold text-ink">
+                      <span className="text-xs font-serif font-bold text-ink">
                         {post.business_name}
                       </span>
-                      <span className="text-[11px] text-muted flex items-center gap-1">
-                        <Calendar className="w-3 h-3" />
+                      <span className="text-[11px] font-mono text-grey">
                         {new Date(post.created_at).toLocaleDateString(undefined, {
                           month: 'short',
                           day: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
                         })}
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-display font-bold text-ink tracking-tight">
+                    <h3 className="text-xs font-medium text-ink">
                       {post.post_theme || 'Instagram Post'}
                     </h3>
 
-                    <p className="text-xs text-muted line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-grey line-clamp-2 leading-relaxed">
                       {post.caption}
                     </p>
 
                     {post.instagram_media_id && (
-                      <div className="flex items-center gap-1.5 text-[11px] text-muted font-mono pt-1">
-                        <Instagram className="w-3.5 h-3.5 text-pink-600" />
-                        <span>Media ID: {post.instagram_media_id}</span>
+                      <div className="text-[10px] font-mono text-grey pt-0.5">
+                        Media ID: {post.instagram_media_id}
                       </div>
                     )}
                   </div>
                 </div>
 
                 {/* Right Side: Action Controls */}
-                <div className="flex items-center gap-2 w-full md:w-auto justify-end border-t md:border-t-0 pt-3 md:pt-0 border-border">
+                <div className="flex items-center gap-2 w-full md:w-auto justify-end border-t md:border-t-0 pt-3 md:pt-0 border-grey/20">
                   <button
                     onClick={() => handleCopy(post.id, post.caption)}
-                    className="p-2.5 rounded-xl bg-canvas hover:bg-border/40 border border-border text-muted hover:text-ink transition text-xs flex items-center gap-1.5 font-semibold"
+                    className="px-2.5 py-1.5 rounded-sm border border-grey/30 text-grey hover:text-ink transition text-xs font-mono"
                     title="Copy Caption"
                   >
-                    {copiedId === post.id ? (
-                      <>
-                        <Check className="w-3.5 h-3.5 text-success" />
-                        <span className="text-success text-[11px]">Copied</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span className="text-[11px] hidden sm:inline">Copy</span>
-                      </>
-                    )}
+                    {copiedId === post.id ? '[Copied]' : 'Copy'}
                   </button>
 
                   <button
                     onClick={() => setSelectedPost(post)}
-                    className="p-2.5 rounded-xl bg-canvas hover:bg-border/40 border border-border text-muted hover:text-ink transition text-xs flex items-center gap-1.5 font-semibold"
+                    className="px-2.5 py-1.5 rounded-sm border border-grey/30 text-grey hover:text-ink transition text-xs font-mono"
                     title="View details"
                   >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span className="text-[11px] hidden sm:inline">View</span>
+                    View
                   </button>
 
                   {post.status !== 'Posted' && (
                     <button
                       onClick={() => handlePublishPost(post)}
                       disabled={publishingId === post.id}
-                      className="btn-instagram px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 shadow-sm disabled:opacity-50"
+                      className="btn-primary px-3 py-1.5 rounded-sm text-xs font-medium disabled:opacity-50"
                     >
-                      {publishingId === post.id ? (
-                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      ) : (
-                        <Instagram className="w-3.5 h-3.5" />
-                      )}
-                      <span>Post Now</span>
+                      {publishingId === post.id ? 'Publishing...' : 'Post Now'}
                     </button>
                   )}
                 </div>
@@ -288,15 +259,15 @@ export default function HistoryPage() {
         {/* Detailed Post Modal */}
         {selectedPost && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-surface rounded-2xl max-w-2xl w-full p-6 sm:p-7 shadow-elevation relative max-h-[90vh] overflow-y-auto border border-border">
-              <div className="flex items-center justify-between pb-4 border-b border-border">
+            <div className="bg-white rounded-sm max-w-2xl w-full p-6 border border-ink relative max-h-[90vh] overflow-y-auto">
+              <div className="flex items-center justify-between pb-4 border-b border-grey/30">
                 <div className="flex items-center gap-2.5">
                   <StatusBadge status={selectedPost.status} />
-                  <span className="text-sm font-bold text-ink">{selectedPost.business_name}</span>
+                  <span className="text-sm font-serif font-bold text-ink">{selectedPost.business_name}</span>
                 </div>
                 <button
                   onClick={() => setSelectedPost(null)}
-                  className="btn-secondary px-3 py-1.5 rounded-xl text-xs font-semibold"
+                  className="btn-secondary px-3 py-1.5 rounded-sm text-xs font-medium"
                 >
                   Close
                 </button>
@@ -305,42 +276,42 @@ export default function HistoryPage() {
               <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {selectedPost.image_data && (
                   <div>
-                    <span className="text-[11px] font-bold text-muted uppercase tracking-wider block mb-2">
-                      Branded Graphic
+                    <span className="text-xs font-mono text-grey block mb-2">
+                      [Canvas Graphic]
                     </span>
                     <img
                       src={selectedPost.image_data}
                       alt={selectedPost.post_theme}
-                      className="w-full aspect-square object-cover rounded-xl border border-border shadow-sm"
+                      className="w-full aspect-square object-cover rounded-sm border border-grey/30"
                     />
                   </div>
                 )}
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[11px] font-bold text-muted uppercase tracking-wider block mb-1">
-                      Post Theme Headline
+                    <span className="text-xs font-mono text-grey block mb-1">
+                      [Post Theme Hook]
                     </span>
-                    <p className="text-sm font-display font-bold text-kanchipuram">
+                    <p className="text-sm font-serif font-bold text-ink">
                       {selectedPost.post_theme}
                     </p>
                   </div>
 
                   <div>
-                    <span className="text-[11px] font-bold text-muted uppercase tracking-wider block mb-1">
-                      Caption & Copy
+                    <span className="text-xs font-mono text-grey block mb-1">
+                      [Caption Text]
                     </span>
-                    <div className="p-3.5 rounded-xl bg-canvas border border-border text-xs text-ink whitespace-pre-wrap max-h-48 overflow-y-auto leading-relaxed">
+                    <div className="p-3 rounded-sm bg-white border border-grey/30 text-xs text-ink whitespace-pre-wrap max-h-48 overflow-y-auto leading-relaxed font-sans">
                       {selectedPost.caption}
                     </div>
                   </div>
 
                   {selectedPost.best_time && (
                     <div>
-                      <span className="text-[11px] font-bold text-muted uppercase tracking-wider block mb-0.5">
-                        Recommended Posting Window
+                      <span className="text-xs font-mono text-grey block mb-0.5">
+                        [Optimal Window]
                       </span>
-                      <p className="text-xs font-semibold text-success">{selectedPost.best_time}</p>
+                      <p className="text-xs font-mono text-ink">{selectedPost.best_time}</p>
                     </div>
                   )}
                 </div>

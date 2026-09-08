@@ -85,41 +85,38 @@ export default function DashboardPage() {
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Top Header Card */}
-        <div className="card rounded-2xl p-6 sm:p-8 shadow-card border border-border">
+        <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border">
-                  Step 1 of 2 · Content Engine
+                <span className="text-xs font-mono text-ink">
+                  [Content Engine · Business Cockpit]
                 </span>
                 <Link
                   href="/voice-onboarding"
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-tumbler-light text-tumbler border border-tumbler-border hover:bg-amber-100 transition shadow-sm"
+                  className="text-xs font-mono text-grey hover:text-ink transition underline"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-marigold" />
-                  <span>🎙️ Speak via Voice AI</span>
+                  [Voice Setup]
                 </Link>
                 <Link
                   href="/brand-kit"
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-muted border border-border hover:text-ink transition"
+                  className="text-xs font-mono text-grey hover:text-ink transition underline"
                 >
-                  <Palette className="w-3.5 h-3.5" />
-                  <span>Brand Kit Active</span>
+                  [Brand Kit]
                 </Link>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-display font-bold text-ink mt-2 tracking-tight">
-                Business Profile &amp; Multi-Format AI
+              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+                Business Profile &amp; Generation Controls
               </h1>
-              <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
                 Define your profile and select your format. MarkAI uses Anthropic Claude to craft on-brand copy, carousel slide outlines, and viral Reels scripts.
               </p>
             </div>
 
             {/* Quick Demo Presets */}
             <div className="flex flex-col items-start lg:items-end gap-1.5">
-              <span className="text-xs font-semibold text-tumbler flex items-center gap-1.5 uppercase tracking-wider">
-                <Zap className="w-3.5 h-3.5 text-marigold" />
-                Theervu&apos;athon Presets:
+              <span className="text-xs font-mono text-ink uppercase tracking-wider">
+                Preset Profiles:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {DEMO_PRESET_PROFILES.map((p, idx) => (
@@ -127,9 +124,9 @@ export default function DashboardPage() {
                     key={idx}
                     type="button"
                     onClick={() => handlePresetSelect(p)}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-gray-50 hover:bg-white text-ink border border-border hover:border-kanchipuram transition"
+                    className="px-2.5 py-1 text-xs font-mono rounded-sm bg-white hover:bg-grey/10 text-ink border border-grey/30 hover:border-ink transition"
                   >
-                    {p.label.split(' ')[0]} {p.profile.business_name.split(' ')[0]}
+                    {p.profile.business_name.split(' ')[0]}
                   </button>
                 ))}
               </div>
@@ -138,49 +135,48 @@ export default function DashboardPage() {
         </div>
 
         {/* Format Selector Bar */}
-        <div className="card rounded-xl p-3 sm:p-4 border border-border shadow-card flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="text-xs font-semibold text-ink uppercase tracking-wider flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-kanchipuram" />
-            <span>Target Post Format:</span>
+        <div className="card rounded-sm p-3 sm:p-4 border border-grey/30 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span className="text-xs font-mono text-ink">
+            Format Selection:
           </span>
 
           <div className="grid grid-cols-3 gap-2 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setSelectedFormat('single_image')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'single_image'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-canvas text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              <ImageIcon className="w-4 h-4" />
+              <ImageIcon className="w-3.5 h-3.5" />
               <span>Single Post</span>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedFormat('carousel')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'carousel'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-canvas text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              <Layers className="w-4 h-4" />
+              <Layers className="w-3.5 h-3.5" />
               <span>Carousel Outline</span>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedFormat('reels_script')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'reels_script'
-                  ? 'bg-kanchipuram text-white shadow-sm'
-                  : 'bg-canvas text-muted hover:text-ink border border-border'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
-              <Film className="w-4 h-4" />
+              <Film className="w-3.5 h-3.5" />
               <span>Reels Script</span>
             </button>
           </div>
@@ -191,88 +187,77 @@ export default function DashboardPage() {
           
           {/* Left: Form Controls */}
           <div className="lg:col-span-7">
-            <div className="card rounded-2xl p-6 sm:p-8 shadow-card border border-border">
+            <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
               <form onSubmit={handleGenerate} className="space-y-4 sm:space-y-5">
                 
                 {error && (
-                  <div className="p-3.5 rounded-xl bg-danger-light border border-danger-border text-xs text-danger">
+                  <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink">
                     {error}
                   </div>
                 )}
 
                 {/* 1. Business Name */}
                 <div>
-                  <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                    1. Business Name <span className="text-danger">*</span>
+                  <label className="block text-xs font-mono text-ink mb-1.5">
+                    1. Business Name
                   </label>
-                  <div className="relative">
-                    <Building2 className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                    <input
-                      type="text"
-                      value={formData.business_name}
-                      onChange={(e) => handleChange('business_name', e.target.value)}
-                      placeholder="e.g. Brew & Bean Specialty Coffee"
-                      className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
-                      required
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={formData.business_name}
+                    onChange={(e) => handleChange('business_name', e.target.value)}
+                    placeholder="e.g. Kaapi & Crumb Co."
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                    required
+                  />
                 </div>
 
                 {/* 2. Industry */}
                 <div>
-                  <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                    2. Industry / Category <span className="text-danger">*</span>
+                  <label className="block text-xs font-mono text-ink mb-1.5">
+                    2. Industry / Category
                   </label>
-                  <div className="relative">
-                    <Tag className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                    <input
-                      type="text"
-                      value={formData.industry}
-                      onChange={(e) => handleChange('industry', e.target.value)}
-                      placeholder="e.g. Specialty Coffee, Fitness Apparel, Clean Skincare"
-                      className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
-                      required
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={formData.industry}
+                    onChange={(e) => handleChange('industry', e.target.value)}
+                    placeholder="e.g. Specialty Coffee, Handloom Silk, Organic Groceries"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                    required
+                  />
                 </div>
 
                 {/* 3. Product / Service Description */}
                 <div>
-                  <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
-                    3. Product or Service Description <span className="text-danger">*</span>
+                  <label className="block text-xs font-mono text-ink mb-1.5">
+                    3. Product or Service Description
                   </label>
-                  <div className="relative">
-                    <textarea
-                      rows={3}
-                      value={formData.description}
-                      onChange={(e) => handleChange('description', e.target.value)}
-                      placeholder="What makes your product special? Mention key benefits, unique selling points, or offers..."
-                      className="w-full bg-canvas border border-border rounded-xl p-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition resize-none leading-relaxed"
-                      required
-                    />
-                  </div>
+                  <textarea
+                    rows={3}
+                    value={formData.description}
+                    onChange={(e) => handleChange('description', e.target.value)}
+                    placeholder="What makes your product special? Mention key benefits, unique selling points, or offers..."
+                    className="w-full bg-white border border-grey/30 rounded-sm p-3 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition resize-none leading-relaxed font-sans"
+                    required
+                  />
                 </div>
 
                 {/* 4. Target Audience */}
                 <div>
-                  <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-mono text-ink mb-1.5">
                     4. Target Audience
                   </label>
-                  <div className="relative">
-                    <Users className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                    <input
-                      type="text"
-                      value={formData.target_audience}
-                      onChange={(e) => handleChange('target_audience', e.target.value)}
-                      placeholder="e.g. Coffee lovers, remote workers, athletes aged 20-38"
-                      className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    value={formData.target_audience}
+                    onChange={(e) => handleChange('target_audience', e.target.value)}
+                    placeholder="e.g. Coffee lovers, remote workers, students aged 20-38"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                  />
                 </div>
 
                 {/* 5. Tone of Voice */}
                 <div>
-                  <label className="block text-xs font-semibold text-ink uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-mono text-ink mb-1.5">
                     5. Brand Tone of Voice
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -283,16 +268,17 @@ export default function DashboardPage() {
                           key={t.value}
                           type="button"
                           onClick={() => handleChange('tone', t.value)}
-                          className={`flex items-start gap-2.5 p-3 rounded-xl border text-left transition ${
+                          className={`flex items-start gap-2.5 p-3 rounded-sm border text-left transition ${
                             isSelected
-                              ? 'bg-kanchipuram-light border-kanchipuram text-ink ring-1 ring-kanchipuram/30 shadow-sm'
-                              : 'bg-gray-50 border-border text-muted hover:border-gray-300'
+                              ? 'bg-ink text-white border-ink'
+                              : 'bg-white border-grey/30 text-grey hover:text-ink hover:border-ink'
                           }`}
                         >
-                          <span className="text-xl flex-shrink-0">{t.emoji}</span>
                           <div>
-                            <p className="text-xs font-semibold text-ink">{t.label}</p>
-                            <p className="text-[11px] text-muted leading-tight mt-0.5">{t.description}</p>
+                            <p className="text-xs font-bold">{t.label}</p>
+                            <p className={`text-[11px] leading-tight mt-0.5 ${isSelected ? 'text-white/80' : 'text-grey'}`}>
+                              {t.description}
+                            </p>
                           </div>
                         </button>
                       );
@@ -305,19 +291,15 @@ export default function DashboardPage() {
                   <button
                     type="submit"
                     disabled={isGenerating}
-                    className="btn-primary w-full py-3.5 px-6 rounded-xl text-sm sm:text-base font-semibold shadow-md"
+                    className="btn-primary w-full py-3 px-6 rounded-sm text-xs font-medium"
                   >
                     {isGenerating ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Claude AI is Crafting {selectedFormat.replace('_', ' ')}...</span>
-                      </>
+                      <span>Claude AI is Crafting {selectedFormat.replace('_', ' ')}...</span>
                     ) : (
-                      <>
-                        <Sparkles className="w-5 h-5 text-marigold" />
+                      <div className="flex items-center justify-center gap-2">
                         <span>Generate AI {selectedFormat === 'carousel' ? 'Carousel Outline' : selectedFormat === 'reels_script' ? 'Reels Script' : 'Post & Graphic'}</span>
-                        <ArrowRight className="w-5 h-5 ml-1" />
-                      </>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
                     )}
                   </button>
                 </div>
@@ -327,55 +309,53 @@ export default function DashboardPage() {
 
           {/* Right: Live Prompt Preview & Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="card rounded-2xl p-6 shadow-card border border-border">
-              <div className="flex items-center justify-between pb-3 border-b border-border">
-                <span className="text-xs font-semibold text-ink uppercase tracking-wider flex items-center gap-1.5">
-                  <Lightbulb className="w-4 h-4 text-tumbler" />
-                  <span>Prompt Context Memory</span>
+            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+                <span className="text-xs font-mono text-ink">
+                  [Prompt Context Memory]
                 </span>
-                <Link href="/brand-kit" className="text-[11px] font-medium text-kanchipuram hover:underline">
-                  Edit Brand Kit →
+                <Link href="/brand-kit" className="text-xs font-mono text-grey hover:text-ink underline">
+                  Brand Kit
                 </Link>
               </div>
 
               <div className="mt-4 space-y-3 text-xs">
                 <div>
-                  <span className="text-muted block text-[11px] font-medium">Brand Name:</span>
-                  <span className="text-ink font-semibold">{formData.business_name}</span>
+                  <span className="text-grey block text-[11px] font-mono">Brand Name:</span>
+                  <span className="text-ink font-medium">{formData.business_name}</span>
                 </div>
                 <div>
-                  <span className="text-muted block text-[11px] font-medium">Format:</span>
-                  <span className="text-kanchipuram font-semibold uppercase">{selectedFormat.replace('_', ' ')}</span>
+                  <span className="text-grey block text-[11px] font-mono">Format:</span>
+                  <span className="text-ink font-mono uppercase">{selectedFormat.replace('_', ' ')}</span>
                 </div>
                 <div>
-                  <span className="text-muted block text-[11px] font-medium">Brand Guidelines Injected:</span>
-                  <span className="text-ink-soft font-normal line-clamp-2">
+                  <span className="text-grey block text-[11px] font-mono">Brand Guidelines Injected:</span>
+                  <span className="text-grey line-clamp-2">
                     {brandKit.brand_voice_guidelines || 'Active'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-muted block text-[11px] font-medium">Active Brand Rules:</span>
-                  <span className="text-success font-medium">
-                    {brandKit.dos_list.length} Do&apos;s · {brandKit.donts_list.length} Don&apos;ts
+                  <span className="text-grey block text-[11px] font-mono">Active Brand Rules:</span>
+                  <span className="text-ink font-mono">
+                    [{brandKit.dos_list.length} Do&apos;s · {brandKit.donts_list.length} Don&apos;ts]
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Link to Calendar CTA */}
-            <div className="card rounded-2xl p-6 shadow-card border border-tumbler-border bg-gradient-to-br from-tumbler-light/60 to-surface">
-              <h4 className="text-sm font-semibold text-ink flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-tumbler" />
-                <span>Plan Ahead for September 2026</span>
+            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
+              <h4 className="text-sm font-serif font-bold text-ink">
+                30-Day Content Calendar
               </h4>
-              <p className="text-xs text-muted mt-2 leading-relaxed">
-                Use the 30-Day Content Calendar to automatically generate seasonal campaigns for Fall Launch, College Pitch Day, and local festivals.
+              <p className="text-xs text-grey mt-2 leading-relaxed">
+                Plan ahead with automatically generated seasonal campaigns for Fall Launch, Pitch Day, and local festivals.
               </p>
               <Link
                 href="/calendar"
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-tumbler text-white text-xs font-semibold hover:bg-tumbler-hover transition"
+                className="inline-flex items-center gap-2 mt-4 px-3.5 py-2 rounded-sm border border-grey/30 text-ink text-xs font-medium hover:border-ink transition"
               >
-                <span>Open Content Calendar</span>
+                <span>Open Calendar</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

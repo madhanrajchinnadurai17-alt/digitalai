@@ -79,27 +79,27 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
   ] as const;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-surface rounded-2xl max-w-lg w-full p-6 shadow-elevation border border-border relative">
-        <div className="flex items-center justify-between pb-4 border-b border-border">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-white rounded-sm max-w-lg w-full p-6 border border-ink relative">
+        <div className="flex items-center justify-between pb-4 border-b border-grey/30">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border">
+            <div className="p-2 rounded-sm border border-grey/30 text-ink">
               <Server className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-ink text-base sm:text-lg">System &amp; Integration Health</h3>
-              <p className="text-xs text-muted">MarkAI Production &amp; Pitch Sandbox Status</p>
+              <h3 className="font-serif font-bold text-ink text-base sm:text-lg">System &amp; Integration Health</h3>
+              <p className="text-xs text-grey">MarkAI Verification Matrix</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-muted hover:text-ink hover:bg-gray-100 transition"
+            className="p-1.5 rounded-sm text-grey hover:text-ink border border-grey/30 transition"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        <div className="mt-5 space-y-3">
+        <div className="mt-5 space-y-2.5">
           {services.map((s) => {
             const status = data?.services?.[s.key];
             const isConfigured = status?.configured ?? false;
@@ -108,41 +108,31 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
             return (
               <div
                 key={s.key}
-                className={`p-3.5 rounded-xl border transition ${
-                  isConfigured
-                    ? 'bg-success-light/40 border-success-border'
-                    : 'bg-gray-50 border-border'
-                }`}
+                className="p-3 rounded-sm border border-grey/30 bg-white"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    <div
-                      className={`p-2 rounded-lg ${
-                        isConfigured
-                          ? 'bg-success-light text-success border border-success-border'
-                          : 'bg-tumbler-light text-tumbler border border-tumbler-border'
-                      }`}
-                    >
+                    <div className="p-1.5 rounded-sm border border-grey/20 text-ink">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-sm font-semibold text-ink">{s.name}</h4>
-                      <p className="text-xs text-muted">{status?.description || s.envVar}</p>
+                      <h4 className="text-sm font-medium text-ink">{s.name}</h4>
+                      <p className="text-xs text-grey">{status?.description || s.envVar}</p>
                     </div>
                   </div>
                   {isConfigured ? (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-success bg-success-light px-2.5 py-0.5 rounded-full border border-success-border">
-                      <CheckCircle2 className="w-3 h-3" /> Live
+                    <span className="text-xs font-mono text-ink">
+                      [Live]
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-medium text-tumbler bg-tumbler-light px-2.5 py-0.5 rounded-full border border-tumbler-border">
-                      <AlertTriangle className="w-3 h-3" /> Sandbox
+                    <span className="text-xs font-mono text-grey">
+                      [Sandbox]
                     </span>
                   )}
                 </div>
                 {!isConfigured && (
-                  <p className="mt-2 text-[11px] text-tumbler bg-tumbler-light px-2.5 py-1 rounded-lg border border-tumbler-border">
-                    ℹ️ {s.fallbackText}
+                  <p className="mt-2 text-[11px] font-mono text-grey border-t border-grey/20 pt-1.5">
+                    Fallback: {s.fallbackText}
                   </p>
                 )}
               </div>
@@ -150,20 +140,20 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
           })}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-border flex items-center justify-between">
+        <div className="mt-6 pt-4 border-t border-grey/30 flex items-center justify-between">
           <button
             onClick={fetchHealth}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-ink transition"
+            className="inline-flex items-center gap-1.5 text-xs text-grey hover:text-ink transition"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh status
           </button>
           <button
             onClick={onClose}
-            className="btn-primary px-5 py-2 text-xs font-semibold rounded-lg"
+            className="btn-primary px-5 py-2 text-xs rounded-sm"
           >
-            Got it
+            Dismiss
           </button>
         </div>
       </div>

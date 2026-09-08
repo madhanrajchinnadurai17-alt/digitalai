@@ -74,34 +74,33 @@ export default function AgentPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header */}
-        <div className="bg-surface rounded-2xl p-6 sm:p-8 border border-border shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-kanchipuram/5 border border-kanchipuram/15 text-xs font-semibold text-kanchipuram mb-2">
-              <Bot className="w-3.5 h-3.5 text-tumbler" />
-              <span>Virtual CMO Agent</span>
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-grey mb-2">
+              <Bot className="w-3.5 h-3.5 text-ink" />
+              <span>[Virtual CMO Agent]</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-display font-bold text-ink tracking-tight flex items-center gap-3">
-              <Bot className="w-7 h-7 text-kanchipuram" />
-              <span>Autonomous Marketing Agent</span>
+            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight flex items-center gap-3">
+              Autonomous Marketing Agent
             </h1>
-            <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
               MarkAI audits post performance across channels and operates an autonomous closed-loop campaign engine that plans, optimizes, and schedules your entire month of marketing.
             </p>
           </div>
         </div>
 
         {/* 1-Click Autopilot Hero Banner */}
-        <div className="bg-surface rounded-2xl p-6 sm:p-8 border border-kanchipuram/20 shadow-card relative overflow-hidden">
+        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 relative overflow-hidden">
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-3 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tumbler/10 text-tumbler text-xs font-semibold border border-tumbler/20">
-                <Zap className="w-3.5 h-3.5" />
-                <span>One-Click Full-Month Autopilot</span>
+              <div className="inline-flex items-center gap-1.5 font-mono text-xs text-grey">
+                <Zap className="w-3.5 h-3.5 text-ink" />
+                <span>[One-Click Full-Month Autopilot]</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-ink">
-                Put Your Marketing on Total Autopilot
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
+                Autonomous Marketing System
               </h2>
-              <p className="text-xs sm:text-sm text-muted leading-relaxed">
+              <p className="text-xs sm:text-sm text-grey leading-relaxed">
                 MarkAI will craft 16 seasonal campaigns, adapt copy per channel, and schedule them across optimal engagement windows for {currentProfile.business_name}.
               </p>
             </div>
@@ -110,27 +109,27 @@ export default function AgentPage() {
               <button
                 onClick={handleLaunchAutopilot}
                 disabled={isLaunching}
-                className="btn-primary py-4 px-8 rounded-xl text-sm font-semibold shadow-sm flex items-center gap-2"
+                className="btn-primary py-3 px-6 rounded-sm text-xs font-medium flex items-center gap-2"
               >
                 {isLaunching ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Autonomous Agent Orchestrating Campaigns...</span>
+                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Agent Orchestrating Campaigns...</span>
                   </>
                 ) : launchSuccess ? (
                   <>
-                    <CheckCircle2 className="w-5 h-5 text-white" />
-                    <span>Autopilot Active for September!</span>
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                    <span>Autopilot Active for September</span>
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4 fill-white" />
-                    <span>Launch 30-Day Autopilot Campaign</span>
+                    <Play className="w-3.5 h-3.5 fill-white" />
+                    <span>Launch 30-Day Autopilot</span>
                   </>
                 )}
               </button>
-              <span className="text-[11px] text-muted">
-                Active Status: <strong className="text-success uppercase font-mono">{campaign.status}</strong> (16/16 scheduled)
+              <span className="text-[11px] font-mono text-grey">
+                Status: <strong className="text-ink uppercase">[{campaign.status}]</strong> (16/16 scheduled)
               </span>
             </div>
           </div>
@@ -141,42 +140,42 @@ export default function AgentPage() {
           
           {/* Left: Strategic Recommendations */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="bg-surface rounded-2xl p-6 sm:p-7 border border-border shadow-card space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-border">
-                <h3 className="text-base font-display font-bold text-ink flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-kanchipuram" />
-                  <span>Closed-Loop Strategy Optimization</span>
+            <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+                <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-ink" />
+                  <span>Strategy Recommendations</span>
                 </h3>
-                <span className="text-[10px] font-semibold text-kanchipuram bg-kanchipuram/10 px-2 py-0.5 rounded-full border border-kanchipuram/20">
-                  Data-Driven Insights
+                <span className="font-mono text-[10px] text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                  [Closed-Loop Optimization]
                 </span>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {recommendations.map((rec) => (
                   <div
                     key={rec.id}
-                    className="p-4 rounded-xl bg-canvas border border-border space-y-2"
+                    className="p-4 rounded-sm bg-white border border-grey/30 space-y-2"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-ink flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded bg-kanchipuram/10 text-kanchipuram text-[10px] uppercase font-bold">
+                      <span className="text-xs font-serif font-bold text-ink flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded-sm border border-grey/30 text-[10px] font-mono uppercase">
                           {rec.category}
                         </span>
                         {rec.title}
                       </span>
-                      <span className="text-[11px] font-bold text-tumbler font-mono">
-                        {rec.impact_score}/100 Impact
+                      <span className="text-[10px] font-mono text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                        [{rec.impact_score}/100 Impact]
                       </span>
                     </div>
 
-                    <p className="text-xs text-muted leading-relaxed">
+                    <p className="text-xs text-grey leading-relaxed">
                       {rec.insight}
                     </p>
 
-                    <div className="pt-2 border-t border-border flex items-center justify-between text-[11px]">
-                      <span className="text-muted font-medium">Action: <strong className="text-ink">{rec.action_item}</strong></span>
-                      <span className="text-success font-bold">{rec.expected_impact}</span>
+                    <div className="pt-2 border-t border-grey/20 flex items-center justify-between text-[11px] font-mono">
+                      <span className="text-grey">Action: <strong className="text-ink font-normal">{rec.action_item}</strong></span>
+                      <span className="text-ink font-bold">[{rec.expected_impact}]</span>
                     </div>
                   </div>
                 ))}
@@ -186,26 +185,26 @@ export default function AgentPage() {
 
           {/* Right: Weekly Executive Digest */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-surface rounded-2xl p-6 sm:p-7 border border-border shadow-card space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-border">
-                <h3 className="text-base font-display font-bold text-ink flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-tumbler" />
+            <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+                <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-ink" />
                   <span>Weekly Executive Digest</span>
                 </h3>
-                <span className="text-[10px] font-mono text-muted">Week 36, 2026</span>
+                <span className="text-[10px] font-mono text-grey">[Week 36, 2026]</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-canvas border border-border space-y-3 text-xs leading-relaxed text-muted">
-                <p className="font-semibold text-ink">
+              <div className="p-4 rounded-sm bg-white border border-grey/30 space-y-3 text-xs leading-relaxed text-grey">
+                <p className="font-serif font-bold text-ink text-sm">
                   Executive Summary for {currentProfile.business_name}:
                 </p>
-                <p>
+                <p className="font-serif">
                   {campaign.weekly_digest_summary || 'MarkAI has generated and scheduled 16 monthly campaigns. Carousel educational formats are delivering 3.4x higher save rates.'}
                 </p>
-                <div className="pt-2 border-t border-border text-[11px] space-y-1">
-                  <div>🎯 Top Channel: <strong className="text-pink-600">Instagram (7.8% Eng.)</strong></div>
-                  <div>⚡ Optimal Time: <strong className="text-success">Tuesdays at 8:15 AM</strong></div>
-                  <div>📈 Follower Momentum: <strong className="text-kanchipuram">+18.5% Net Growth</strong></div>
+                <div className="pt-2 border-t border-grey/20 text-[11px] font-mono space-y-1 text-grey">
+                  <div>Channel: <strong className="text-ink font-normal">Instagram [7.8% Eng.]</strong></div>
+                  <div>Optimal Window: <strong className="text-ink font-normal">Tuesdays at 08:15 AM</strong></div>
+                  <div>Momentum: <strong className="text-ink font-normal">[+18.5% Growth]</strong></div>
                 </div>
               </div>
             </div>

@@ -9,81 +9,87 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: '#FAFAF8',
+        white: '#FFFFFF',
+        canvas: '#FFFFFF',
         surface: '#FFFFFF',
         ink: {
-          DEFAULT: '#1A1A2E',
-          soft: '#2D3142',
+          DEFAULT: '#0A0A0A',
+          pure: '#000000',
+        },
+        grey: {
+          DEFAULT: '#8A8A8A',
+          hairline: '#8A8A8A',
         },
         muted: {
-          DEFAULT: '#6B7280',
-          light: '#9CA3AF',
-        },
-        kanchipuram: {
-          DEFAULT: '#3730A3',
-          hover: '#312E81',
-          light: '#EEF2FF',
-          border: '#C7D2FE',
-        },
-        tumbler: {
-          DEFAULT: '#D97706',
-          hover: '#B45309',
-          light: '#FFFBEB',
-          border: '#FDE68A',
-        },
-        marigold: {
-          DEFAULT: '#F59E0B',
-          light: '#FEF3C7',
-        },
-        success: {
-          DEFAULT: '#059669',
-          light: '#ECFDF5',
-          border: '#A7F3D0',
-        },
-        danger: {
-          DEFAULT: '#DC2626',
-          light: '#FEF2F2',
-          border: '#FECACA',
+          DEFAULT: '#8A8A8A',
+          light: '#8A8A8A',
         },
         border: {
-          DEFAULT: '#E5E7EB',
-          dark: '#D1D5DB',
+          DEFAULT: '#8A8A8A',
+          dark: '#0A0A0A',
         },
-        // Backwards compatibility fallbacks
+        // Monochromatic fallbacks so legacy aliases safely resolve to 3-color palette
+        kanchipuram: {
+          DEFAULT: '#0A0A0A',
+          hover: '#000000',
+          light: '#FFFFFF',
+          border: '#8A8A8A',
+        },
+        tumbler: {
+          DEFAULT: '#0A0A0A',
+          hover: '#000000',
+          light: '#FFFFFF',
+          border: '#8A8A8A',
+        },
+        marigold: {
+          DEFAULT: '#0A0A0A',
+          light: '#FFFFFF',
+        },
+        success: {
+          DEFAULT: '#0A0A0A',
+          light: '#FFFFFF',
+          border: '#8A8A8A',
+        },
+        danger: {
+          DEFAULT: '#0A0A0A',
+          light: '#FFFFFF',
+          border: '#8A8A8A',
+        },
         space: {
-          950: '#FAFAF8',
+          950: '#FFFFFF',
           900: '#FFFFFF',
-          850: '#F3F4F6',
-          800: '#E5E7EB',
-          700: '#D1D5DB',
+          850: '#FFFFFF',
+          800: '#8A8A8A',
+          700: '#8A8A8A',
         },
         brand: {
-          violet: '#3730A3',
-          fuchsia: '#D97706',
-          amber: '#F59E0B',
-          orange: '#EA580C',
-          cyan: '#0D9488',
+          violet: '#0A0A0A',
+          fuchsia: '#0A0A0A',
+          amber: '#0A0A0A',
+          orange: '#0A0A0A',
+          cyan: '#0A0A0A',
         }
       },
       fontFamily: {
-        display: ['"DM Sans"', 'system-ui', 'sans-serif'],
-        sans: ['"Inter"', 'system-ui', 'sans-serif'],
-        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        display: ['"Newsreader"', 'Georgia', 'serif'],
+        serif: ['"Newsreader"', 'Georgia', 'serif'],
+        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05)',
-        'card-hover': '0 10px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.05)',
-        'elevation': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.08)',
+        'none': 'none',
+        'card': 'none',
+        'card-hover': 'none',
+        'elevation': 'none',
       },
       animation: {
-        'pulse-subtle': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'shimmer': 'shimmer 2.5s infinite linear',
+        'waveform': 'waveform 1.2s ease-in-out infinite alternate',
       },
       keyframes: {
-        shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
-          '100%': { backgroundPosition: '200% 0' },
+        waveform: {
+          '0%': { height: '8px' },
+          '100%': { height: '32px' },
         }
       }
     },

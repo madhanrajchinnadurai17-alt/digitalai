@@ -41,94 +41,84 @@ export default function LoginPage() {
       <div className="max-w-md mx-auto py-8">
         
         {/* Pitch competition fast-access banner */}
-        <div className="mb-6 p-5 rounded-2xl bg-tumbler-light border border-tumbler-border text-center shadow-sm">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white text-tumbler text-xs font-semibold border border-tumbler-border mb-2">
-            <Zap className="w-3.5 h-3.5 text-marigold" /> Theervu&apos;athon Demo Mode
+        <div className="mb-6 p-5 rounded-sm border border-grey/30 bg-white text-center">
+          <div className="text-xs font-mono text-ink mb-1.5">
+            [Evaluation Demo Mode]
           </div>
-          <p className="text-xs text-ink-soft">
-            For judges and pitch evaluation, use one-click demo login to access the full cockpit instantly.
+          <p className="text-xs text-grey">
+            Use one-click demo login to access the full business cockpit instantly.
           </p>
           <button
             type="button"
             onClick={handleDemoLogin}
-            className="btn-primary mt-3 w-full py-2.5 px-4 rounded-xl text-xs font-semibold"
+            className="btn-primary mt-3 w-full py-2.5 px-4 rounded-sm text-xs font-medium"
           >
-            <Sparkles className="w-4 h-4 text-marigold" />
-            <span>Instant Pitch Demo Login</span>
+            Instant Pitch Demo Login
           </button>
         </div>
 
         {/* Auth Card */}
-        <div className="card rounded-2xl p-7 sm:p-8 shadow-card border border-border">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-display font-bold text-ink tracking-tight">Welcome Back</h1>
-            <p className="text-xs sm:text-sm text-muted mt-1">
-              Sign in to manage and auto-publish your business content
+        <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
+          <div className="text-left mb-6 pb-4 border-b border-grey/30">
+            <h1 className="text-2xl font-serif font-bold text-ink tracking-tight">Sign In</h1>
+            <p className="text-xs text-grey mt-1">
+              Access your business profile and publishing queue
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 p-3.5 rounded-xl bg-danger-light border border-danger-border flex items-start gap-2.5 text-xs text-danger">
-              <AlertCircle className="w-4 h-4 flex-shrink-0 text-danger mt-0.5" />
+            <div className="mb-5 p-3 rounded-sm bg-white border border-ink flex items-start gap-2.5 text-xs text-ink">
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono text-ink mb-1.5">
                 Email Address
               </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@business.com"
-                  className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
-                  required
-                />
-              </div>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="name@business.com"
+                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                required
+              />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-mono text-ink mb-1.5">
                 Password
               </label>
-              <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
-                  required
-                />
-              </div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                required
+              />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold mt-2"
+              className="btn-primary w-full py-2.5 px-4 rounded-sm text-xs font-medium mt-2"
             >
               {loading ? (
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Verifying...</span>
               ) : (
-                <>
-                  <span>Sign In</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
+                <span>Sign In</span>
               )}
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-border text-center">
-            <p className="text-xs text-muted">
+          <div className="mt-6 pt-5 border-t border-grey/30 text-left">
+            <p className="text-xs text-grey">
               Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-kanchipuram font-semibold hover:underline transition">
+              <Link href="/signup" className="text-ink font-medium hover:underline transition">
                 Create an account
               </Link>
             </p>
@@ -136,13 +126,10 @@ export default function LoginPage() {
         </div>
 
         {/* Security Note */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted">
-          <ShieldCheck className="w-3.5 h-3.5 text-muted" />
-          <span>
-            {isFirebaseConfigured
-              ? 'Secured with Firebase Authentication'
-              : 'Running on Pitch Demo Authentication'}
-          </span>
+        <div className="mt-4 text-center text-xs font-mono text-grey">
+          {isFirebaseConfigured
+            ? '[Firebase Authentication]'
+            : '[Session: Pitch Demo Authentication]'}
         </div>
       </div>
     </Layout>

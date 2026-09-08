@@ -4,84 +4,98 @@
 
 @layer base {
   body {
-    @apply bg-canvas text-ink font-body antialiased min-h-screen selection:bg-kanchipuram selection:text-white;
-    background-color: #FAFAF8;
+    @apply bg-white text-ink font-body antialiased min-h-screen selection:bg-ink selection:text-white;
+    background-color: #FFFFFF;
+    color: #0A0A0A;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Newsreader', Georgia, serif;
+    letter-spacing: -0.02em;
+    color: #0A0A0A;
   }
 }
 
-/* Card & Surface Tokens */
+/* Hairline Card & Surface Rules */
 .card-glass, .card {
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  background-color: #FFFFFF;
+  border: 1px solid #8A8A8A;
+  border-radius: 0.125rem; /* rounded-sm */
+  box-shadow: none;
 }
 
 .card-glass-hover {
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.15s ease;
 }
 
 .card-glass-hover:hover {
-  border-color: #C7D2FE;
-  box-shadow: 0 10px 20px -5px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
-  transform: translateY(-2px);
+  border-color: #0A0A0A;
 }
 
-/* Button Tokens */
+/* Button Rules — Strict Black & White */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 font-display font-semibold text-white transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none rounded-xl;
-  background-color: #3730A3;
-  box-shadow: 0 2px 4px 0 rgb(55 48 163 / 0.2);
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none rounded-sm text-xs sm:text-sm px-4 py-2.5;
+  background-color: #0A0A0A;
+  border: 1px solid #0A0A0A;
+  color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background-color: #312E81;
-  box-shadow: 0 4px 8px 0 rgb(55 48 163 / 0.25);
+  background-color: #000000;
+  border-color: #000000;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 font-display font-medium text-ink transition-all duration-200 active:scale-[0.98] disabled:opacity-50 rounded-xl;
-  background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-ink transition-colors duration-150 disabled:opacity-40 rounded-sm text-xs sm:text-sm px-4 py-2.5;
+  background-color: #FFFFFF;
+  border: 1px solid #8A8A8A;
+  color: #0A0A0A;
 }
 
 .btn-secondary:hover {
-  background: #F9FAFB;
-  border-color: #D1D5DB;
+  border-color: #0A0A0A;
+  background-color: #FAFAFA;
 }
 
 .btn-instagram {
-  @apply inline-flex items-center justify-center gap-2 font-display font-semibold text-white transition-all duration-200 active:scale-[0.98] disabled:opacity-50 rounded-xl;
-  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
-  box-shadow: 0 2px 8px -2px rgba(253, 29, 29, 0.3);
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-colors duration-150 disabled:opacity-40 rounded-sm text-xs sm:text-sm px-4 py-2.5;
+  background-color: #0A0A0A;
+  border: 1px solid #0A0A0A;
+  color: #FFFFFF;
 }
 
 .btn-instagram:hover {
-  box-shadow: 0 4px 12px -2px rgba(253, 29, 29, 0.45);
-  filter: brightness(1.05);
+  background-color: #000000;
+  border-color: #000000;
 }
 
-/* Typography Accent Classes */
-.text-gradient-brand, .text-gradient-ai {
-  color: #1A1A2E;
-  font-weight: 700;
+/* Typography Helpers */
+.text-serif {
+  font-family: 'Newsreader', Georgia, serif;
+}
+
+.hairline {
+  border-color: #8A8A8A;
+}
+
+.hairline-b {
+  border-bottom: 1px solid #8A8A8A;
+}
+
+.hairline-t {
+  border-top: 1px solid #8A8A8A;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAF8;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D1D5DB;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #9CA3AF;
+  background: #8A8A8A;
 }

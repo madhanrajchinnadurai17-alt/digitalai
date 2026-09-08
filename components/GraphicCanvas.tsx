@@ -50,17 +50,17 @@ export function GraphicCanvas({
   return (
     <div className="flex flex-col gap-4">
       {/* Visual Canvas Container */}
-      <div className="relative aspect-square w-full max-w-[430px] mx-auto rounded-2xl overflow-hidden border border-border shadow-card bg-surface flex items-center justify-center group">
+      <div className="relative aspect-square w-full max-w-[430px] mx-auto rounded-sm overflow-hidden border border-ink bg-white flex items-center justify-center group">
         <canvas
           ref={canvasRef}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+          className="w-full h-full object-cover"
         />
 
         {/* Overlay Download Button */}
-        <div className="absolute bottom-3.5 right-3.5 flex items-center gap-2 opacity-90 group-hover:opacity-100 transition">
+        <div className="absolute bottom-3 right-3 flex items-center gap-2">
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-ink/80 hover:bg-ink text-white backdrop-blur-md border border-white/20 shadow-md transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium bg-ink hover:bg-black text-white border border-white/20 transition"
             title="Download PNG graphic"
           >
             <Download className="w-3.5 h-3.5" />
@@ -70,13 +70,13 @@ export function GraphicCanvas({
       </div>
 
       {/* Theme Style Selector */}
-      <div className="p-4 rounded-xl bg-gray-50 border border-border">
+      <div className="p-3.5 rounded-sm bg-white border border-grey/30">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2 text-xs font-semibold text-ink">
-            <Palette className="w-4 h-4 text-kanchipuram" />
-            <span>Creative Theme &amp; Color Palette</span>
+          <div className="flex items-center gap-2 text-xs font-medium text-ink">
+            <Palette className="w-3.5 h-3.5 text-ink" />
+            <span>Canvas Style Preset</span>
           </div>
-          <span className="text-[11px] text-kanchipuram font-medium">{selectedTheme.name}</span>
+          <span className="text-[11px] text-grey font-mono">{selectedTheme.name}</span>
         </div>
 
         <div className="grid grid-cols-5 gap-2">
@@ -86,18 +86,18 @@ export function GraphicCanvas({
               <button
                 key={theme.id}
                 onClick={() => setSelectedTheme(theme)}
-                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-lg border transition ${
+                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-sm border transition ${
                   isSelected
-                    ? 'border-kanchipuram bg-kanchipuram-light ring-2 ring-kanchipuram/30 shadow-sm'
-                    : 'border-border hover:border-gray-400 bg-surface'
+                    ? 'border-ink bg-white ring-1 ring-ink'
+                    : 'border-grey/30 hover:border-ink bg-white'
                 }`}
                 title={theme.name}
               >
                 <div
-                  className="w-full h-8 rounded-md border border-black/10 shadow-inner"
+                  className="w-full h-7 rounded-none border border-grey/30"
                   style={{ background: theme.background }}
                 />
-                <span className="text-[10px] text-ink truncate max-w-full font-medium">
+                <span className="text-[10px] text-ink truncate max-w-full font-mono">
                   {theme.name.split(' ')[0]}
                 </span>
               </button>
