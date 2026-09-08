@@ -73,30 +73,30 @@ export default function HostedSitePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070512] text-slate-100 font-sans antialiased selection:bg-fuchsia-500 selection:text-white">
+    <div className="min-h-screen bg-[#FAFAF8] text-[#1A1A2E] font-sans antialiased selection:bg-kanchipuram selection:text-white">
       <Head>
         <title>{site.business_name} — Official Website</title>
         <meta name="description" content={site.hero.tagline} />
       </Head>
 
       {/* Top Banner Navigation */}
-      <header className="sticky top-0 z-40 bg-[#0E0927]/90 backdrop-blur-xl border-b border-white/10">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[#E5E7EB]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-white shadow-lg"
+              className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-white shadow-sm"
               style={{ backgroundColor: site.primary_color }}
             >
               {site.business_name.charAt(0)}
             </div>
-            <span className="font-extrabold text-lg sm:text-xl tracking-tight text-white">
+            <span className="font-display font-bold text-lg sm:text-xl tracking-tight text-[#1A1A2E]">
               {site.business_name}
             </span>
           </div>
 
           <a
             href="#contact"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-white transition shadow-md"
+            className="px-4 py-2 rounded-xl text-xs font-semibold text-white transition shadow-sm"
             style={{ backgroundColor: site.primary_color }}
           >
             Contact & Order
@@ -106,30 +106,30 @@ export default function HostedSitePage() {
 
       {/* Hero Section */}
       <section className="py-20 sm:py-28 text-center px-4 max-w-5xl mx-auto relative">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-xs font-bold text-amber-300 border border-white/15 mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1A1A2E]/5 text-xs font-semibold text-[#1A1A2E] border border-[#1A1A2E]/10 mb-6">
+          <Sparkles className="w-3.5 h-3.5 text-tumbler" />
           <span>{site.industry}</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
+        <h1 className="text-4xl sm:text-6xl font-display font-bold text-[#1A1A2E] tracking-tight leading-[1.15]">
           {site.hero.headline}
         </h1>
 
-        <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto mt-6 leading-relaxed">
+        <p className="text-base sm:text-xl text-[#6B7280] max-w-2xl mx-auto mt-6 leading-relaxed">
           {site.hero.tagline}
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#offerings"
-            className="px-8 py-4 rounded-2xl text-sm font-bold text-white shadow-xl transition transform active:scale-95"
+            className="px-8 py-4 rounded-xl text-sm font-semibold text-white shadow-sm transition transform active:scale-95"
             style={{ backgroundColor: site.primary_color }}
           >
             {site.hero.cta_button_text}
           </a>
           <a
             href="#contact"
-            className="px-8 py-4 rounded-2xl text-sm font-bold bg-white/5 hover:bg-white/10 text-slate-200 border border-white/10 transition"
+            className="px-8 py-4 rounded-xl text-sm font-semibold bg-white hover:bg-[#FAFAF8] text-[#1A1A2E] border border-[#E5E7EB] transition shadow-sm"
           >
             Get In Touch
           </a>
@@ -137,25 +137,25 @@ export default function HostedSitePage() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-[#0E0927]/60 border-y border-white/10">
+      <section className="py-16 bg-white border-y border-[#E5E7EB]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
+            <span className="text-xs font-bold uppercase tracking-wider text-tumbler">
               Our Craft & Story
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#1A1A2E]">
               {site.about.title}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#6B7280] leading-relaxed">
               {site.about.story}
             </p>
           </div>
 
           <div className="md:col-span-6 space-y-3">
             {site.about.bullet_points.map((point, idx) => (
-              <div key={idx} className="p-3.5 rounded-2xl bg-space-950/80 border border-white/10 flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <span className="text-xs font-medium text-slate-200">{point}</span>
+              <div key={idx} className="p-3.5 rounded-xl bg-[#FAFAF8] border border-[#E5E7EB] flex items-start gap-3">
+                <CheckCircle2 className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                <span className="text-xs font-medium text-[#1A1A2E]">{point}</span>
               </div>
             ))}
           </div>
@@ -165,10 +165,10 @@ export default function HostedSitePage() {
       {/* Offerings / Catalog Grid */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6" id="offerings">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-fuchsia-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-kanchipuram">
             Featured Highlights
           </span>
-          <h2 className="text-3xl font-extrabold text-white mt-2">
+          <h2 className="text-3xl font-display font-bold text-[#1A1A2E] mt-2">
             Signature Offerings
           </h2>
         </div>
@@ -177,26 +177,26 @@ export default function HostedSitePage() {
           {site.offerings.map((item) => (
             <div
               key={item.id}
-              className="p-6 rounded-3xl bg-[#0E0927]/80 border border-white/10 shadow-xl flex flex-col justify-between hover:border-white/20 transition"
+              className="p-6 rounded-2xl bg-white border border-[#E5E7EB] shadow-card flex flex-col justify-between hover:shadow-card-hover transition"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-base font-bold text-white">{item.name}</h3>
+                  <h3 className="text-base font-display font-bold text-[#1A1A2E]">{item.name}</h3>
                   <span
-                    className="text-sm font-extrabold font-mono px-2.5 py-1 rounded-xl text-white shadow-sm"
+                    className="text-sm font-bold font-mono px-2.5 py-1 rounded-lg text-white shadow-sm"
                     style={{ backgroundColor: site.primary_color }}
                   >
                     {item.price}
                   </span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed mt-2">
+                <p className="text-xs text-[#6B7280] leading-relaxed mt-2">
                   {item.description}
                 </p>
               </div>
 
               {item.badge && (
-                <div className="mt-4 pt-3 border-t border-white/10">
-                  <span className="text-[10px] font-bold text-amber-300 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                <div className="mt-4 pt-3 border-t border-[#E5E7EB]">
+                  <span className="text-[10px] font-semibold text-tumbler bg-tumbler/10 px-2 py-0.5 rounded-full border border-tumbler/20">
                     ★ {item.badge}
                   </span>
                 </div>
@@ -207,25 +207,25 @@ export default function HostedSitePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-[#0E0927]/60 border-y border-white/10">
+      <section className="py-16 bg-white border-y border-[#E5E7EB]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-300">Customer Love</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">What Our Community Says</h2>
+            <span className="text-xs font-bold uppercase tracking-wider text-tumbler">Customer Love</span>
+            <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#1A1A2E] mt-1">What Our Community Says</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {site.testimonials.map((t, i) => (
-              <div key={i} className="p-6 rounded-3xl bg-space-950/80 border border-white/10 space-y-3">
+              <div key={i} className="p-6 rounded-2xl bg-[#FAFAF8] border border-[#E5E7EB] space-y-3">
                 <div className="flex text-amber-400 gap-0.5">
                   {Array.from({ length: t.rating }).map((_, r) => (
                     <Star key={r} className="w-4 h-4 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-xs text-slate-300 italic leading-relaxed">"{t.comment}"</p>
-                <div className="pt-2 border-t border-white/10">
-                  <span className="text-xs font-bold text-white block">{t.name}</span>
-                  <span className="text-[10px] text-slate-500">{t.role}</span>
+                <p className="text-xs text-[#6B7280] italic leading-relaxed">"{t.comment}"</p>
+                <div className="pt-2 border-t border-[#E5E7EB]">
+                  <span className="text-xs font-bold text-[#1A1A2E] block">{t.name}</span>
+                  <span className="text-[10px] text-[#6B7280]">{t.role}</span>
                 </div>
               </div>
             ))}
@@ -240,22 +240,22 @@ export default function HostedSitePage() {
           {/* Business Info */}
           <div className="md:col-span-5 space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-amber-300">Visit & Connect</span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Get In Touch</h2>
-              <p className="text-xs text-slate-400 mt-2">Have a question or custom catering inquiry? Send us a message.</p>
+              <span className="text-xs font-bold uppercase tracking-wider text-tumbler">Visit & Connect</span>
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-[#1A1A2E] mt-1">Get In Touch</h2>
+              <p className="text-xs text-[#6B7280] mt-2">Have a question or custom catering inquiry? Send us a message.</p>
             </div>
 
-            <div className="space-y-3 text-xs text-slate-300">
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#0E0927] border border-white/10">
-                <MapPin className="w-4 h-4 text-fuchsia-400" />
+            <div className="space-y-3 text-xs text-[#1A1A2E]">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#E5E7EB]">
+                <MapPin className="w-4 h-4 text-kanchipuram" />
                 <span>{site.address}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#0E0927] border border-white/10">
-                <Clock className="w-4 h-4 text-amber-400" />
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#E5E7EB]">
+                <Clock className="w-4 h-4 text-tumbler" />
                 <span>{site.hours}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#0E0927] border border-white/10">
-                <Phone className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#E5E7EB]">
+                <Phone className="w-4 h-4 text-success" />
                 <span>{site.contact_phone}</span>
               </div>
             </div>
@@ -263,17 +263,17 @@ export default function HostedSitePage() {
 
           {/* Interactive Lead Capture Form */}
           <div className="md:col-span-7">
-            <div className="p-7 sm:p-8 rounded-3xl bg-[#0E0927] border border-white/10 shadow-2xl">
+            <div className="p-7 sm:p-8 rounded-2xl bg-white border border-[#E5E7EB] shadow-card">
               {submitted ? (
                 <div className="py-10 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto">
+                  <div className="w-12 h-12 rounded-full bg-success/10 text-success border border-success/20 flex items-center justify-center mx-auto">
                     <Check className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg font-bold text-white">Thank You!</h3>
-                  <p className="text-xs text-slate-300 max-w-xs mx-auto">Your inquiry has been received. Our team will contact you shortly.</p>
+                  <h3 className="text-lg font-display font-bold text-[#1A1A2E]">Thank You!</h3>
+                  <p className="text-xs text-[#6B7280] max-w-xs mx-auto">Your inquiry has been received. Our team will contact you shortly.</p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs font-bold text-amber-300 underline"
+                    className="mt-4 text-xs font-semibold text-kanchipuram underline"
                   >
                     Send another message
                   </button>
@@ -282,36 +282,36 @@ export default function HostedSitePage() {
                 <form onSubmit={handleSubmitLead} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1">Your Name *</label>
+                      <label className="block text-xs font-bold text-[#1A1A2E] mb-1">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
-                        className="w-full bg-space-950 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
+                        className="w-full bg-[#FAFAF8] border border-[#E5E7EB] rounded-xl px-3.5 py-2.5 text-xs text-[#1A1A2E] focus:outline-none focus:border-kanchipuram"
                         placeholder="Jane Doe"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 mb-1">Email Address *</label>
+                      <label className="block text-xs font-bold text-[#1A1A2E] mb-1">Email Address *</label>
                       <input
                         type="email"
                         required
                         value={formEmail}
                         onChange={(e) => setFormEmail(e.target.value)}
-                        className="w-full bg-space-950 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400"
+                        className="w-full bg-[#FAFAF8] border border-[#E5E7EB] rounded-xl px-3.5 py-2.5 text-xs text-[#1A1A2E] focus:outline-none focus:border-kanchipuram"
                         placeholder="jane@example.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 mb-1">Message / Inquiry</label>
+                    <label className="block text-xs font-bold text-[#1A1A2E] mb-1">Message / Inquiry</label>
                     <textarea
                       rows={3}
                       value={formMessage}
                       onChange={(e) => setFormMessage(e.target.value)}
-                      className="w-full bg-space-950 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-400 resize-none"
+                      className="w-full bg-[#FAFAF8] border border-[#E5E7EB] rounded-xl p-3 text-xs text-[#1A1A2E] focus:outline-none focus:border-kanchipuram resize-none"
                       placeholder="Tell us what you need..."
                     />
                   </div>
@@ -319,7 +319,7 @@ export default function HostedSitePage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-3 px-4 rounded-xl text-xs font-bold text-white shadow-lg transition"
+                    className="w-full py-3 px-4 rounded-xl text-xs font-semibold text-white shadow-sm transition"
                     style={{ backgroundColor: site.primary_color }}
                   >
                     {submitting ? 'Submitting...' : 'Send Customer Inquiry'}
@@ -332,7 +332,7 @@ export default function HostedSitePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/10 text-center text-xs text-slate-500">
+      <footer className="py-8 border-t border-[#E5E7EB] text-center text-xs text-[#6B7280]">
         <p>© 2026 {site.business_name}. Powered by MarkAI.</p>
       </footer>
     </div>

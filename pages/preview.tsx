@@ -147,28 +147,28 @@ export default function PreviewPage() {
 
   return (
     <Layout title="Preview & Post — MarkAI">
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Navigation & Header Breadcrumb */}
-        <div className="card-glass rounded-3xl p-5 sm:p-6 shadow-2xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="card rounded-2xl p-5 sm:p-6 shadow-card border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Link
               href="/dashboard"
-              className="p-2.5 rounded-2xl bg-white/[0.05] border border-white/10 text-slate-400 hover:text-white transition"
+              className="p-2 rounded-xl bg-gray-50 border border-border text-muted hover:text-ink transition"
               title="Back to Dashboard"
             >
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-success-light text-success border border-success-border">
                   Step 2 of 2 · {format === 'carousel' ? 'Carousel Outline' : format === 'reels_script' ? 'Reels Storyboard' : 'Preview & Post'}
                 </span>
                 {currentPostRecord?.status && (
                   <StatusBadge status={currentPostRecord.status} size="sm" />
                 )}
               </div>
-              <h1 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+              <h1 className="text-xl sm:text-2xl font-display font-bold text-ink mt-1">
                 Content Cockpit for {currentProfile.business_name}
               </h1>
             </div>
@@ -177,16 +177,16 @@ export default function PreviewPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={handleSaveDraft}
-              className="btn-secondary px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold"
+              className="btn-secondary px-4 py-2 rounded-xl text-xs sm:text-sm font-medium"
             >
               {saveSuccess ? (
                 <>
-                  <Check className="w-4 h-4 text-emerald-400" />
-                  <span className="text-emerald-400">Saved to History</span>
+                  <Check className="w-4 h-4 text-success" />
+                  <span className="text-success font-semibold">Saved to History</span>
                 </>
               ) : (
                 <>
-                  <Save className="w-4 h-4 text-slate-400" />
+                  <Save className="w-4 h-4 text-muted" />
                   <span>Save Draft</span>
                 </>
               )}
@@ -195,7 +195,7 @@ export default function PreviewPage() {
             <button
               onClick={handlePublish}
               disabled={isPosting}
-              className="btn-instagram px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold shadow-lg"
+              className="btn-instagram px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold shadow-md"
             >
               {isPosting ? (
                 <>
@@ -214,43 +214,43 @@ export default function PreviewPage() {
 
         {/* AI Insight Metadata Chips */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="card-glass p-4 rounded-2xl flex items-start gap-3 border border-white/[0.08]">
-            <div className="p-2.5 rounded-xl bg-fuchsia-500/15 text-fuchsia-400 flex-shrink-0">
+          <div className="card p-4 rounded-xl flex items-start gap-3 border border-border shadow-card">
+            <div className="p-2.5 rounded-lg bg-kanchipuram-light text-kanchipuram flex-shrink-0">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-muted uppercase tracking-wider block">
                 Campaign Hook
               </span>
-              <p className="text-xs font-semibold text-slate-200 mt-0.5 line-clamp-1">
+              <p className="text-xs font-semibold text-ink mt-0.5 line-clamp-1">
                 {activePost.post_theme}
               </p>
             </div>
           </div>
 
-          <div className="card-glass p-4 rounded-2xl flex items-start gap-3 border border-white/[0.08]">
-            <div className="p-2.5 rounded-xl bg-emerald-500/15 text-emerald-400 flex-shrink-0">
+          <div className="card p-4 rounded-xl flex items-start gap-3 border border-border shadow-card">
+            <div className="p-2.5 rounded-lg bg-success-light text-success flex-shrink-0">
               <Clock className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-muted uppercase tracking-wider block">
                 Optimal Posting Window
               </span>
-              <p className="text-xs font-semibold text-emerald-300 mt-0.5">
+              <p className="text-xs font-semibold text-success mt-0.5">
                 {activePost.best_time}
               </p>
             </div>
           </div>
 
-          <div className="card-glass p-4 rounded-2xl flex items-start gap-3 border border-white/[0.08]">
-            <div className="p-2.5 rounded-xl bg-violet-500/15 text-violet-400 flex-shrink-0">
+          <div className="card p-4 rounded-xl flex items-start gap-3 border border-border shadow-card">
+            <div className="p-2.5 rounded-lg bg-tumbler-light text-tumbler flex-shrink-0">
               <ImageIcon className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-semibold text-muted uppercase tracking-wider block">
                 Visual Concept
               </span>
-              <p className="text-xs font-semibold text-slate-300 mt-0.5 line-clamp-1">
+              <p className="text-xs font-semibold text-ink mt-0.5 line-clamp-1">
                 {activePost.visual_idea}
               </p>
             </div>
@@ -261,19 +261,19 @@ export default function PreviewPage() {
         {format === 'carousel' ? (
           /* Multi-Slide Carousel Outline View */
           <div className="space-y-6">
-            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+            <div className="card rounded-2xl p-6 shadow-card border border-border">
+              <div className="flex items-center justify-between pb-4 border-b border-border mb-6">
                 <div className="flex items-center gap-2">
-                  <Layers className="w-5 h-5 text-fuchsia-400" />
-                  <span className="text-sm font-extrabold text-white uppercase tracking-wider">
+                  <Layers className="w-5 h-5 text-kanchipuram" />
+                  <span className="text-sm font-display font-bold text-ink uppercase tracking-wider">
                     Structured Carousel Slide Deck ({activePost.carousel_slides?.length || 5} Slides)
                   </span>
                 </div>
                 <button
                   onClick={handleCopySlides}
-                  className="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5"
+                  className="btn-secondary px-3.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5"
                 >
-                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedSlides ? 'Deck Copied' : 'Copy Slide Outline'}</span>
                 </button>
               </div>
@@ -283,31 +283,31 @@ export default function PreviewPage() {
                 {activePost.carousel_slides?.map((slide) => (
                   <div
                     key={slide.slide_number}
-                    className="p-5 rounded-2xl bg-space-950/80 border border-white/10 flex flex-col justify-between space-y-3 hover:border-fuchsia-500/40 transition group"
+                    className="p-4 rounded-xl bg-gray-50 border border-border flex flex-col justify-between space-y-3 hover:border-kanchipuram transition group"
                   >
                     <div>
-                      <div className="flex items-center justify-between text-xs font-mono font-bold text-fuchsia-400 mb-2">
+                      <div className="flex items-center justify-between text-xs font-mono font-semibold text-kanchipuram mb-2">
                         <span>SLIDE 0{slide.slide_number}</span>
                         {slide.slide_number === 1 && (
-                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-fuchsia-500/20 text-fuchsia-300">
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-kanchipuram-light text-kanchipuram font-semibold">
                             HOOK
                           </span>
                         )}
                         {slide.slide_number === 5 && (
-                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                          <span className="text-[9px] px-1.5 py-0.5 rounded bg-success-light text-success font-semibold">
                             CTA
                           </span>
                         )}
                       </div>
-                      <h4 className="text-xs font-bold text-white leading-snug group-hover:text-fuchsia-200">
+                      <h4 className="text-xs font-bold text-ink leading-snug">
                         {slide.headline}
                       </h4>
-                      <p className="text-[11px] text-slate-300 mt-2 leading-relaxed">
+                      <p className="text-[11px] text-muted mt-2 leading-relaxed">
                         {slide.body}
                       </p>
                     </div>
 
-                    <div className="pt-3 border-t border-white/10 text-[10px] text-slate-500 italic">
+                    <div className="pt-3 border-t border-border text-[10px] text-muted italic">
                       🎬 Visual: {slide.visual_cue}
                     </div>
                   </div>
@@ -316,16 +316,16 @@ export default function PreviewPage() {
             </div>
 
             {/* Accompanying Caption Editor */}
-            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
-                <span className="text-xs font-bold text-white uppercase tracking-wider">
+            <div className="card rounded-2xl p-6 shadow-card border border-border">
+              <div className="flex items-center justify-between pb-3 border-b border-border mb-3">
+                <span className="text-xs font-semibold text-ink uppercase tracking-wider">
                   Instagram Caption (Carousel Intro)
                 </span>
                 <button
                   onClick={handleCopyCaption}
-                  className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                  className="flex items-center gap-1 text-xs text-muted hover:text-ink transition"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copied' : 'Copy Caption'}</span>
                 </button>
               </div>
@@ -333,25 +333,25 @@ export default function PreviewPage() {
                 rows={5}
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="w-full bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed focus:outline-none focus:border-brand-fuchsia resize-none"
+                className="w-full bg-canvas border border-border rounded-xl p-4 text-sm text-ink leading-relaxed focus:outline-none focus:border-kanchipuram resize-none"
               />
             </div>
           </div>
         ) : format === 'reels_script' ? (
           /* Reels / Video Script Storyboard View */
           <div className="space-y-6">
-            <div className="card-glass rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/10 space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+            <div className="card rounded-2xl p-6 sm:p-7 shadow-card border border-border space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-2xl bg-rose-500/15 text-rose-400 border border-rose-500/30">
-                    <Film className="w-6 h-6" />
+                  <div className="p-2.5 rounded-xl bg-danger-light text-danger border border-danger-border">
+                    <Film className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-extrabold text-white">Reels & Short Video Script Storyboard</h3>
-                    <div className="flex items-center gap-3 text-xs text-slate-400 mt-0.5">
-                      <span>Duration: <strong className="text-white">{activePost.reels_script?.duration || '20s'}</strong></span>
+                    <h3 className="text-base font-display font-bold text-ink">Reels &amp; Short Video Script Storyboard</h3>
+                    <div className="flex items-center gap-3 text-xs text-muted mt-0.5">
+                      <span>Duration: <strong className="text-ink">{activePost.reels_script?.duration || '20s'}</strong></span>
                       <span>·</span>
-                      <span className="flex items-center gap-1 text-amber-300">
+                      <span className="flex items-center gap-1 text-tumbler">
                         <Music className="w-3.5 h-3.5" /> {activePost.reels_script?.music_suggestion || 'Upbeat Kinetic Lofi'}
                       </span>
                     </div>
@@ -360,49 +360,49 @@ export default function PreviewPage() {
 
                 <button
                   onClick={handleCopySlides}
-                  className="btn-secondary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5"
+                  className="btn-secondary px-3.5 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5"
                 >
-                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedSlides ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedSlides ? 'Script Copied' : 'Copy Full Script'}</span>
                 </button>
               </div>
 
               {/* 3-Second Hook Callout */}
-              <div className="p-4 rounded-2xl bg-rose-950/30 border border-rose-500/30 flex items-start gap-3">
-                <div className="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 text-xs font-extrabold uppercase">
+              <div className="p-4 rounded-xl bg-danger-light border border-danger-border flex items-start gap-3">
+                <div className="px-2.5 py-1 rounded-md bg-danger text-white text-xs font-bold uppercase">
                   3-Sec Hook
                 </div>
-                <p className="text-xs sm:text-sm font-bold text-white">
-                  "{activePost.reels_script?.hook || activePost.post_theme}"
+                <p className="text-xs sm:text-sm font-semibold text-ink">
+                  &quot;{activePost.reels_script?.hook || activePost.post_theme}&quot;
                 </p>
               </div>
 
               {/* Scene Breakdown Storyboard */}
               <div className="space-y-3">
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
-                  Scene-by-Scene Visual & Audio Storyboard:
+                <span className="text-xs font-semibold text-muted uppercase tracking-wider block">
+                  Scene-by-Scene Visual &amp; Audio Storyboard:
                 </span>
 
                 <div className="grid grid-cols-1 gap-3">
                   {activePost.reels_script?.scenes?.map((scene, idx) => (
                     <div
                       key={idx}
-                      className="p-4 rounded-2xl bg-space-950/80 border border-white/10 grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
+                      className="p-4 rounded-xl bg-gray-50 border border-border grid grid-cols-1 md:grid-cols-12 gap-4 items-center"
                     >
                       <div className="md:col-span-2 flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded-xl bg-white/[0.05] text-xs font-mono font-bold text-fuchsia-300 border border-white/10">
+                        <span className="px-2.5 py-1 rounded-md bg-white text-xs font-mono font-semibold text-kanchipuram border border-border">
                           {scene.timestamp}
                         </span>
                       </div>
-                      <div className="md:col-span-4 text-xs text-slate-300">
-                        <strong className="text-slate-100 block text-[11px] uppercase mb-0.5">🎬 Visual Action:</strong>
+                      <div className="md:col-span-4 text-xs text-ink-soft">
+                        <strong className="text-ink block text-[11px] uppercase mb-0.5">🎬 Visual Action:</strong>
                         {scene.visual_action}
                       </div>
-                      <div className="md:col-span-4 text-xs text-amber-200">
-                        <strong className="text-amber-400 block text-[11px] uppercase mb-0.5">🎙️ Voiceover / Spoken:</strong>
+                      <div className="md:col-span-4 text-xs text-tumbler">
+                        <strong className="text-tumbler block text-[11px] uppercase mb-0.5">🎙️ Voiceover / Spoken:</strong>
                         {scene.spoken_audio}
                       </div>
-                      <div className="md:col-span-2 text-[11px] font-bold text-white bg-white/10 px-2.5 py-1.5 rounded-xl border border-white/15 text-center">
+                      <div className="md:col-span-2 text-[11px] font-semibold text-ink bg-white px-2.5 py-1.5 rounded-lg border border-border text-center">
                         {scene.on_screen_text}
                       </div>
                     </div>
@@ -412,16 +412,16 @@ export default function PreviewPage() {
             </div>
 
             {/* Accompanying Caption */}
-            <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
-                <span className="text-xs font-bold text-white uppercase tracking-wider">
-                  Reels Post Caption & Viral Hashtags
+            <div className="card rounded-2xl p-6 shadow-card border border-border">
+              <div className="flex items-center justify-between pb-3 border-b border-border mb-3">
+                <span className="text-xs font-semibold text-ink uppercase tracking-wider">
+                  Reels Post Caption &amp; Viral Hashtags
                 </span>
                 <button
                   onClick={handleCopyCaption}
-                  className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                  className="flex items-center gap-1 text-xs text-muted hover:text-ink transition"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copied' : 'Copy'}</span>
                 </button>
               </div>
@@ -429,27 +429,27 @@ export default function PreviewPage() {
                 rows={4}
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="w-full bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed focus:outline-none focus:border-brand-fuchsia resize-none"
+                className="w-full bg-canvas border border-border rounded-xl p-4 text-sm text-ink leading-relaxed focus:outline-none focus:border-kanchipuram resize-none"
               />
             </div>
           </div>
         ) : (
           /* Default: Single Image Post with HTML5 Canvas Studio */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             <div className="lg:col-span-6 space-y-4">
-              <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10 flex flex-col h-full">
-                <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-3">
+              <div className="card rounded-2xl p-6 shadow-card border border-border flex flex-col h-full">
+                <div className="flex items-center justify-between pb-3.5 border-b border-border mb-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">
-                      Instagram Caption & Copy
+                    <span className="text-xs font-semibold text-ink uppercase tracking-wider">
+                      Instagram Caption &amp; Copy
                     </span>
-                    <span className="text-[11px] text-fuchsia-400 font-semibold">(Editable)</span>
+                    <span className="text-[11px] text-kanchipuram font-medium">(Editable)</span>
                   </div>
                   <button
                     onClick={handleCopyCaption}
-                    className="flex items-center gap-1 text-xs text-slate-400 hover:text-white transition"
+                    className="flex items-center gap-1 text-xs text-muted hover:text-ink transition"
                   >
-                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    {copied ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copied ? 'Copied' : 'Copy'}</span>
                   </button>
                 </div>
@@ -459,14 +459,14 @@ export default function PreviewPage() {
                     rows={14}
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}
-                    className="w-full h-full min-h-[330px] bg-space-950/80 border border-white/10 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition resize-none font-sans"
+                    className="w-full h-full min-h-[330px] bg-canvas border border-border rounded-xl p-4 text-sm text-ink leading-relaxed placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition resize-none font-sans"
                     placeholder="Your generated caption will appear here..."
                   />
                 </div>
 
-                <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
+                <div className="mt-3 flex items-center justify-between text-xs text-muted">
                   <div className="flex items-center gap-2">
-                    <Hash className="w-3.5 h-3.5 text-fuchsia-400" />
+                    <Hash className="w-3.5 h-3.5 text-kanchipuram" />
                     <span>{activePost.hashtags?.length || 0} Hashtags Included</span>
                   </div>
                   <span>{caption.length} characters</span>
@@ -475,13 +475,13 @@ export default function PreviewPage() {
             </div>
 
             <div className="lg:col-span-6 space-y-4">
-              <div className="card-glass rounded-3xl p-6 shadow-2xl border border-white/10">
-                <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
+              <div className="card rounded-2xl p-6 shadow-card border border-border">
+                <div className="flex items-center justify-between pb-3.5 border-b border-border mb-4">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-ink uppercase tracking-wider">
                       Branded Text-Overlay Creative
                     </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-fuchsia-500/15 text-fuchsia-300 border border-fuchsia-500/30">
+                    <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-kanchipuram-light text-kanchipuram border border-kanchipuram-border">
                       1080 × 1080
                     </span>
                   </div>
@@ -499,35 +499,35 @@ export default function PreviewPage() {
 
         {/* Post Result Feedback Modal */}
         {postResult.open && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-            <div className="card-glass rounded-3xl max-w-md w-full p-7 shadow-2xl text-center border border-white/10">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40 backdrop-blur-sm animate-fadeIn">
+            <div className="bg-surface rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-elevation text-center border border-border">
               {postResult.success ? (
                 <>
-                  <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4 shadow-inner">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-14 h-14 rounded-2xl bg-success-light border border-success-border text-success flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-7 h-7" />
                   </div>
-                  <h3 className="text-xl font-extrabold text-white">Post Successfully Published!</h3>
-                  <p className="text-xs text-slate-300 mt-2">
+                  <h3 className="text-xl font-display font-bold text-ink">Post Successfully Published!</h3>
+                  <p className="text-xs text-muted mt-2">
                     {postResult.message}
                   </p>
                   
                   {postResult.mediaId && (
-                    <div className="mt-4 p-3 rounded-2xl bg-space-950 border border-white/10 text-left">
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider font-bold block">Instagram Media ID:</span>
-                      <code className="text-xs font-mono text-emerald-400 break-all">{postResult.mediaId}</code>
+                    <div className="mt-4 p-3 rounded-xl bg-gray-50 border border-border text-left">
+                      <span className="text-[10px] text-muted uppercase tracking-wider font-semibold block">Instagram Media ID:</span>
+                      <code className="text-xs font-mono text-success break-all">{postResult.mediaId}</code>
                     </div>
                   )}
 
                   <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
                     <Link
                       href="/history"
-                      className="btn-primary flex-1 py-3 px-4 rounded-xl text-xs font-bold"
+                      className="btn-primary flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold text-center"
                     >
                       View Post History
                     </Link>
                     <button
                       onClick={() => setPostResult({ open: false, success: false })}
-                      className="btn-secondary flex-1 py-3 px-4 rounded-xl text-xs font-bold"
+                      className="btn-secondary flex-1 py-2.5 px-4 rounded-xl text-xs font-medium"
                     >
                       Close
                     </button>
@@ -535,16 +535,16 @@ export default function PreviewPage() {
                 </>
               ) : (
                 <>
-                  <div className="w-16 h-16 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto mb-4 shadow-inner">
-                    <AlertCircle className="w-8 h-8" />
+                  <div className="w-14 h-14 rounded-2xl bg-danger-light border border-danger-border text-danger flex items-center justify-center mx-auto mb-4">
+                    <AlertCircle className="w-7 h-7" />
                   </div>
-                  <h3 className="text-xl font-extrabold text-white">Publishing Issue</h3>
-                  <p className="text-xs text-rose-300 mt-2">
+                  <h3 className="text-xl font-display font-bold text-ink">Publishing Issue</h3>
+                  <p className="text-xs text-danger mt-2">
                     {postResult.error}
                   </p>
                   <button
                     onClick={() => setPostResult({ open: false, success: false })}
-                    className="btn-secondary mt-6 w-full py-3 px-4 rounded-xl text-xs font-bold"
+                    className="btn-secondary mt-6 w-full py-2.5 px-4 rounded-xl text-xs font-medium"
                   >
                     Dismiss
                   </button>

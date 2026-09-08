@@ -41,69 +41,69 @@ export default function LoginPage() {
       <div className="max-w-md mx-auto py-8">
         
         {/* Pitch competition fast-access banner */}
-        <div className="mb-6 p-5 rounded-3xl bg-gradient-to-r from-violet-950/60 via-fuchsia-950/50 to-amber-950/40 border border-fuchsia-500/30 text-center shadow-xl backdrop-blur-xl">
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold mb-2">
-            <Zap className="w-3.5 h-3.5" /> Pitch Competition Demo Mode
+        <div className="mb-6 p-5 rounded-2xl bg-tumbler-light border border-tumbler-border text-center shadow-sm">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white text-tumbler text-xs font-semibold border border-tumbler-border mb-2">
+            <Zap className="w-3.5 h-3.5 text-marigold" /> Theervu&apos;athon Demo Mode
           </div>
-          <p className="text-xs text-slate-300">
-            For judges and fast evaluation, use one-click demo login to access the full cockpit instantly.
+          <p className="text-xs text-ink-soft">
+            For judges and pitch evaluation, use one-click demo login to access the full cockpit instantly.
           </p>
           <button
             type="button"
             onClick={handleDemoLogin}
-            className="btn-primary mt-3 w-full py-3 px-4 rounded-xl text-xs font-bold shadow-lg"
+            className="btn-primary mt-3 w-full py-2.5 px-4 rounded-xl text-xs font-semibold"
           >
-            <Sparkles className="w-4 h-4 text-amber-300" />
+            <Sparkles className="w-4 h-4 text-marigold" />
             <span>Instant Pitch Demo Login</span>
           </button>
         </div>
 
-        {/* Auth Glass Card */}
-        <div className="card-glass rounded-3xl p-7 sm:p-8 shadow-2xl border border-white/10">
+        {/* Auth Card */}
+        <div className="card rounded-2xl p-7 sm:p-8 shadow-card border border-border">
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-extrabold text-white tracking-tight">Welcome Back</h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Sign in with your business account to manage & auto-post content
+            <h1 className="text-2xl font-display font-bold text-ink tracking-tight">Welcome Back</h1>
+            <p className="text-xs sm:text-sm text-muted mt-1">
+              Sign in to manage and auto-publish your business content
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-start gap-2.5 text-xs text-rose-300">
-              <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5" />
+            <div className="mb-5 p-3.5 rounded-xl bg-danger-light border border-danger-border flex items-start gap-2.5 text-xs text-danger">
+              <AlertCircle className="w-4 h-4 flex-shrink-0 text-danger mt-0.5" />
               <span>{error}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wider">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
+                  placeholder="name@business.com"
+                  className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-ink mb-1.5 uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-space-950/80 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-fuchsia focus:ring-1 focus:ring-brand-fuchsia transition"
+                  className="w-full bg-canvas border border-border rounded-xl pl-10 pr-4 py-2.5 text-sm text-ink placeholder-muted focus:outline-none focus:border-kanchipuram focus:ring-1 focus:ring-kanchipuram transition"
                   required
                 />
               </div>
@@ -112,7 +112,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold mt-2"
+              className="btn-primary w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold mt-2"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -125,23 +125,23 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-white/10 text-center">
-            <p className="text-xs text-slate-400">
-              Don't have an account?{' '}
-              <Link href="/signup" className="text-fuchsia-400 hover:text-fuchsia-300 font-bold transition">
+          <div className="mt-6 pt-5 border-t border-border text-center">
+            <p className="text-xs text-muted">
+              Don&apos;t have an account?{' '}
+              <Link href="/signup" className="text-kanchipuram font-semibold hover:underline transition">
                 Create an account
               </Link>
             </p>
           </div>
         </div>
 
-        {/* Security / Stack Note */}
-        <div className="mt-4 flex items-center justify-center gap-2 text-[11px] text-slate-500">
-          <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+        {/* Security Note */}
+        <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted">
+          <ShieldCheck className="w-3.5 h-3.5 text-muted" />
           <span>
             {isFirebaseConfigured
               ? 'Secured with Firebase Authentication'
-              : 'Running on Demo Sandbox Authentication'}
+              : 'Running on Pitch Demo Authentication'}
           </span>
         </div>
       </div>

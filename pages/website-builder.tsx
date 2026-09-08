@@ -75,18 +75,17 @@ export default function WebsiteBuilderPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header */}
-        <div className="card-glass rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-surface rounded-2xl p-6 sm:p-8 border border-border shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                Phase 5 · Instant Digital Presence
-              </span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-kanchipuram/5 border border-kanchipuram/15 text-xs font-semibold text-kanchipuram mb-2">
+              <Globe className="w-3.5 h-3.5 text-tumbler" />
+              <span>Instant Digital Presence</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-2 tracking-tight flex items-center gap-3">
-              <Globe className="w-7 h-7 text-amber-400" />
+            <h1 className="text-2xl sm:text-3xl font-display font-bold text-ink tracking-tight flex items-center gap-3">
+              <Globe className="w-7 h-7 text-kanchipuram" />
               <span>AI One-Page Website Builder</span>
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
               Instantly turn your social audience into paying customers. MarkAI generates and hosts a responsive, branded landing page with built-in lead capture in seconds.
             </p>
           </div>
@@ -95,7 +94,7 @@ export default function WebsiteBuilderPage() {
             <Link
               href={`/sites/${siteData.slug}`}
               target="_blank"
-              className="btn-primary px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold shadow-lg flex items-center gap-2"
+              className="btn-primary px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold shadow-sm flex items-center gap-2"
             >
               <span>View Live Website</span>
               <ExternalLink className="w-4 h-4" />
@@ -113,19 +112,19 @@ export default function WebsiteBuilderPage() {
                 key={t.id}
                 type="button"
                 onClick={() => setTemplateType(t.id)}
-                className={`p-4 rounded-2xl border text-left transition flex flex-col justify-between ${
+                className={`p-4 rounded-xl border text-left transition flex flex-col justify-between shadow-card hover:shadow-card-hover ${
                   isSelected
-                    ? 'bg-amber-500/15 border-amber-400 text-white ring-1 ring-amber-400/40 shadow-lg'
-                    : 'bg-space-950/60 border-white/10 text-slate-400 hover:border-white/20'
+                    ? 'bg-kanchipuram/5 border-kanchipuram ring-2 ring-kanchipuram/20'
+                    : 'bg-surface border-border text-muted hover:border-kanchipuram/30'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Icon className={`w-5 h-5 ${isSelected ? 'text-amber-400' : 'text-slate-400'}`} />
-                  {isSelected && <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>}
+                  <Icon className={`w-5 h-5 ${isSelected ? 'text-kanchipuram' : 'text-muted'}`} />
+                  {isSelected && <span className="w-2 h-2 rounded-full bg-kanchipuram animate-ping"></span>}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-200">{t.label}</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5 leading-snug">{t.desc}</p>
+                  <h4 className="text-xs font-display font-bold text-ink">{t.label}</h4>
+                  <p className="text-[10px] text-muted mt-0.5 leading-snug">{t.desc}</p>
                 </div>
               </button>
             );
@@ -137,31 +136,31 @@ export default function WebsiteBuilderPage() {
           
           {/* Left: Generated Site Preview & Generator */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="card-glass rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/10 space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                  <Globe className="w-4 h-4 text-amber-300" />
+            <div className="bg-surface rounded-2xl p-6 sm:p-7 border border-border shadow-card space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-border">
+                <span className="text-xs font-bold text-ink uppercase tracking-wider flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-kanchipuram" />
                   <span>Hosted Domain: {siteData.slug}.markai.site</span>
                 </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-success/10 text-success border border-success/20">
                   Live & Hosted
                 </span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-space-950/80 border border-white/10 space-y-3 text-xs">
+              <div className="p-4 rounded-xl bg-canvas border border-border space-y-3 text-xs">
                 <div>
-                  <span className="text-slate-500 block text-[11px] font-bold uppercase">Hero Headline:</span>
-                  <p className="text-sm font-bold text-white mt-0.5">{siteData.hero.headline}</p>
-                  <p className="text-slate-300 mt-1">{siteData.hero.tagline}</p>
+                  <span className="text-muted block text-[11px] font-bold uppercase">Hero Headline:</span>
+                  <p className="text-sm font-display font-bold text-ink mt-0.5">{siteData.hero.headline}</p>
+                  <p className="text-muted mt-1">{siteData.hero.tagline}</p>
                 </div>
 
-                <div className="pt-2 border-t border-white/10">
-                  <span className="text-slate-500 block text-[11px] font-bold uppercase">Included Offerings ({siteData.offerings.length} items):</span>
+                <div className="pt-2 border-t border-border">
+                  <span className="text-muted block text-[11px] font-bold uppercase">Included Offerings ({siteData.offerings.length} items):</span>
                   <div className="grid grid-cols-2 gap-2 mt-1.5">
                     {siteData.offerings.map((item) => (
-                      <div key={item.id} className="p-2 rounded-xl bg-white/[0.03] border border-white/5">
-                        <span className="font-bold text-white block truncate">{item.name}</span>
-                        <span className="text-[10px] text-amber-300 font-mono">{item.price}</span>
+                      <div key={item.id} className="p-2 rounded-lg bg-surface border border-border">
+                        <span className="font-bold text-ink block truncate">{item.name}</span>
+                        <span className="text-[10px] text-tumbler font-mono font-semibold">{item.price}</span>
                       </div>
                     ))}
                   </div>
@@ -172,7 +171,7 @@ export default function WebsiteBuilderPage() {
                 <button
                   type="submit"
                   disabled={isGenerating}
-                  className="btn-primary w-full py-3.5 px-6 rounded-2xl text-xs sm:text-sm font-bold shadow-lg flex items-center justify-center gap-2"
+                  className="btn-primary w-full py-3.5 px-6 rounded-xl text-xs sm:text-sm font-semibold shadow-sm flex items-center justify-center gap-2"
                 >
                   {isGenerating ? (
                     <>
@@ -181,7 +180,7 @@ export default function WebsiteBuilderPage() {
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <Sparkles className="w-4 h-4 text-tumbler" />
                       <span>Re-Generate Site with Selected Template</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
@@ -193,38 +192,38 @@ export default function WebsiteBuilderPage() {
 
           {/* Right: Captured Customer Inquiries & Leads */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="card-glass rounded-3xl p-6 sm:p-7 shadow-2xl border border-white/10 space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-fuchsia-400" />
+            <div className="bg-surface rounded-2xl p-6 sm:p-7 border border-border shadow-card space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-border">
+                <h3 className="text-base font-display font-bold text-ink flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-kanchipuram" />
                   <span>Lead Capture Inquiries</span>
                 </h3>
-                <span className="text-[10px] font-bold text-slate-400">
+                <span className="text-[10px] font-semibold text-muted">
                   {leads.length} submissions
                 </span>
               </div>
 
               {leads.length === 0 ? (
-                <div className="py-10 text-center text-xs text-slate-400 space-y-2">
-                  <Users className="w-8 h-8 mx-auto text-slate-600 mb-2" />
+                <div className="py-10 text-center text-xs text-muted space-y-2">
+                  <Users className="w-8 h-8 mx-auto text-muted/50 mb-2" />
                   <p>No customer inquiries submitted yet.</p>
-                  <p className="text-[11px] text-slate-500">Test the lead form on your live site!</p>
+                  <p className="text-[11px] text-muted/70">Test the lead form on your live site!</p>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-[380px] overflow-y-auto pr-1">
                   {leads.map((lead) => (
                     <div
                       key={lead.id}
-                      className="p-3.5 rounded-2xl bg-space-950/80 border border-white/10 space-y-1.5"
+                      className="p-3.5 rounded-xl bg-canvas border border-border space-y-1.5"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white">{lead.name}</span>
-                        <span className="text-[10px] text-slate-500 font-mono">
+                        <span className="text-xs font-bold text-ink">{lead.name}</span>
+                        <span className="text-[10px] text-muted font-mono">
                           {new Date(lead.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
-                      <p className="text-[11px] text-fuchsia-400 font-mono">{lead.email}</p>
-                      <p className="text-xs text-slate-300 italic">"{lead.message}"</p>
+                      <p className="text-[11px] text-kanchipuram font-mono">{lead.email}</p>
+                      <p className="text-xs text-muted italic">"{lead.message}"</p>
                     </div>
                   ))}
                 </div>
