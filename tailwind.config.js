@@ -10,54 +10,64 @@ module.exports = {
     extend: {
       colors: {
         white: '#FFFFFF',
-        canvas: '#FFFFFF',
+        canvas: '#F8FAFC', // Soft modern slate-50 canvas
         surface: '#FFFFFF',
         ink: {
-          DEFAULT: '#0A0A0A',
-          pure: '#000000',
+          DEFAULT: '#0F172A', // Slate 900 ink
+          pure: '#020617',
+        },
+        primary: {
+          DEFAULT: '#4F46E5', // Electric Indigo brand color
+          hover: '#4338CA',
+          light: '#EEF2FF',
+          border: '#C7D2FE',
+        },
+        accent: {
+          DEFAULT: '#6366F1', // Indigo 500
+          light: '#F5F3FF',
         },
         grey: {
-          DEFAULT: '#8A8A8A',
-          hairline: '#8A8A8A',
+          DEFAULT: '#64748B', // Slate 500
+          hairline: '#E2E8F0', // Slate 200
         },
         muted: {
-          DEFAULT: '#8A8A8A',
-          light: '#8A8A8A',
+          DEFAULT: '#64748B',
+          light: '#94A3B8',
         },
         border: {
-          DEFAULT: '#8A8A8A',
-          dark: '#0A0A0A',
+          DEFAULT: '#E2E8F0', // Crisp slate border
+          dark: '#0F172A',
         },
         // Functional Working Process Colors
         process: {
-          DEFAULT: '#2563EB', // Cobalt Blue for active generation & AI work
+          DEFAULT: '#3B82F6', // Vibrant Blue
           light: '#EFF6FF',
           border: '#BFDBFE',
         },
         success: {
-          DEFAULT: '#059669', // Emerald Green for verified, approved, live
+          DEFAULT: '#10B981', // Emerald Green
           light: '#ECFDF5',
           border: '#A7F3D0',
         },
         pending: {
-          DEFAULT: '#D97706', // Warm Amber for scheduled, queue, warning
+          DEFAULT: '#F59E0B', // Warm Amber
           light: '#FFFBEB',
           border: '#FDE68A',
         },
         danger: {
-          DEFAULT: '#DC2626', // Rose for errors
+          DEFAULT: '#EF4444', // Red
           light: '#FEF2F2',
           border: '#FECACA',
         },
-        // Monochromatic fallbacks so legacy aliases safely resolve
+        // Legacy aliases
         kanchipuram: {
-          DEFAULT: '#2563EB',
-          hover: '#1D4ED8',
-          light: '#EFF6FF',
-          border: '#BFDBFE',
+          DEFAULT: '#4F46E5',
+          hover: '#4338CA',
+          light: '#EEF2FF',
+          border: '#C7D2FE',
         },
         tumbler: {
-          DEFAULT: '#D97706',
+          DEFAULT: '#F59E0B',
           hover: '#B45309',
           light: '#FFFBEB',
           border: '#FDE68A',

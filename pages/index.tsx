@@ -65,15 +65,16 @@ export default function LandingPage() {
     <Layout title="MarkAI — Voice-First AI Social Media Engine for Local Business">
       
       {/* 1. HERO SECTION */}
-      <section className="pt-10 pb-16 sm:pt-16 sm:pb-24 border-b border-grey/30 text-left">
+      <section className="pt-10 pb-16 sm:pt-16 sm:pb-24 border-b border-grey-hairline text-left">
         <div className="max-w-4xl">
-          <div className="text-xs font-mono text-grey mb-4">
-            [MarkAI — Autonomous Social Marketing for Micro-Enterprises]
+          <div className="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold px-2.5 py-1 rounded bg-primary-light border border-primary-border mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span>Autonomous Social Marketing for Micro-Enterprises</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-serif font-bold tracking-tight leading-[1.1] text-ink">
             Speak your business.<br />
-            Publish on-brand social copy in thirty seconds.
+            <span className="text-primary">Publish on-brand social copy</span> in thirty seconds.
           </h1>
 
           <p className="text-base sm:text-lg text-grey max-w-2xl mt-6 leading-relaxed">
@@ -84,7 +85,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
             <Link
               href="/voice-onboarding"
-              className="btn-primary w-full sm:w-auto px-7 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2"
+              className="btn-primary w-full sm:w-auto px-7 py-3 rounded-md text-xs sm:text-sm font-medium flex items-center justify-center gap-2 shadow-md hover:shadow-indigo-500/25"
             >
               <span>Begin Voice Setup</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -92,7 +93,7 @@ export default function LandingPage() {
 
             <button
               onClick={handleLaunchDemo}
-              className="btn-secondary w-full sm:w-auto px-6 py-3 rounded-sm text-xs font-medium"
+              className="btn-secondary w-full sm:w-auto px-6 py-3 rounded-md text-xs sm:text-sm font-medium"
             >
               Launch Pitch Demo
             </button>
@@ -100,21 +101,21 @@ export default function LandingPage() {
         </div>
 
         {/* Hero Ledger Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mt-14 pt-8 border-t border-grey/20">
-          <div>
-            <span className="text-3xl font-serif font-bold text-ink">5s</span>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mt-14 pt-8 border-t border-grey-hairline">
+          <div className="p-4 rounded-md bg-white border border-grey-hairline shadow-sm">
+            <span className="text-3xl font-serif font-bold text-primary">5s</span>
             <p className="text-xs font-mono text-grey mt-1">Voice Extraction Latency</p>
           </div>
-          <div>
-            <span className="text-3xl font-serif font-bold text-ink">1-Click</span>
+          <div className="p-4 rounded-md bg-white border border-grey-hairline shadow-sm">
+            <span className="text-3xl font-serif font-bold text-success">1-Click</span>
             <p className="text-xs font-mono text-grey mt-1">Meta Graph Publishing</p>
           </div>
-          <div>
+          <div className="p-4 rounded-md bg-white border border-grey-hairline shadow-sm">
             <span className="text-3xl font-serif font-bold text-ink">1080px</span>
             <p className="text-xs font-mono text-grey mt-1">Canvas Graphics Engine</p>
           </div>
-          <div>
-            <span className="text-3xl font-serif font-bold text-ink">0 cost</span>
+          <div className="p-4 rounded-md bg-white border border-grey-hairline shadow-sm">
+            <span className="text-3xl font-serif font-bold text-pending">0 cost</span>
             <p className="text-xs font-mono text-grey mt-1">Agency Retainer Alternative</p>
           </div>
         </div>

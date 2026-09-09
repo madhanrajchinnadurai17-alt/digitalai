@@ -65,7 +65,7 @@ export function Navbar() {
             {/* Logo */}
             <div className="flex items-center gap-3">
               <Link href="/" className="flex items-center gap-3 group">
-                <div className="w-8 h-8 rounded-sm bg-ink flex items-center justify-center text-white">
+                <div className="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-white shadow-sm group-hover:bg-primary-hover transition">
                   <span className="font-serif font-bold text-base leading-none">M</span>
                 </div>
                 <div>
@@ -73,7 +73,7 @@ export function Navbar() {
                     <span className="font-serif font-bold text-xl text-ink tracking-tight">
                       MarkAI
                     </span>
-                    <span className="text-[11px] font-mono text-grey">
+                    <span className="text-[11px] font-mono text-primary font-semibold px-1.5 py-0.5 rounded bg-primary-light border border-primary-border">
                       [Voice-First]
                     </span>
                   </div>
@@ -85,7 +85,7 @@ export function Navbar() {
             </div>
 
             {/* Navigation Links */}
-            <nav className="hidden xl:flex items-center gap-1 p-1 rounded-sm border border-grey/30 bg-white">
+            <nav className="hidden xl:flex items-center gap-1 p-1 rounded-md border border-grey-hairline bg-white shadow-sm">
               {(user ? appNavItems : landingNavItems).map((item) => {
                 const isActive = router.pathname === item.href;
                 const Icon = (item as any).icon;
@@ -93,10 +93,10 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium transition ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium transition ${
                       isActive
-                        ? 'bg-ink text-white'
-                        : 'text-grey hover:text-ink hover:bg-white'
+                        ? 'bg-primary text-white shadow-sm'
+                        : 'text-grey hover:text-primary hover:bg-primary-light'
                     }`}
                   >
                     {Icon && <Icon className="w-3.5 h-3.5" />}

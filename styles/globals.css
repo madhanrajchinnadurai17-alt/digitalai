@@ -4,57 +4,61 @@
 
 @layer base {
   body {
-    @apply bg-white text-ink font-body antialiased min-h-screen selection:bg-ink selection:text-white;
-    background-color: #FFFFFF;
-    color: #0A0A0A;
+    @apply bg-canvas text-ink font-body antialiased min-h-screen selection:bg-primary selection:text-white;
+    background-color: #F8FAFC;
+    color: #0F172A;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Newsreader', Georgia, serif;
     letter-spacing: -0.02em;
-    color: #0A0A0A;
+    color: #0F172A;
   }
 }
 
-/* Hairline Card & Surface Rules */
+/* Modern Card & Surface Rules */
 .card-glass, .card {
   background-color: #FFFFFF;
-  border: 1px solid #8A8A8A;
-  border-radius: 0.125rem; /* rounded-sm */
-  box-shadow: none;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.375rem; /* rounded-md */
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
 }
 
 .card-glass-hover {
-  transition: border-color 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-glass-hover:hover {
-  border-color: #0A0A0A;
+  border-color: #C7D2FE;
+  box-shadow: 0 10px 15px -3px rgb(79 70 229 / 0.08), 0 4px 6px -4px rgb(79 70 229 / 0.04);
+  transform: translateY(-1px);
 }
 
-/* Button Rules — Strict Black & White */
+/* Button Rules — Vibrant Indigo Primary & Crisp Secondary */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-colors duration-150 disabled:opacity-40 disabled:pointer-events-none rounded-sm text-xs sm:text-sm px-4 py-2.5;
-  background-color: #0A0A0A;
-  border: 1px solid #0A0A0A;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none rounded-md text-xs sm:text-sm px-4 py-2.5 shadow-sm;
+  background-color: #4F46E5;
+  border: 1px solid #4338CA;
   color: #FFFFFF;
 }
 
 .btn-primary:hover {
-  background-color: #000000;
-  border-color: #000000;
+  background-color: #4338CA;
+  border-color: #3730A3;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-ink transition-colors duration-150 disabled:opacity-40 rounded-sm text-xs sm:text-sm px-4 py-2.5;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-ink transition-colors duration-150 disabled:opacity-40 rounded-md text-xs sm:text-sm px-4 py-2.5;
   background-color: #FFFFFF;
-  border: 1px solid #8A8A8A;
-  color: #0A0A0A;
+  border: 1px solid #CBD5E1;
+  color: #0F172A;
 }
 
 .btn-secondary:hover {
-  border-color: #0A0A0A;
-  background-color: #FAFAFA;
+  border-color: #4F46E5;
+  color: #4F46E5;
+  background-color: #F8FAFC;
 }
 
 .btn-instagram {
