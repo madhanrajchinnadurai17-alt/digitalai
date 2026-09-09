@@ -118,8 +118,12 @@ export default function WebsiteBuilderPage() {
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Icon className={`w-4 h-4 ${isSelected ? 'text-ink' : 'text-grey'}`} />
-                  {isSelected && <span className="font-mono text-[10px] text-ink">[Active]</span>}
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-process' : 'text-grey'}`} />
+                  {isSelected && (
+                    <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-sm">
+                      [Active]
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h4 className="text-xs font-serif font-bold text-ink">{t.label}</h4>
@@ -138,10 +142,10 @@ export default function WebsiteBuilderPage() {
             <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-grey/30">
                 <span className="text-xs font-mono text-ink flex items-center gap-2">
-                  <Globe className="w-3.5 h-3.5 text-ink" />
+                  <Globe className="w-3.5 h-3.5 text-process" />
                   <span>Hosted: {siteData.slug}.markai.site</span>
                 </span>
-                <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-sm">
+                <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm">
                   [Live & Hosted]
                 </span>
               </div>

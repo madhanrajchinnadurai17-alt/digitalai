@@ -257,14 +257,14 @@ export default function HostedSitePage() {
             <div className="p-6 sm:p-7 rounded-sm bg-white border border-grey/30">
               {submitted ? (
                 <div className="py-10 text-center space-y-3">
-                  <div className="w-10 h-10 rounded-sm bg-ink text-white flex items-center justify-center mx-auto">
+                  <div className="w-10 h-10 rounded-sm bg-success text-white flex items-center justify-center mx-auto shadow-sm">
                     <Check className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-serif font-bold text-ink">Thank You</h3>
+                  <h3 className="text-lg font-serif font-bold text-ink">Inquiry Sent Successfully</h3>
                   <p className="text-xs text-grey max-w-xs mx-auto">Your inquiry has been received. Our team will contact you shortly.</p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs font-mono text-ink underline"
+                    className="mt-4 text-xs font-mono text-process hover:underline"
                   >
                     Send another message
                   </button>

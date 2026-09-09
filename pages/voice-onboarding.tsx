@@ -240,7 +240,7 @@ export default function VoiceOnboardingPage() {
         <div className="card rounded-sm p-6 border border-grey/30 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-mono text-ink">
+              <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm">
                 [Voice AI Onboarding]
               </span>
               <span className="text-xs font-mono text-grey">
@@ -265,8 +265,8 @@ export default function VoiceOnboardingPage() {
         </div>
 
         {!speechSupported && (
-          <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-ink" />
+          <div className="p-3.5 rounded-sm bg-pending-light border border-pending-border text-xs text-pending flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-pending" />
             <span>
               Web Speech API is best supported in Google Chrome or Microsoft Edge. You can also click any of our sample presets below.
             </span>
@@ -274,8 +274,8 @@ export default function VoiceOnboardingPage() {
         )}
 
         {speechError && (
-          <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-ink" />
+          <div className="p-3.5 rounded-sm bg-danger-light border border-danger-border text-xs text-danger flex items-start gap-2.5">
+            <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-danger" />
             <span>{speechError}</span>
           </div>
         )}
@@ -293,8 +293,8 @@ export default function VoiceOnboardingPage() {
                   onClick={isRecording ? handleStopRecording : handleStartRecording}
                   className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition border ${
                     isRecording
-                      ? 'bg-ink text-white border-ink'
-                      : 'bg-white text-ink border-ink hover:bg-black hover:text-white'
+                      ? 'bg-process text-white border-process ring-4 ring-process/20 shadow-sm'
+                      : 'bg-white text-ink border-ink hover:border-process hover:text-process'
                   }`}
                 >
                   {isRecording ? (
@@ -316,7 +316,7 @@ export default function VoiceOnboardingPage() {
                     {[30, 75, 45, 95, 60, 85, 40, 100, 50, 70, 35].map((h, i) => (
                       <span
                         key={i}
-                        className="w-1 bg-ink rounded-none animate-waveform"
+                        className="w-1 bg-process rounded-none animate-waveform"
                         style={{
                           height: `${h}%`,
                           animationDelay: `${i * 0.09}s`,
@@ -331,8 +331,8 @@ export default function VoiceOnboardingPage() {
               {/* Status & Timer */}
               <div className="space-y-1">
                 <div className="flex items-center justify-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${isRecording ? 'bg-ink animate-ping' : 'bg-grey'}`} />
-                  <span className="text-xs font-mono uppercase tracking-wider text-ink">
+                  <span className={`w-2 h-2 rounded-full ${isRecording ? 'bg-process animate-ping' : 'bg-grey'}`} />
+                  <span className={`text-xs font-mono uppercase tracking-wider ${isRecording ? 'text-process font-bold' : 'text-ink'}`}>
                     {isRecording ? `Listening (0:${recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds} / 1:00)` : 'Ready to Record — Max 60 Seconds'}
                   </span>
                 </div>
@@ -425,8 +425,8 @@ export default function VoiceOnboardingPage() {
         {/* STEP 2: EXTRACTING SPINNER */}
         {step === 'extracting' && (
           <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
-            <div className="w-10 h-10 rounded-sm border border-ink text-ink mx-auto flex items-center justify-center">
-              <Wand2 className="w-5 h-5 animate-spin" />
+            <div className="w-12 h-12 rounded-sm bg-process-light border border-process-border text-process mx-auto flex items-center justify-center">
+              <Wand2 className="w-6 h-6 animate-spin" />
             </div>
             <h2 className="text-xl font-serif font-bold text-ink">
               Claude 3.5 Sonnet is Structuring Your Profile
@@ -442,7 +442,7 @@ export default function VoiceOnboardingPage() {
           <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-grey/30">
               <div>
-                <span className="text-xs font-mono text-ink">
+                <span className="text-xs font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm">
                   [Voice Extraction Complete]
                 </span>
                 <h2 className="text-xl font-serif font-bold text-ink mt-1">
@@ -470,7 +470,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.business_name}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, business_name: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -483,7 +483,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.industry}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, industry: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -496,7 +496,7 @@ export default function VoiceOnboardingPage() {
                   rows={3}
                   value={extractedProfile.description}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, description: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink resize-none leading-relaxed font-sans"
+                  className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process resize-none leading-relaxed font-sans"
                 />
               </div>
 
@@ -509,7 +509,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.target_audience}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, target_audience: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink min-h-[40px]"
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -521,7 +521,7 @@ export default function VoiceOnboardingPage() {
                 <select
                   value={extractedProfile.tone}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, tone: e.target.value as ToneType })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-ink capitalize min-h-[40px]"
+                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process capitalize min-h-[40px]"
                 >
                   <option value="playful">Playful &amp; Witty</option>
                   <option value="casual">Casual &amp; Friendly</option>
@@ -551,8 +551,8 @@ export default function VoiceOnboardingPage() {
         {/* STEP 4: GENERATING POST SPINNER */}
         {step === 'generating' && (
           <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
-            <div className="w-10 h-10 rounded-sm border border-ink text-ink mx-auto flex items-center justify-center">
-              <Sparkles className="w-5 h-5 animate-spin" />
+            <div className="w-12 h-12 rounded-sm bg-process-light border border-process-border text-process mx-auto flex items-center justify-center">
+              <Sparkles className="w-6 h-6 animate-spin" />
             </div>
             <h2 className="text-xl font-serif font-bold text-ink">
               Generating High-Converting Post &amp; Canvas Graphic

@@ -331,7 +331,7 @@ export default function VideoCreatorPage() {
                           <Icon className="w-5 h-5" />
                         </div>
                         {isSelected && (
-                          <span className="font-mono text-[10px] text-ink border border-ink px-1.5 py-0.5 rounded-sm">
+                          <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-sm">
                             [Recommended]
                           </span>
                         )}
@@ -402,7 +402,7 @@ export default function VideoCreatorPage() {
                 <div
                   key={idx}
                   className={`bg-white rounded-sm p-5 border transition space-y-4 ${
-                    shot.uploaded_image ? 'border-ink' : 'border-grey/30'
+                    shot.uploaded_image ? 'border-success/50 ring-1 ring-success/20' : 'border-grey/30'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -415,8 +415,8 @@ export default function VideoCreatorPage() {
                           {shot.title}
                         </h3>
                         {shot.status === 'approved' && (
-                          <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-sm flex items-center gap-1">
-                            <Check className="w-3 h-3" /> [Approved]
+                          <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm flex items-center gap-1">
+                            <Check className="w-3 h-3 text-success" /> [Approved]
                           </span>
                         )}
                       </div>
@@ -431,7 +431,7 @@ export default function VideoCreatorPage() {
                           <span>Angle: <strong className="text-ink">{shot.camera_angle}</strong></span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <Sun className="w-3.5 h-3.5 text-ink" />
+                          <Sun className="w-3.5 h-3.5 text-pending" />
                           <span>Lighting: <strong className="text-ink">{shot.lighting_tip}</strong></span>
                         </div>
                       </div>
@@ -447,7 +447,7 @@ export default function VideoCreatorPage() {
                     {/* Upload Controls & Preview */}
                     <div className="flex sm:flex-col items-center gap-2 flex-shrink-0">
                       {shot.uploaded_image ? (
-                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-sm overflow-hidden border border-ink group">
+                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-sm overflow-hidden border border-success group">
                           <img
                             src={shot.uploaded_image}
                             alt={shot.title}
@@ -491,20 +491,20 @@ export default function VideoCreatorPage() {
 
                   {/* Gemini Multimodal Feedback Pill */}
                   {analyzingShotIdx === idx && (
-                    <div className="p-3 rounded-sm border border-grey/30 flex items-center gap-2 text-xs font-mono text-grey">
-                      <div className="w-3.5 h-3.5 border-2 border-ink border-t-transparent rounded-full animate-spin"></div>
-                      <span>Gemini Vision evaluating composition...</span>
+                    <div className="p-3 rounded-sm border border-process-border bg-process-light flex items-center gap-2 text-xs font-mono text-process">
+                      <div className="w-3.5 h-3.5 border-2 border-process border-t-transparent rounded-full animate-spin"></div>
+                      <span>Gemini Vision evaluating composition & lighting...</span>
                     </div>
                   )}
 
                   {shot.ai_feedback && (
-                    <div className="p-3.5 rounded-sm bg-white border border-grey/30 space-y-1.5 text-xs">
+                    <div className="p-3.5 rounded-sm bg-white border border-success-border space-y-1.5 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-medium text-ink flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-ink" />
+                        <span className="font-medium text-success flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-success" />
                           {shot.ai_feedback.feedback}
                         </span>
-                        <span className="font-mono text-[10px] text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                        <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm">
                           [{shot.ai_feedback.score}/100 Quality]
                         </span>
                       </div>
@@ -602,15 +602,15 @@ export default function VideoCreatorPage() {
                         <div
                           key={i}
                           className={`h-0.5 rounded-none transition-all duration-300 ${
-                            i === activeShotIdx ? 'bg-white' : i < activeShotIdx ? 'bg-white/60' : 'bg-white/20'
+                            i === activeShotIdx ? 'bg-pending' : i < activeShotIdx ? 'bg-white/80' : 'bg-white/20'
                           }`}
                         />
                       ))}
                     </div>
 
                     <div className="flex items-center justify-between text-[10px] font-mono text-white/70 uppercase pt-1">
-                      <span className="flex items-center gap-1">
-                        <Music className="w-3 h-3" />
+                      <span className="flex items-center gap-1 text-pending">
+                        <Music className="w-3 h-3 animate-pulse" />
                         <span>Lofi Beat (120 BPM)</span>
                       </span>
                       <span>MarkAI</span>

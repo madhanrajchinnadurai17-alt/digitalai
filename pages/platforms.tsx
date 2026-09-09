@@ -133,7 +133,8 @@ export default function PlatformsPage() {
                     {getPlatformIcon(p.platform)}
                   </div>
                   {p.connected ? (
-                    <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-sm">
+                    <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm font-semibold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-success" />
                       [Connected]
                     </span>
                   ) : (
@@ -158,7 +159,7 @@ export default function PlatformsPage() {
                   onClick={() => handleToggle(p.platform, p.connected)}
                   className={`w-full py-2 px-3 rounded-sm text-xs font-medium transition ${
                     p.connected
-                      ? 'border border-grey/30 text-grey hover:text-ink hover:border-ink'
+                      ? 'border border-grey/30 text-grey hover:text-danger hover:border-danger'
                       : 'btn-primary'
                   }`}
                 >
@@ -173,10 +174,10 @@ export default function PlatformsPage() {
         <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 space-y-5">
           <div className="flex items-center justify-between pb-3 border-b border-grey/30">
             <span className="text-xs font-mono text-ink flex items-center gap-2">
-              <Send className="w-3.5 h-3.5 text-ink" />
+              <Send className="w-3.5 h-3.5 text-process" />
               <span>Simultaneous Multi-Channel Broadcast</span>
             </span>
-            <span className="font-mono text-[10px] text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+            <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm font-medium">
               [Format Auto-Adapted]
             </span>
           </div>
@@ -200,7 +201,7 @@ export default function PlatformsPage() {
                       }}
                       className={`flex items-center gap-2 px-3 py-1.5 rounded-sm text-xs font-medium transition border ${
                         isSelected
-                          ? 'bg-ink text-white border-ink'
+                          ? 'bg-process text-white border-process shadow-sm'
                           : 'bg-white border-grey/30 text-grey hover:text-ink hover:border-grey'
                       }`}
                     >

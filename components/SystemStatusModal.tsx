@@ -121,11 +121,11 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
                     </div>
                   </div>
                   {isConfigured ? (
-                    <span className="text-xs font-mono text-ink">
+                    <span className="text-xs font-mono text-success bg-success-light border border-success-border rounded-sm px-1.5 py-0.5">
                       [Live]
                     </span>
                   ) : (
-                    <span className="text-xs font-mono text-grey">
+                    <span className="text-xs font-mono text-pending bg-pending-light border border-pending-border rounded-sm px-1.5 py-0.5">
                       [Sandbox]
                     </span>
                   )}

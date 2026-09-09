@@ -28,32 +28,39 @@ module.exports = {
           DEFAULT: '#8A8A8A',
           dark: '#0A0A0A',
         },
-        // Monochromatic fallbacks so legacy aliases safely resolve to 3-color palette
-        kanchipuram: {
-          DEFAULT: '#0A0A0A',
-          hover: '#000000',
-          light: '#FFFFFF',
-          border: '#8A8A8A',
-        },
-        tumbler: {
-          DEFAULT: '#0A0A0A',
-          hover: '#000000',
-          light: '#FFFFFF',
-          border: '#8A8A8A',
-        },
-        marigold: {
-          DEFAULT: '#0A0A0A',
-          light: '#FFFFFF',
+        // Functional Working Process Colors
+        process: {
+          DEFAULT: '#2563EB', // Cobalt Blue for active generation & AI work
+          light: '#EFF6FF',
+          border: '#BFDBFE',
         },
         success: {
-          DEFAULT: '#0A0A0A',
-          light: '#FFFFFF',
-          border: '#8A8A8A',
+          DEFAULT: '#059669', // Emerald Green for verified, approved, live
+          light: '#ECFDF5',
+          border: '#A7F3D0',
+        },
+        pending: {
+          DEFAULT: '#D97706', // Warm Amber for scheduled, queue, warning
+          light: '#FFFBEB',
+          border: '#FDE68A',
         },
         danger: {
-          DEFAULT: '#0A0A0A',
-          light: '#FFFFFF',
-          border: '#8A8A8A',
+          DEFAULT: '#DC2626', // Rose for errors
+          light: '#FEF2F2',
+          border: '#FECACA',
+        },
+        // Monochromatic fallbacks so legacy aliases safely resolve
+        kanchipuram: {
+          DEFAULT: '#2563EB',
+          hover: '#1D4ED8',
+          light: '#EFF6FF',
+          border: '#BFDBFE',
+        },
+        tumbler: {
+          DEFAULT: '#D97706',
+          hover: '#B45309',
+          light: '#FFFBEB',
+          border: '#FDE68A',
         },
         space: {
           950: '#FFFFFF',

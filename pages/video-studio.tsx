@@ -123,8 +123,12 @@ export default function VideoStudioPage() {
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Icon className={`w-4 h-4 ${isSelected ? 'text-ink' : 'text-grey'}`} />
-                  {isSelected && <span className="font-mono text-[10px] text-ink">[Active]</span>}
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-process' : 'text-grey'}`} />
+                  {isSelected && (
+                    <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-sm">
+                      [Active]
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h4 className="text-xs font-serif font-bold text-ink">{arch.label}</h4>
@@ -172,15 +176,15 @@ export default function VideoStudioPage() {
                     <div
                       key={i}
                       className={`h-0.5 transition-all duration-300 ${
-                        i === activeSceneIdx ? 'bg-white' : i < activeSceneIdx ? 'bg-white/60' : 'bg-white/20'
+                        i === activeSceneIdx ? 'bg-pending' : i < activeSceneIdx ? 'bg-white/60' : 'bg-white/20'
                       }`}
                     />
                   ))}
                 </div>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-white/70 uppercase pt-2 border-t border-white/20">
-                  <span className="flex items-center gap-1">
-                    <Music className="w-3 h-3" />
+                  <span className="flex items-center gap-1 text-pending">
+                    <Music className="w-3 h-3 animate-pulse" />
                     <span className="truncate max-w-[140px]">{activeProject.audio_track.split(' ')[0]} Beats</span>
                   </span>
                   <span>@markai</span>
@@ -228,7 +232,7 @@ export default function VideoStudioPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
               <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-ink" />
+                <Sparkles className="w-4 h-4 text-process" />
                 <span>AI Video Director Engine</span>
               </h3>
 
@@ -242,7 +246,7 @@ export default function VideoStudioPage() {
                     value={customPrompt}
                     onChange={(e) => setCustomPrompt(e.target.value)}
                     placeholder="e.g. Highlight our fresh single-origin pour overs or Autumn seasonal menu"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink placeholder:text-grey focus:outline-none focus:border-ink transition"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink placeholder:text-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition"
                   />
                 </div>
 
@@ -280,12 +284,16 @@ export default function VideoStudioPage() {
                     onClick={() => { setActiveSceneIdx(idx); setIsPlaying(false); }}
                     className={`p-3.5 rounded-sm border transition cursor-pointer flex items-center justify-between ${
                       activeSceneIdx === idx
-                        ? 'border-ink bg-white ring-1 ring-ink'
+                        ? 'border-process bg-process-light/40 ring-1 ring-process/30'
                         : 'border-grey/30 hover:border-grey'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="w-7 h-7 rounded-sm bg-white text-xs font-mono text-ink flex items-center justify-center border border-grey/30">
+                      <span className={`w-7 h-7 rounded-sm text-xs font-mono flex items-center justify-center border ${
+                        activeSceneIdx === idx
+                          ? 'bg-process text-white border-process'
+                          : 'bg-white text-ink border-grey/30'
+                      }`}>
                         0{idx + 1}
                       </span>
                       <div>

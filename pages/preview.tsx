@@ -180,7 +180,7 @@ export default function PreviewPage() {
               className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium"
             >
               {saveSuccess ? (
-                <span className="text-ink font-mono">[Saved]</span>
+                <span className="text-success font-mono font-semibold">[Saved]</span>
               ) : (
                 <span>Save Draft</span>
               )}
@@ -192,7 +192,10 @@ export default function PreviewPage() {
               className="btn-primary px-5 py-2 rounded-sm text-xs font-medium"
             >
               {isPosting ? (
-                <span>Publishing to Instagram...</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Publishing to Instagram...</span>
+                </div>
               ) : (
                 <span>Post to Instagram</span>
               )}
@@ -452,13 +455,16 @@ export default function PreviewPage() {
             <div className="bg-white rounded-sm max-w-md w-full p-6 text-center border border-ink">
               {postResult.success ? (
                 <>
+                  <div className="w-10 h-10 rounded-full bg-success-light border border-success-border text-success flex items-center justify-center mx-auto mb-3">
+                    <CheckCircle2 className="w-5 h-5 text-success" />
+                  </div>
                   <h3 className="text-xl font-serif font-bold text-ink">Post Dispatched</h3>
                   <p className="text-xs text-grey mt-2">
                     {postResult.message}
                   </p>
                   
                   {postResult.mediaId && (
-                    <div className="mt-4 p-3 rounded-sm bg-white border border-grey/30 text-left">
+                    <div className="mt-4 p-3 rounded-sm bg-success-light/40 border border-success-border text-left">
                       <span className="text-[10px] text-grey font-mono block">Media ID:</span>
                       <code className="text-xs font-mono text-ink break-all">{postResult.mediaId}</code>
                     </div>
@@ -481,7 +487,10 @@ export default function PreviewPage() {
                 </>
               ) : (
                 <>
-                  <h3 className="text-xl font-serif font-bold text-ink">Publishing Notice</h3>
+                  <div className="w-10 h-10 rounded-full bg-danger-light border border-danger-border text-danger flex items-center justify-center mx-auto mb-3">
+                    <AlertCircle className="w-5 h-5 text-danger" />
+                  </div>
+                  <h3 className="text-xl font-serif font-bold text-danger">Publishing Notice</h3>
                   <p className="text-xs text-grey mt-2">
                     {postResult.error}
                   </p>

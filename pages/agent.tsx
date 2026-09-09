@@ -109,7 +109,11 @@ export default function AgentPage() {
               <button
                 onClick={handleLaunchAutopilot}
                 disabled={isLaunching}
-                className="btn-primary py-3 px-6 rounded-sm text-xs font-medium flex items-center gap-2"
+                className={`py-3 px-6 rounded-sm text-xs font-medium flex items-center gap-2 transition ${
+                  launchSuccess
+                    ? 'bg-success text-white border border-success'
+                    : 'btn-primary'
+                }`}
               >
                 {isLaunching ? (
                   <>
@@ -128,8 +132,12 @@ export default function AgentPage() {
                   </>
                 )}
               </button>
-              <span className="text-[11px] font-mono text-grey">
-                Status: <strong className="text-ink uppercase">[{campaign.status}]</strong> (16/16 scheduled)
+              <span className="text-[11px] font-mono text-grey flex items-center gap-1.5">
+                Status:{' '}
+                <strong className="text-success uppercase bg-success-light border border-success-border px-1.5 py-0.5 rounded-sm font-semibold">
+                  [{campaign.status}]
+                </strong>{' '}
+                <span className="text-process font-medium">(16/16 scheduled)</span>
               </span>
             </div>
           </div>
@@ -143,10 +151,10 @@ export default function AgentPage() {
             <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-grey/30">
                 <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-ink" />
+                  <TrendingUp className="w-4 h-4 text-process" />
                   <span>Strategy Recommendations</span>
                 </h3>
-                <span className="font-mono text-[10px] text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm font-medium">
                   [Closed-Loop Optimization]
                 </span>
               </div>
@@ -159,12 +167,12 @@ export default function AgentPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-serif font-bold text-ink flex items-center gap-2">
-                        <span className="px-1.5 py-0.5 rounded-sm border border-grey/30 text-[10px] font-mono uppercase">
+                        <span className="px-1.5 py-0.5 rounded-sm bg-process-light text-process border border-process-border text-[10px] font-mono uppercase font-semibold">
                           {rec.category}
                         </span>
                         {rec.title}
                       </span>
-                      <span className="text-[10px] font-mono text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                      <span className="text-[10px] font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm font-semibold">
                         [{rec.impact_score}/100 Impact]
                       </span>
                     </div>
@@ -175,7 +183,7 @@ export default function AgentPage() {
 
                     <div className="pt-2 border-t border-grey/20 flex items-center justify-between text-[11px] font-mono">
                       <span className="text-grey">Action: <strong className="text-ink font-normal">{rec.action_item}</strong></span>
-                      <span className="text-ink font-bold">[{rec.expected_impact}]</span>
+                      <span className="text-success font-semibold">[{rec.expected_impact}]</span>
                     </div>
                   </div>
                 ))}

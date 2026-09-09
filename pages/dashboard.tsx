@@ -146,7 +146,7 @@ export default function DashboardPage() {
               onClick={() => setSelectedFormat('single_image')}
               className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'single_image'
-                  ? 'bg-ink text-white'
+                  ? 'bg-process text-white border border-process'
                   : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
@@ -159,7 +159,7 @@ export default function DashboardPage() {
               onClick={() => setSelectedFormat('carousel')}
               className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'carousel'
-                  ? 'bg-ink text-white'
+                  ? 'bg-process text-white border border-process'
                   : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
@@ -172,7 +172,7 @@ export default function DashboardPage() {
               onClick={() => setSelectedFormat('reels_script')}
               className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
                 selectedFormat === 'reels_script'
-                  ? 'bg-ink text-white'
+                  ? 'bg-process text-white border border-process'
                   : 'bg-white text-grey hover:text-ink border border-grey/30'
               }`}
             >
@@ -191,7 +191,7 @@ export default function DashboardPage() {
               <form onSubmit={handleGenerate} className="space-y-4 sm:space-y-5">
                 
                 {error && (
-                  <div className="p-3.5 rounded-sm bg-white border border-ink text-xs text-ink">
+                  <div className="p-3.5 rounded-sm bg-danger-light border border-danger-border text-xs text-danger">
                     {error}
                   </div>
                 )}
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                     value={formData.business_name}
                     onChange={(e) => handleChange('business_name', e.target.value)}
                     placeholder="e.g. Kaapi & Crumb Co."
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
                     required
                   />
                 </div>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
                     value={formData.industry}
                     onChange={(e) => handleChange('industry', e.target.value)}
                     placeholder="e.g. Specialty Coffee, Handloom Silk, Organic Groceries"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
                     required
                   />
                 </div>
@@ -236,7 +236,7 @@ export default function DashboardPage() {
                     value={formData.description}
                     onChange={(e) => handleChange('description', e.target.value)}
                     placeholder="What makes your product special? Mention key benefits, unique selling points, or offers..."
-                    className="w-full bg-white border border-grey/30 rounded-sm p-3 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition resize-none leading-relaxed font-sans"
+                    className="w-full bg-white border border-grey/30 rounded-sm p-3 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition resize-none leading-relaxed font-sans"
                     required
                   />
                 </div>
@@ -250,12 +250,13 @@ export default function DashboardPage() {
                     type="text"
                     value={formData.target_audience}
                     onChange={(e) => handleChange('target_audience', e.target.value)}
-                    placeholder="e.g. Coffee lovers, remote workers, students aged 20-38"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                    placeholder="e.g. College students, young professionals, specialty coffee enthusiasts"
+                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
+                    required
                   />
                 </div>
 
-                {/* 5. Tone of Voice */}
+                {/* 5. Brand Tone of Voice */}
                 <div>
                   <label className="block text-xs font-mono text-ink mb-1.5">
                     5. Brand Tone of Voice
@@ -294,7 +295,10 @@ export default function DashboardPage() {
                     className="btn-primary w-full py-3 px-6 rounded-sm text-xs font-medium"
                   >
                     {isGenerating ? (
-                      <span>Claude AI is Crafting {selectedFormat.replace('_', ' ')}...</span>
+                      <div className="flex items-center justify-center gap-2.5">
+                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Claude 3.5 Sonnet is Crafting {selectedFormat.replace('_', ' ')}...</span>
+                      </div>
                     ) : (
                       <div className="flex items-center justify-center gap-2">
                         <span>Generate AI {selectedFormat === 'carousel' ? 'Carousel Outline' : selectedFormat === 'reels_script' ? 'Reels Script' : 'Post & Graphic'}</span>
@@ -311,7 +315,7 @@ export default function DashboardPage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="card rounded-sm p-6 border border-grey/30 bg-white">
               <div className="flex items-center justify-between pb-3 border-b border-grey/30">
-                <span className="text-xs font-mono text-ink">
+                <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm">
                   [Prompt Context Memory]
                 </span>
                 <Link href="/brand-kit" className="text-xs font-mono text-grey hover:text-ink underline">

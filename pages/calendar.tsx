@@ -195,7 +195,7 @@ export default function CalendarPage() {
                     key={`day-${dayNum}`}
                     className={`min-h-[105px] sm:min-h-[120px] rounded-none p-2 flex flex-col justify-between transition border ${
                       isPitchDay
-                        ? 'border-ink bg-white'
+                        ? 'border-process bg-process-light/30 ring-1 ring-process/30'
                         : events.length > 0
                         ? 'border-grey/30 bg-white hover:border-ink'
                         : 'border-grey/20 bg-white'
@@ -203,40 +203,50 @@ export default function CalendarPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span
-                        className={`text-xs font-mono w-6 h-6 flex items-center justify-center ${
+                        className={`text-xs font-mono w-6 h-6 flex items-center justify-center rounded-sm ${
                           isPitchDay
-                            ? 'bg-ink text-white font-bold'
+                            ? 'bg-process text-white font-bold'
                             : 'text-ink'
                         }`}
                       >
                         {dayNum}
                       </span>
                       {isPitchDay && (
-                        <span className="text-[9px] font-mono text-ink">
-                          [PITCH]
+                        <span className="text-[9px] font-mono text-process font-bold px-1 py-0.5 bg-process-light border border-process-border rounded-sm">
+                          [PITCH DAY]
                         </span>
                       )}
                     </div>
 
                     <div className="space-y-1 mt-1">
-                      {events.map((ev) => (
-                        <button
-                          key={ev.id}
-                          onClick={() => setSelectedEvent(ev)}
-                          className="w-full text-left p-1 rounded-none bg-white hover:bg-grey/5 border border-grey/30 hover:border-ink transition group"
-                        >
-                          <div className="flex items-center gap-1">
-                            <span className="text-[10px] font-medium text-ink truncate">
-                              {ev.title}
-                            </span>
-                          </div>
-                          {ev.festival_occasion && (
-                            <span className="text-[9px] text-grey font-mono block truncate mt-0.5">
-                              {ev.festival_occasion}
-                            </span>
-                          )}
-                        </button>
-                      ))}
+                      {events.map((ev) => {
+                        const isReel = ev.format.toLowerCase().includes('reel');
+                        const isCarousel = ev.format.toLowerCase().includes('carousel');
+                        return (
+                          <button
+                            key={ev.id}
+                            onClick={() => setSelectedEvent(ev)}
+                            className={`w-full text-left p-1 rounded-none border transition group ${
+                              isCarousel
+                                ? 'bg-process-light/50 border-process-border hover:border-process'
+                                : isReel
+                                ? 'bg-pending-light/50 border-pending-border hover:border-pending'
+                                : 'bg-white hover:bg-grey/5 border border-grey/30 hover:border-ink'
+                            }`}
+                          >
+                            <div className="flex items-center gap-1">
+                              <span className="text-[10px] font-medium text-ink truncate">
+                                {ev.title}
+                              </span>
+                            </div>
+                            {ev.festival_occasion && (
+                              <span className="text-[9px] text-grey font-mono block truncate mt-0.5">
+                                {ev.festival_occasion}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -261,17 +271,29 @@ export default function CalendarPage() {
                     </span>
                   </div>
 
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[11px] font-mono text-ink">
-                        [{ev.format.replace('_', ' ')}]
-                      </span>
-                      {ev.festival_occasion && (
-                        <span className="text-[10px] font-mono text-grey">
-                          [{ev.festival_occasion}]
-                        </span>
-                      )}
-                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {(() => {
+                          const isReel = ev.format.toLowerCase().includes('reel');
+                          const isCarousel = ev.format.toLowerCase().includes('carousel');
+                          return (
+                            <span className={`text-[11px] font-mono px-1.5 py-0.5 rounded-sm border ${
+                              isCarousel
+                                ? 'bg-process-light text-process border-process-border font-medium'
+                                : isReel
+                                ? 'bg-pending-light text-pending border-pending-border font-medium'
+                                : 'bg-white text-ink border-grey/30'
+                            }`}>
+                              [{ev.format.replace('_', ' ')}]
+                            </span>
+                          );
+                        })()}
+                        {ev.festival_occasion && (
+                          <span className="text-[10px] font-mono text-grey">
+                            [{ev.festival_occasion}]
+                          </span>
+                        )}
+                      </div>
                     <h3 className="text-sm font-serif font-bold text-ink">{ev.title}</h3>
                     <p className="text-xs text-grey leading-relaxed">
                       {ev.content_hook}

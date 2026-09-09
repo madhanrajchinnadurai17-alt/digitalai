@@ -83,8 +83,8 @@ export default function AnalyticsPage() {
             <span className="text-2xl sm:text-3xl font-serif font-bold text-ink">
               {metrics.total_reach.toLocaleString()}
             </span>
-            <div className="flex items-center gap-1 text-[11px] font-mono text-ink mt-2">
-              <TrendingUp className="w-3 h-3 text-ink" />
+            <div className="flex items-center gap-1 text-[11px] font-mono text-success font-semibold mt-2">
+              <TrendingUp className="w-3 h-3 text-success" />
               <span>[+{metrics.follower_growth}% MoM]</span>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
             <span className="text-2xl sm:text-3xl font-serif font-bold text-ink">
               {metrics.avg_engagement_rate}%
             </span>
-            <p className="text-[11px] font-mono text-grey mt-2">[2.4x benchmark]</p>
+            <p className="text-[11px] font-mono text-process font-medium mt-2">[2.4x benchmark]</p>
           </div>
 
           <div className="bg-white rounded-sm p-5 border border-grey/30">
@@ -146,7 +146,7 @@ export default function AnalyticsPage() {
 
                     <div className="text-right font-mono">
                       <span className="text-xs font-medium text-ink">{data.reach.toLocaleString()} Reach</span>
-                      <span className="block text-[11px] text-grey">[{data.engagement}% Eng]</span>
+                      <span className="block text-[11px] text-success font-medium">[{data.engagement}% Eng]</span>
                     </div>
                   </div>
                 ))}
@@ -174,7 +174,7 @@ export default function AnalyticsPage() {
                         <span className="capitalize">{post.platform}</span>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-ink border border-grey/30 px-2 py-0.5 rounded-sm flex-shrink-0">
+                    <span className="text-xs font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm flex-shrink-0 font-medium">
                       [{post.engagement}% Eng]
                     </span>
                   </div>
@@ -191,7 +191,8 @@ export default function AnalyticsPage() {
                   <Clock className="w-4 h-4 text-ink" />
                   <span>Scheduled Publishing Queue</span>
                 </h3>
-                <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-sm">
+                <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
                   [Cron Worker Active]
                 </span>
               </div>
