@@ -41,33 +41,33 @@ export default function LoginPage() {
       <div className="max-w-md mx-auto py-8">
         
         {/* Pitch competition fast-access banner */}
-        <div className="mb-6 p-5 rounded-sm border border-grey/30 bg-white text-center">
+        <div className="mb-6 p-5 rounded-xl border border-line bg-surface text-center">
           <div className="text-xs font-mono text-ink mb-1.5">
             [Evaluation Demo Mode]
           </div>
-          <p className="text-xs text-grey">
+          <p className="text-xs text-muted">
             Use one-click demo login to access the full business cockpit instantly.
           </p>
           <button
             type="button"
             onClick={handleDemoLogin}
-            className="btn-primary mt-3 w-full py-2.5 px-4 rounded-sm text-xs font-medium"
+            className="btn-primary mt-3 w-full py-2.5 px-4 rounded-xl text-xs font-medium"
           >
             Instant Pitch Demo Login
           </button>
         </div>
 
         {/* Auth Card */}
-        <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
-          <div className="text-left mb-6 pb-4 border-b border-grey/30">
-            <h1 className="text-2xl font-serif font-bold text-ink tracking-tight">Sign In</h1>
-            <p className="text-xs text-grey mt-1">
+        <div className="card rounded-xl p-6 sm:p-8 border border-line bg-surface">
+          <div className="text-left mb-6 pb-4 border-b border-line">
+            <h1 className="text-2xl font-sans font-bold text-ink tracking-tight">Sign In</h1>
+            <p className="text-xs text-muted mt-1">
               Access your business profile and publishing queue
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 p-3 rounded-sm bg-white border border-ink flex items-start gap-2.5 text-xs text-ink">
+            <div className="mb-5 p-3 rounded-xl bg-surface border border-line flex items-start gap-2.5 text-xs text-ink">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@business.com"
-                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-line transition min-h-[40px]"
                 required
               />
             </div>
@@ -97,7 +97,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-line transition min-h-[40px]"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-2.5 px-4 rounded-sm text-xs font-medium mt-2"
+              className="btn-primary w-full py-2.5 px-4 rounded-xl text-xs font-medium mt-2"
             >
               {loading ? (
                 <span>Verifying...</span>
@@ -115,8 +115,8 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-grey/30 text-left">
-            <p className="text-xs text-grey">
+          <div className="mt-6 pt-5 border-t border-line text-left">
+            <p className="text-xs text-muted">
               Don&apos;t have an account?{' '}
               <Link href="/signup" className="text-ink font-medium hover:underline transition">
                 Create an account
@@ -126,7 +126,7 @@ export default function LoginPage() {
         </div>
 
         {/* Security Note */}
-        <div className="mt-4 text-center text-xs font-mono text-grey">
+        <div className="mt-4 text-center text-xs font-mono text-muted">
           {isFirebaseConfigured
             ? '[Firebase Authentication]'
             : '[Session: Pitch Demo Authentication]'}

@@ -4,24 +4,52 @@
 
 @layer base {
   body {
-    @apply bg-canvas text-ink font-body antialiased min-h-screen selection:bg-primary selection:text-white;
-    background-color: #F8FAFC;
-    color: #0F172A;
+    background-color: #0B0B12;
+    color: #F5F5FA;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Newsreader', Georgia, serif;
-    letter-spacing: -0.02em;
-    color: #0F172A;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.025em;
+    color: #F5F5FA;
+    font-weight: 700;
+  }
+
+  input, textarea, select {
+    background-color: #14141F !important;
+    color: #F5F5FA !important;
+    border: 1px solid #26263A !important;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #8B5CF6 !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3) !important;
   }
 }
 
-/* Modern Card & Surface Rules */
+/* AI Utility Classes */
+.ai-gradient {
+  background: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+}
+
+.ai-glow {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.35);
+}
+
+.ai-text {
+  background: linear-gradient(135deg, #A78BFA 0%, #22D3EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* AI Dark Glass Cards & Surfaces */
 .card-glass, .card {
-  background-color: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 0.375rem; /* rounded-md */
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  background-color: #14141F;
+  border: 1px solid #26263A;
+  border-radius: 0.75rem; /* rounded-xl */
 }
 
 .card-glass-hover {
@@ -29,77 +57,79 @@
 }
 
 .card-glass-hover:hover {
-  border-color: #C7D2FE;
-  box-shadow: 0 10px 15px -3px rgb(79 70 229 / 0.08), 0 4px 6px -4px rgb(79 70 229 / 0.04);
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 8px 30px -4px rgba(139, 92, 246, 0.25);
   transform: translateY(-1px);
 }
 
-/* Button Rules — Vibrant Indigo Primary & Crisp Secondary */
+/* Primary AI Gradient Buttons */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none rounded-md text-xs sm:text-sm px-4 py-2.5 shadow-sm;
-  background-color: #4F46E5;
-  border: 1px solid #4338CA;
-  color: #FFFFFF;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-semibold text-white transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none rounded-lg text-xs sm:text-sm px-4 py-2.5;
+  background: linear-gradient(135deg, #8B5CF6 0%, #22D3EE 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.35);
 }
 
 .btn-primary:hover {
-  background-color: #4338CA;
-  border-color: #3730A3;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.55), 0 0 20px rgba(34, 211, 238, 0.35);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-ink transition-colors duration-150 disabled:opacity-40 rounded-md text-xs sm:text-sm px-4 py-2.5;
-  background-color: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  color: #0F172A;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-slate-200 transition-all duration-200 disabled:opacity-40 rounded-lg text-xs sm:text-sm px-4 py-2.5;
+  background: #14141F;
+  border: 1px solid #26263A;
 }
 
 .btn-secondary:hover {
-  border-color: #4F46E5;
-  color: #4F46E5;
-  background-color: #F8FAFC;
+  border-color: rgba(139, 92, 246, 0.5);
+  background: #1A1A2A;
+  color: #FFFFFF;
+  box-shadow: 0 0 15px -3px rgba(139, 92, 246, 0.25);
 }
 
 .btn-instagram {
-  @apply inline-flex items-center justify-center gap-2 font-sans font-medium text-white transition-colors duration-150 disabled:opacity-40 rounded-sm text-xs sm:text-sm px-4 py-2.5;
-  background-color: #0A0A0A;
-  border: 1px solid #0A0A0A;
-  color: #FFFFFF;
+  @apply inline-flex items-center justify-center gap-2 font-sans font-semibold text-white transition-all duration-200 disabled:opacity-40 rounded-lg text-xs sm:text-sm px-4 py-2.5;
+  background: linear-gradient(135deg, #E1306C 0%, #FD1D1D 50%, #F56040 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px -3px rgba(225, 48, 108, 0.4);
 }
 
 .btn-instagram:hover {
-  background-color: #000000;
-  border-color: #000000;
+  filter: brightness(1.1);
+  box-shadow: 0 0 25px 0px rgba(225, 48, 108, 0.6);
+  transform: translateY(-1px);
 }
 
-/* Typography Helpers */
-.text-serif {
-  font-family: 'Newsreader', Georgia, serif;
-}
-
+/* Hairline & Surface Border Helpers */
 .hairline {
-  border-color: #8A8A8A;
+  border-color: #26263A;
 }
 
 .hairline-b {
-  border-bottom: 1px solid #8A8A8A;
+  border-bottom: 1px solid #26263A;
 }
 
 .hairline-t {
-  border-top: 1px solid #8A8A8A;
+  border-top: 1px solid #26263A;
 }
 
-/* Custom scrollbar */
+/* Custom Cyber Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: #0B0B12;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8A8A8A;
+  background: #26263A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
 }

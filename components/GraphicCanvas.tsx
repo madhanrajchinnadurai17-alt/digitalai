@@ -50,7 +50,7 @@ export function GraphicCanvas({
   return (
     <div className="flex flex-col gap-4">
       {/* Visual Canvas Container */}
-      <div className="relative aspect-square w-full max-w-[430px] mx-auto rounded-sm overflow-hidden border border-ink bg-white flex items-center justify-center group">
+      <div className="relative aspect-square w-full max-w-[430px] mx-auto rounded-xl overflow-hidden border border-line bg-surface flex items-center justify-center group">
         <canvas
           ref={canvasRef}
           className="w-full h-full object-cover"
@@ -60,7 +60,7 @@ export function GraphicCanvas({
         <div className="absolute bottom-3 right-3 flex items-center gap-2">
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm text-xs font-medium bg-ink hover:bg-black text-white border border-white/20 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-surface hover:bg-black text-white border border-white/20 transition"
             title="Download PNG graphic"
           >
             <Download className="w-3.5 h-3.5" />
@@ -70,13 +70,13 @@ export function GraphicCanvas({
       </div>
 
       {/* Theme Style Selector */}
-      <div className="p-3.5 rounded-sm bg-white border border-grey/30">
+      <div className="p-3.5 rounded-xl bg-surface border border-line">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2 text-xs font-medium text-ink">
             <Palette className="w-3.5 h-3.5 text-ink" />
             <span>Canvas Style Preset</span>
           </div>
-          <span className="text-[11px] text-grey font-mono">{selectedTheme.name}</span>
+          <span className="text-[11px] text-muted font-mono">{selectedTheme.name}</span>
         </div>
 
         <div className="grid grid-cols-5 gap-2">
@@ -86,15 +86,15 @@ export function GraphicCanvas({
               <button
                 key={theme.id}
                 onClick={() => setSelectedTheme(theme)}
-                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-sm border transition ${
+                className={`flex flex-col items-center gap-1.5 p-1.5 rounded-xl border transition ${
                   isSelected
-                    ? 'border-ink bg-white ring-1 ring-ink'
-                    : 'border-grey/30 hover:border-ink bg-white'
+                    ? 'border-line bg-surface ring-1 ring-ink'
+                    : 'border-line hover:border-line bg-surface'
                 }`}
                 title={theme.name}
               >
                 <div
-                  className="w-full h-7 rounded-none border border-grey/30"
+                  className="w-full h-7 rounded-lg border border-line"
                   style={{ background: theme.background }}
                 />
                 <span className="text-[10px] text-ink truncate max-w-full font-mono">

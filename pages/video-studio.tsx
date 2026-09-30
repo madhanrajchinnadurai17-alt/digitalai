@@ -91,16 +91,16 @@ export default function VideoStudioPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header */}
-        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-surface rounded-xl p-6 sm:p-8 border border-line flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs text-grey mb-2">
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-muted mb-2">
               <Film className="w-3.5 h-3.5 text-ink" />
               <span>[Short-Form Video Engine]</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink tracking-tight flex items-center gap-3">
               Programmatic 9:16 Video Studio
             </h1>
-            <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
               Auto-generate 12-second vertical Reels from captions and hooks using kinetic typography and synchronized scene pacing.
             </p>
           </div>
@@ -116,23 +116,23 @@ export default function VideoStudioPage() {
                 key={arch.id}
                 type="button"
                 onClick={() => setActiveArchetype(arch.id)}
-                className={`p-4 rounded-sm border text-left transition flex flex-col justify-between ${
+                className={`p-4 rounded-xl border text-left transition flex flex-col justify-between ${
                   isSelected
-                    ? 'border-ink bg-white ring-1 ring-ink'
-                    : 'bg-white border-grey/30 text-grey hover:border-grey'
+                    ? 'border-line bg-surface ring-1 ring-ink'
+                    : 'bg-surface border-line text-muted hover:border-line'
                 }`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Icon className={`w-4 h-4 ${isSelected ? 'text-process' : 'text-grey'}`} />
+                  <Icon className={`w-4 h-4 ${isSelected ? 'text-process' : 'text-muted'}`} />
                   {isSelected && (
-                    <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-sm">
+                    <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-xl">
                       [Active]
                     </span>
                   )}
                 </div>
                 <div>
-                  <h4 className="text-xs font-serif font-bold text-ink">{arch.label}</h4>
-                  <p className="text-[10px] text-grey mt-0.5 leading-snug">{arch.desc}</p>
+                  <h4 className="text-xs font-sans font-bold text-ink">{arch.label}</h4>
+                  <p className="text-[10px] text-muted mt-0.5 leading-snug">{arch.desc}</p>
                 </div>
               </button>
             );
@@ -144,28 +144,28 @@ export default function VideoStudioPage() {
           
           {/* Left: 9:16 Vertical Video Player Simulation */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            <div className="w-full max-w-[320px] aspect-[9/16] rounded-sm p-6 border border-ink relative overflow-hidden flex flex-col justify-between text-white select-none bg-black">
+            <div className="w-full max-w-[320px] aspect-[9/16] rounded-xl p-6 border border-line relative overflow-hidden flex flex-col justify-between text-white select-none bg-black">
               
               {/* Top Bar inside Video */}
               <div className="flex items-center justify-between z-10">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-black/60 text-[10px] font-mono tracking-wider uppercase border border-white/20">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-black/60 text-[10px] font-mono tracking-wider uppercase border border-white/20">
                   <span>{currentScene.badge_text || currentProfile.business_name}</span>
                 </div>
-                <div className="text-[10px] font-mono bg-black/60 px-2 py-0.5 rounded-sm border border-white/15">
+                <div className="text-[10px] font-mono bg-black/60 px-2 py-0.5 rounded-xl border border-white/15">
                   00:0{activeSceneIdx * 4} / 00:12
                 </div>
               </div>
 
               {/* Center Kinetic Typography Animation */}
               <div className="my-auto text-center space-y-3 z-10">
-                <span className="text-3xl font-serif text-white/40 block leading-none">“</span>
-                <h3 className="text-xl font-serif font-bold tracking-tight leading-tight uppercase">
+                <span className="text-3xl font-sans text-white/40 block leading-none">“</span>
+                <h3 className="text-xl font-sans font-bold tracking-tight leading-tight uppercase">
                   {currentScene.title_text}
                 </h3>
                 <p className="text-xs font-sans text-white/80 max-w-[220px] mx-auto leading-relaxed">
                   {currentScene.subtitle_text}
                 </p>
-                <div className="w-12 h-0.5 bg-white mx-auto"></div>
+                <div className="w-12 h-0.5 bg-surface mx-auto"></div>
               </div>
 
               {/* Bottom Scene Indicators & Watermark */}
@@ -176,7 +176,7 @@ export default function VideoStudioPage() {
                     <div
                       key={i}
                       className={`h-0.5 transition-all duration-300 ${
-                        i === activeSceneIdx ? 'bg-pending' : i < activeSceneIdx ? 'bg-white/60' : 'bg-white/20'
+                        i === activeSceneIdx ? 'bg-pending' : i < activeSceneIdx ? 'bg-surface/60' : 'bg-surface/20'
                       }`}
                     />
                   ))}
@@ -193,10 +193,10 @@ export default function VideoStudioPage() {
             </div>
 
             {/* Video Controls Bar */}
-            <div className="w-full max-w-[320px] mt-4 flex items-center justify-between p-3 rounded-sm bg-white border border-grey/30">
+            <div className="w-full max-w-[320px] mt-4 flex items-center justify-between p-3 rounded-xl bg-surface border border-line">
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="p-2 rounded-sm bg-ink hover:bg-black text-white transition"
+                className="p-2 rounded-xl bg-surface hover:bg-black text-white transition"
                 title={isPlaying ? 'Pause' : 'Play'}
               >
                 {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
@@ -204,7 +204,7 @@ export default function VideoStudioPage() {
 
               <button
                 onClick={() => { setActiveSceneIdx(0); setIsPlaying(true); }}
-                className="p-2 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+                className="p-2 rounded-xl border border-line text-muted hover:text-ink transition"
                 title="Restart"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -212,7 +212,7 @@ export default function VideoStudioPage() {
 
               <button
                 onClick={() => setAudioMuted(!audioMuted)}
-                className="p-2 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+                className="p-2 rounded-xl border border-line text-muted hover:text-ink transition"
                 title={audioMuted ? 'Unmute' : 'Mute'}
               >
                 {audioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-ink" />}
@@ -220,7 +220,7 @@ export default function VideoStudioPage() {
 
               <button
                 onClick={() => alert('High-res vertical MP4 download triggered via MarkAI Canvas Video Renderer.')}
-                className="btn-secondary px-3 py-1.5 rounded-sm text-xs font-medium flex items-center gap-1"
+                className="btn-secondary px-3 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Export</span>
@@ -230,15 +230,15 @@ export default function VideoStudioPage() {
 
           {/* Right: AI Video Script Generator Form & Scene Breakdown */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
-              <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-4">
+              <h3 className="text-base font-sans font-bold text-ink flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-process" />
                 <span>AI Video Director Engine</span>
               </h3>
 
               <form onSubmit={handleGenerateVideo} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-mono text-grey mb-1.5 uppercase">
+                  <label className="block text-xs font-mono text-muted mb-1.5 uppercase">
                     Custom Campaign Angle / Hook:
                   </label>
                   <input
@@ -246,14 +246,14 @@ export default function VideoStudioPage() {
                     value={customPrompt}
                     onChange={(e) => setCustomPrompt(e.target.value)}
                     placeholder="e.g. Highlight our fresh single-origin pour overs or Autumn seasonal menu"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink placeholder:text-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition"
+                    className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink placeholder:text-muted focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isGenerating}
-                  className="btn-primary w-full py-2.5 px-4 rounded-sm text-xs font-medium flex items-center justify-center gap-2"
+                  className="btn-primary w-full py-2.5 px-4 rounded-xl text-xs font-medium flex items-center justify-center gap-2"
                 >
                   {isGenerating ? (
                     <>
@@ -271,8 +271,8 @@ export default function VideoStudioPage() {
             </div>
 
             {/* Scene-by-Scene Timeline Breakdown */}
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
-              <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-4">
+              <h3 className="text-base font-sans font-bold text-ink flex items-center gap-2">
                 <Layers className="w-4 h-4 text-ink" />
                 <span>Scene Timeline & Typography Sequence</span>
               </h3>
@@ -282,26 +282,26 @@ export default function VideoStudioPage() {
                   <div
                     key={scene.id}
                     onClick={() => { setActiveSceneIdx(idx); setIsPlaying(false); }}
-                    className={`p-3.5 rounded-sm border transition cursor-pointer flex items-center justify-between ${
+                    className={`p-3.5 rounded-xl border transition cursor-pointer flex items-center justify-between ${
                       activeSceneIdx === idx
                         ? 'border-process bg-process-light/40 ring-1 ring-process/30'
-                        : 'border-grey/30 hover:border-grey'
+                        : 'border-line hover:border-line'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className={`w-7 h-7 rounded-sm text-xs font-mono flex items-center justify-center border ${
+                      <span className={`w-7 h-7 rounded-xl text-xs font-mono flex items-center justify-center border ${
                         activeSceneIdx === idx
                           ? 'bg-process text-white border-process'
-                          : 'bg-white text-ink border-grey/30'
+                          : 'bg-surface text-ink border-line'
                       }`}>
                         0{idx + 1}
                       </span>
                       <div>
-                        <h4 className="text-xs font-serif font-bold text-ink">{scene.title_text}</h4>
-                        <p className="text-[11px] text-grey">{scene.subtitle_text}</p>
+                        <h4 className="text-xs font-sans font-bold text-ink">{scene.title_text}</h4>
+                        <p className="text-[11px] text-muted">{scene.subtitle_text}</p>
                       </div>
                     </div>
-                    <span className="text-[10px] font-mono text-grey">
+                    <span className="text-[10px] font-mono text-muted">
                       [{scene.duration_seconds}s]
                     </span>
                   </div>

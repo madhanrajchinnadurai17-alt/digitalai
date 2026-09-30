@@ -40,16 +40,16 @@ export default function SignupPage() {
   return (
     <Layout title="Sign Up — MarkAI">
       <div className="max-w-md mx-auto py-8">
-        <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
-          <div className="text-left mb-6 pb-4 border-b border-grey/30">
-            <h1 className="text-2xl font-serif font-bold text-ink tracking-tight">Create Account</h1>
-            <p className="text-xs text-grey mt-1">
+        <div className="card rounded-xl p-6 sm:p-8 border border-line bg-surface">
+          <div className="text-left mb-6 pb-4 border-b border-line">
+            <h1 className="text-2xl font-sans font-bold text-ink tracking-tight">Create Account</h1>
+            <p className="text-xs text-muted mt-1">
               Start generating on-brand social media copy in minutes
             </p>
           </div>
 
           {error && (
-            <div className="mb-5 p-3 rounded-sm bg-white border border-ink flex items-start gap-2.5 text-xs text-ink">
+            <div className="mb-5 p-3 rounded-xl bg-surface border border-line flex items-start gap-2.5 text-xs text-ink">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
@@ -65,7 +65,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="owner@yourbusiness.com"
-                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-line transition min-h-[40px]"
                 required
               />
             </div>
@@ -79,7 +79,7 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Minimum 6 characters"
-                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-line transition min-h-[40px]"
                 required
               />
             </div>
@@ -93,7 +93,7 @@ export default function SignupPage() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Repeat password"
-                className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-ink transition min-h-[40px]"
+                className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-line transition min-h-[40px]"
                 required
               />
             </div>
@@ -101,7 +101,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-2.5 px-4 rounded-sm text-xs font-medium mt-2"
+              className="btn-primary w-full py-2.5 px-4 rounded-xl text-xs font-medium mt-2"
             >
               {loading ? (
                 <span>Creating Account...</span>
@@ -111,8 +111,8 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-grey/30 text-left">
-            <p className="text-xs text-grey">
+          <div className="mt-6 pt-5 border-t border-line text-left">
+            <p className="text-xs text-muted">
               Already have an account?{' '}
               <Link href="/login" className="text-ink font-medium hover:underline transition">
                 Sign In

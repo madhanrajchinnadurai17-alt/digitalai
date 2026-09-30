@@ -79,21 +79,21 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
   ] as const;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-white rounded-sm max-w-lg w-full p-6 border border-ink relative">
-        <div className="flex items-center justify-between pb-4 border-b border-grey/30">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+      <div className="bg-surface rounded-xl max-w-lg w-full p-6 border border-line shadow-ai-glow relative">
+        <div className="flex items-center justify-between pb-4 border-b border-line">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-sm border border-grey/30 text-ink">
+            <div className="p-2 rounded-xl border border-line text-ink">
               <Server className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-serif font-bold text-ink text-base sm:text-lg">System &amp; Integration Health</h3>
-              <p className="text-xs text-grey">MarkAI Verification Matrix</p>
+              <h3 className="font-sans font-bold text-ink text-base sm:text-lg">System &amp; Integration Health</h3>
+              <p className="text-xs text-muted">MarkAI Verification Matrix</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-sm text-grey hover:text-ink border border-grey/30 transition"
+            className="p-1.5 rounded-xl text-muted hover:text-ink border border-line transition"
           >
             <X className="w-4 h-4" />
           </button>
@@ -108,30 +108,30 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
             return (
               <div
                 key={s.key}
-                className="p-3 rounded-sm border border-grey/30 bg-white"
+                className="p-3 rounded-xl border border-line bg-surface"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-3">
-                    <div className="p-1.5 rounded-sm border border-grey/20 text-ink">
+                    <div className="p-1.5 rounded-xl border border-line text-ink">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-ink">{s.name}</h4>
-                      <p className="text-xs text-grey">{status?.description || s.envVar}</p>
+                      <p className="text-xs text-muted">{status?.description || s.envVar}</p>
                     </div>
                   </div>
                   {isConfigured ? (
-                    <span className="text-xs font-mono text-success bg-success-light border border-success-border rounded-sm px-1.5 py-0.5">
+                    <span className="text-xs font-mono text-success bg-success-light border border-success-border rounded-xl px-1.5 py-0.5">
                       [Live]
                     </span>
                   ) : (
-                    <span className="text-xs font-mono text-pending bg-pending-light border border-pending-border rounded-sm px-1.5 py-0.5">
+                    <span className="text-xs font-mono text-pending bg-pending-light border border-pending-border rounded-xl px-1.5 py-0.5">
                       [Sandbox]
                     </span>
                   )}
                 </div>
                 {!isConfigured && (
-                  <p className="mt-2 text-[11px] font-mono text-grey border-t border-grey/20 pt-1.5">
+                  <p className="mt-2 text-[11px] font-mono text-muted border-t border-line pt-1.5">
                     Fallback: {s.fallbackText}
                   </p>
                 )}
@@ -140,18 +140,18 @@ export function SystemStatusModal({ isOpen, onClose }: SystemStatusModalProps) {
           })}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-grey/30 flex items-center justify-between">
+        <div className="mt-6 pt-4 border-t border-line flex items-center justify-between">
           <button
             onClick={fetchHealth}
             disabled={loading}
-            className="inline-flex items-center gap-1.5 text-xs text-grey hover:text-ink transition"
+            className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink transition"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
             Refresh status
           </button>
           <button
             onClick={onClose}
-            className="btn-primary px-5 py-2 text-xs rounded-sm"
+            className="btn-primary px-5 py-2 text-xs rounded-xl"
           >
             Dismiss
           </button>

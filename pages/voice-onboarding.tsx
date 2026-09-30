@@ -237,27 +237,27 @@ export default function VoiceOnboardingPage() {
       <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 py-2 sm:py-4 px-2 sm:px-0">
         
         {/* Header Breadcrumb */}
-        <div className="card rounded-sm p-6 border border-grey/30 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="card rounded-xl p-6 border border-line bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm">
+              <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-xl">
                 [Voice AI Onboarding]
               </span>
-              <span className="text-xs font-mono text-grey">
+              <span className="text-xs font-mono text-muted">
                 Web Speech API · Indian English &amp; Tanglish
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink mt-2 tracking-tight">
               Describe Your Business Aloud
             </h1>
-            <p className="text-xs sm:text-sm text-grey mt-1 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-xl leading-relaxed">
               Speak naturally about your shop in English, Tamil, or Tanglish. MarkAI extracts your profile and generates on-brand social copy in seconds.
             </p>
           </div>
 
           <Link
             href="/dashboard"
-            className="btn-secondary px-4 py-2 rounded-sm text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[38px]"
+            className="btn-secondary px-4 py-2 rounded-xl text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[38px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Manual Form</span>
@@ -265,7 +265,7 @@ export default function VoiceOnboardingPage() {
         </div>
 
         {!speechSupported && (
-          <div className="p-3.5 rounded-sm bg-pending-light border border-pending-border text-xs text-pending flex items-start gap-2.5">
+          <div className="p-3.5 rounded-xl bg-pending-light border border-pending-border text-xs text-pending flex items-start gap-2.5">
             <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-pending" />
             <span>
               Web Speech API is best supported in Google Chrome or Microsoft Edge. You can also click any of our sample presets below.
@@ -274,7 +274,7 @@ export default function VoiceOnboardingPage() {
         )}
 
         {speechError && (
-          <div className="p-3.5 rounded-sm bg-danger-light border border-danger-border text-xs text-danger flex items-start gap-2.5">
+          <div className="p-3.5 rounded-xl bg-danger-light border border-danger-border text-xs text-danger flex items-start gap-2.5">
             <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-danger" />
             <span>{speechError}</span>
           </div>
@@ -285,38 +285,38 @@ export default function VoiceOnboardingPage() {
           <div className="space-y-6">
             
             {/* Live Microphone Recording Card */}
-            <div className="card rounded-sm p-8 sm:p-12 border border-grey/30 bg-white text-center relative">
+            <div className="card rounded-xl p-8 sm:p-12 border border-line bg-surface text-center relative">
               
               {/* Central Mic Button & Waveform Hero Moment */}
               <div className="flex flex-col items-center justify-center mb-6">
                 <button
                   onClick={isRecording ? handleStopRecording : handleStartRecording}
-                  className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition border ${
+                  className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition-all duration-300 border ${
                     isRecording
-                      ? 'bg-process text-white border-process ring-4 ring-process/20 shadow-sm'
-                      : 'bg-white text-ink border-ink hover:border-process hover:text-process'
+                      ? 'ai-gradient text-white border-ai-cyan ring-8 ring-process/30 ai-glow scale-105'
+                      : 'bg-surface text-ink border-line hover:border-process hover:text-ai-cyan hover:scale-105 shadow-card'
                   }`}
                 >
                   {isRecording ? (
                     <>
-                      <MicOff className="w-7 h-7 mb-1" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider">Stop</span>
+                      <MicOff className="w-7 h-7 mb-1 text-white animate-pulse" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Stop</span>
                     </>
                   ) : (
                     <>
-                      <Mic className="w-7 h-7 mb-1" />
-                      <span className="text-[10px] font-mono uppercase tracking-wider">Record</span>
+                      <Mic className="w-7 h-7 mb-1 text-ai-cyan" />
+                      <span className="text-[10px] font-mono uppercase tracking-wider font-semibold">Record</span>
                     </>
                   )}
                 </button>
 
-                {/* Vertical Audio Waveform (Single Hero Motion Moment) */}
+                {/* Vertical Audio Waveform (Violet to Cyan AI Gradient) */}
                 {isRecording && (
                   <div className="flex items-center justify-center gap-1.5 h-10 mt-5">
                     {[30, 75, 45, 95, 60, 85, 40, 100, 50, 70, 35].map((h, i) => (
                       <span
                         key={i}
-                        className="w-1 bg-process rounded-none animate-waveform"
+                        className="w-1.5 bg-gradient-to-t from-ai-violet to-ai-cyan rounded-full animate-waveform shadow-sm"
                         style={{
                           height: `${h}%`,
                           animationDelay: `${i * 0.09}s`,
@@ -336,7 +336,7 @@ export default function VoiceOnboardingPage() {
                     {isRecording ? `Listening (0:${recordingSeconds < 10 ? `0${recordingSeconds}` : recordingSeconds} / 1:00)` : 'Ready to Record — Max 60 Seconds'}
                   </span>
                 </div>
-                <p className="text-xs text-grey max-w-md mx-auto">
+                <p className="text-xs text-muted max-w-md mx-auto">
                   {isRecording
                     ? 'Speak freely about your business name, what you sell, your target customers, and your brand tone.'
                     : 'Click the record button and describe your business in English, Tamil, or Tanglish.'}
@@ -346,24 +346,24 @@ export default function VoiceOnboardingPage() {
               {/* Live Streaming Transcript Box */}
               <div className="mt-8 text-left">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-mono text-grey">
+                  <span className="text-xs font-mono text-muted">
                     [Live Speech Transcript]
                   </span>
                   {transcript && (
                     <button
                       onClick={() => setTranscript('')}
-                      className="text-xs text-grey hover:text-ink transition underline"
+                      className="text-xs text-muted hover:text-ink transition underline"
                     >
                       Clear
                     </button>
                   )}
                 </div>
 
-                <div className="w-full min-h-[110px] p-4 rounded-sm bg-white border border-grey/30 text-xs sm:text-sm text-ink leading-relaxed font-mono">
+                <div className="w-full min-h-[110px] p-4 rounded-xl bg-surface border border-line text-xs sm:text-sm text-ink leading-relaxed font-mono">
                   {transcript ? (
                     <p className="whitespace-pre-wrap">{transcript}</p>
                   ) : (
-                    <span className="text-grey italic">
+                    <span className="text-muted italic">
                       {isRecording
                         ? 'Speech will appear here in real time as you speak...'
                         : 'Your transcribed voice notes will stream here. Or click one of the presets below.'}
@@ -377,7 +377,7 @@ export default function VoiceOnboardingPage() {
                 {transcript && (
                   <button
                     onClick={() => handleProcessTranscript()}
-                    className="btn-primary w-full sm:w-auto px-7 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[42px]"
+                    className="btn-primary w-full sm:w-auto px-7 py-3 rounded-xl text-xs font-medium flex items-center justify-center gap-2 min-h-[42px]"
                   >
                     <span>Extract Profile with Claude AI</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -387,12 +387,12 @@ export default function VoiceOnboardingPage() {
             </div>
 
             {/* Pitch Demo Fallback Presets */}
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+            <div className="card rounded-xl p-6 border border-line bg-surface space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-line">
                 <span className="text-xs font-mono text-ink">
                   [Sample Voice Presets — 1-Click Fallback]
                 </span>
-                <span className="text-xs font-mono text-grey">Tanglish / English</span>
+                <span className="text-xs font-mono text-muted">Tanglish / English</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -400,19 +400,19 @@ export default function VoiceOnboardingPage() {
                   <button
                     key={idx}
                     onClick={() => handleSelectSample(s)}
-                    className="p-3.5 rounded-sm bg-white hover:bg-grey/5 border border-grey/30 hover:border-ink text-left transition flex flex-col justify-between"
+                    className="p-3.5 rounded-xl bg-surface hover:bg-grey/5 border border-line hover:border-line text-left transition flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-xs font-serif font-bold text-ink truncate">
+                        <span className="text-xs font-sans font-bold text-ink truncate">
                           {s.title}
                         </span>
                       </div>
-                      <p className="text-[11px] text-grey line-clamp-3 leading-relaxed">
+                      <p className="text-[11px] text-muted line-clamp-3 leading-relaxed">
                         &quot;{s.transcript}&quot;
                       </p>
                     </div>
-                    <span className="text-[11px] font-mono text-ink block pt-3 border-t border-grey/20 mt-3">
+                    <span className="text-[11px] font-mono text-ink block pt-3 border-t border-line mt-3">
                       [Use Preset]
                     </span>
                   </button>
@@ -424,14 +424,14 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 2: EXTRACTING SPINNER */}
         {step === 'extracting' && (
-          <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
-            <div className="w-12 h-12 rounded-sm bg-process-light border border-process-border text-process mx-auto flex items-center justify-center">
-              <Wand2 className="w-6 h-6 animate-spin" />
+          <div className="card rounded-xl p-8 sm:p-12 text-center border border-line bg-surface space-y-4 py-16 sm:py-20 ai-glow">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-ai-violet/20 to-ai-cyan/20 border border-ai-cyan/40 text-ai-cyan mx-auto flex items-center justify-center shadow-lg">
+              <Wand2 className="w-7 h-7 text-ai-cyan animate-spin" />
             </div>
-            <h2 className="text-xl font-serif font-bold text-ink">
+            <h2 className="text-xl font-sans font-bold text-ink">
               Claude 3.5 Sonnet is Structuring Your Profile
             </h2>
-            <p className="text-xs sm:text-sm text-grey max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
               Parsing natural language transcript, identifying business name, extracting offerings, and selecting optimal brand tone...
             </p>
           </div>
@@ -439,19 +439,19 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 3: REVIEW & CONFIRM PROFILE */}
         {step === 'review' && (
-          <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-grey/30">
+          <div className="card rounded-xl p-6 sm:p-8 border border-line bg-surface space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-line">
               <div>
-                <span className="text-xs font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm">
+                <span className="text-xs font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-xl">
                   [Voice Extraction Complete]
                 </span>
-                <h2 className="text-xl font-serif font-bold text-ink mt-1">
+                <h2 className="text-xl font-sans font-bold text-ink mt-1">
                   Review Extracted Profile
                 </h2>
               </div>
               <button
                 onClick={() => { setStep('record'); setTranscript(''); }}
-                className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
+                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Re-Record</span>
@@ -470,7 +470,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.business_name}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, business_name: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
+                  className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -483,7 +483,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.industry}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, industry: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
+                  className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -496,7 +496,7 @@ export default function VoiceOnboardingPage() {
                   rows={3}
                   value={extractedProfile.description}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, description: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process resize-none leading-relaxed font-sans"
+                  className="w-full bg-surface border border-line rounded-xl p-3 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process resize-none leading-relaxed font-sans"
                 />
               </div>
 
@@ -509,7 +509,7 @@ export default function VoiceOnboardingPage() {
                   type="text"
                   value={extractedProfile.target_audience}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, target_audience: e.target.value })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
+                  className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process min-h-[40px]"
                 />
               </div>
 
@@ -521,7 +521,7 @@ export default function VoiceOnboardingPage() {
                 <select
                   value={extractedProfile.tone}
                   onChange={(e) => setExtractedProfile({ ...extractedProfile, tone: e.target.value as ToneType })}
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process capitalize min-h-[40px]"
+                  className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink focus:outline-none focus:border-process focus:ring-1 focus:ring-process capitalize min-h-[40px]"
                 >
                   <option value="playful">Playful &amp; Witty</option>
                   <option value="casual">Casual &amp; Friendly</option>
@@ -533,13 +533,13 @@ export default function VoiceOnboardingPage() {
             </div>
 
             {/* Confirm CTA */}
-            <div className="pt-4 border-t border-grey/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs text-grey font-mono">
+            <div className="pt-4 border-t border-line flex flex-col sm:flex-row items-center justify-between gap-4">
+              <span className="text-xs text-muted font-mono">
                 [Profile ready for generation]
               </span>
               <button
                 onClick={handleConfirmAndGenerate}
-                className="btn-primary w-full sm:w-auto px-7 py-2.5 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[40px]"
+                className="btn-primary w-full sm:w-auto px-7 py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-2 min-h-[40px]"
               >
                 <span>Confirm &amp; Generate Social Post</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -550,14 +550,14 @@ export default function VoiceOnboardingPage() {
 
         {/* STEP 4: GENERATING POST SPINNER */}
         {step === 'generating' && (
-          <div className="card rounded-sm p-8 sm:p-12 text-center border border-grey/30 bg-white space-y-4 py-16 sm:py-20">
-            <div className="w-12 h-12 rounded-sm bg-process-light border border-process-border text-process mx-auto flex items-center justify-center">
-              <Sparkles className="w-6 h-6 animate-spin" />
+          <div className="card rounded-xl p-8 sm:p-12 text-center border border-line bg-surface space-y-4 py-16 sm:py-20 ai-glow">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-ai-violet/20 to-ai-cyan/20 border border-ai-cyan/40 text-ai-cyan mx-auto flex items-center justify-center shadow-lg">
+              <Sparkles className="w-7 h-7 text-ai-cyan animate-spin" />
             </div>
-            <h2 className="text-xl font-serif font-bold text-ink">
+            <h2 className="text-xl font-sans font-bold text-ink">
               Generating High-Converting Post &amp; Canvas Graphic
             </h2>
-            <p className="text-xs sm:text-sm text-grey max-w-md mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
               Feeding {extractedProfile.business_name} directly into the MarkAI content engine. Preparing your preview cockpit...
             </p>
           </div>

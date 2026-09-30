@@ -85,7 +85,7 @@ export default function DashboardPage() {
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Top Header Card */}
-        <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
+        <div className="card rounded-xl p-6 sm:p-8 border border-line bg-surface">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 flex-wrap">
@@ -94,21 +94,21 @@ export default function DashboardPage() {
                 </span>
                 <Link
                   href="/voice-onboarding"
-                  className="text-xs font-mono text-grey hover:text-ink transition underline"
+                  className="text-xs font-mono text-muted hover:text-ink transition underline"
                 >
                   [Voice Setup]
                 </Link>
                 <Link
                   href="/brand-kit"
-                  className="text-xs font-mono text-grey hover:text-ink transition underline"
+                  className="text-xs font-mono text-muted hover:text-ink transition underline"
                 >
                   [Brand Kit]
                 </Link>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink mt-2 tracking-tight">
                 Business Profile &amp; Generation Controls
               </h1>
-              <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
                 Define your profile and select your format. MarkAI uses Anthropic Claude to craft on-brand copy, carousel slide outlines, and viral Reels scripts.
               </p>
             </div>
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                     key={idx}
                     type="button"
                     onClick={() => handlePresetSelect(p)}
-                    className="px-2.5 py-1 text-xs font-mono rounded-sm bg-white hover:bg-grey/10 text-ink border border-grey/30 hover:border-ink transition"
+                    className="px-2.5 py-1 text-xs font-mono rounded-xl bg-surface hover:bg-grey/10 text-ink border border-line hover:border-line transition"
                   >
                     {p.profile.business_name.split(' ')[0]}
                   </button>
@@ -135,7 +135,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Format Selector Bar */}
-        <div className="card rounded-sm p-3 sm:p-4 border border-grey/30 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="card rounded-xl p-3 sm:p-4 border border-line bg-surface flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="text-xs font-mono text-ink">
             Format Selection:
           </span>
@@ -144,10 +144,10 @@ export default function DashboardPage() {
             <button
               type="button"
               onClick={() => setSelectedFormat('single_image')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition ${
                 selectedFormat === 'single_image'
-                  ? 'bg-process text-white border border-process'
-                  : 'bg-white text-grey hover:text-ink border border-grey/30'
+                  ? 'ai-gradient text-white border border-ai-cyan/40 shadow-sm ai-glow'
+                  : 'bg-surface text-muted hover:text-ink border border-line hover:border-line'
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5" />
@@ -157,10 +157,10 @@ export default function DashboardPage() {
             <button
               type="button"
               onClick={() => setSelectedFormat('carousel')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition ${
                 selectedFormat === 'carousel'
-                  ? 'bg-process text-white border border-process'
-                  : 'bg-white text-grey hover:text-ink border border-grey/30'
+                  ? 'ai-gradient text-white border border-ai-cyan/40 shadow-sm ai-glow'
+                  : 'bg-surface text-muted hover:text-ink border border-line hover:border-line'
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
@@ -170,10 +170,10 @@ export default function DashboardPage() {
             <button
               type="button"
               onClick={() => setSelectedFormat('reels_script')}
-              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-sm text-xs font-medium transition ${
+              className={`flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition ${
                 selectedFormat === 'reels_script'
-                  ? 'bg-process text-white border border-process'
-                  : 'bg-white text-grey hover:text-ink border border-grey/30'
+                  ? 'ai-gradient text-white border border-ai-cyan/40 shadow-sm ai-glow'
+                  : 'bg-surface text-muted hover:text-ink border border-line hover:border-line'
               }`}
             >
               <Film className="w-3.5 h-3.5" />
@@ -187,11 +187,11 @@ export default function DashboardPage() {
           
           {/* Left: Form Controls */}
           <div className="lg:col-span-7">
-            <div className="card rounded-sm p-6 sm:p-8 border border-grey/30 bg-white">
+            <div className="card rounded-xl p-6 sm:p-8 border border-line bg-surface">
               <form onSubmit={handleGenerate} className="space-y-4 sm:space-y-5">
                 
                 {error && (
-                  <div className="p-3.5 rounded-sm bg-danger-light border border-danger-border text-xs text-danger">
+                  <div className="p-3.5 rounded-xl bg-danger-light border border-danger-border text-xs text-danger">
                     {error}
                   </div>
                 )}
@@ -206,7 +206,7 @@ export default function DashboardPage() {
                     value={formData.business_name}
                     onChange={(e) => handleChange('business_name', e.target.value)}
                     placeholder="e.g. Kaapi & Crumb Co."
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
+                    className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
                     required
                   />
                 </div>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
                     value={formData.industry}
                     onChange={(e) => handleChange('industry', e.target.value)}
                     placeholder="e.g. Specialty Coffee, Handloom Silk, Organic Groceries"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
+                    className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
                     required
                   />
                 </div>
@@ -236,7 +236,7 @@ export default function DashboardPage() {
                     value={formData.description}
                     onChange={(e) => handleChange('description', e.target.value)}
                     placeholder="What makes your product special? Mention key benefits, unique selling points, or offers..."
-                    className="w-full bg-white border border-grey/30 rounded-sm p-3 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition resize-none leading-relaxed font-sans"
+                    className="w-full bg-surface border border-line rounded-xl p-3 text-sm text-ink placeholder-muted focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition resize-none leading-relaxed font-sans"
                     required
                   />
                 </div>
@@ -251,7 +251,7 @@ export default function DashboardPage() {
                     value={formData.target_audience}
                     onChange={(e) => handleChange('target_audience', e.target.value)}
                     placeholder="e.g. College students, young professionals, specialty coffee enthusiasts"
-                    className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-sm text-ink placeholder-grey focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
+                    className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-sm text-ink placeholder-muted focus:outline-none focus:border-process focus:ring-1 focus:ring-process transition min-h-[40px]"
                     required
                   />
                 </div>
@@ -269,15 +269,15 @@ export default function DashboardPage() {
                           key={t.value}
                           type="button"
                           onClick={() => handleChange('tone', t.value)}
-                          className={`flex items-start gap-2.5 p-3 rounded-sm border text-left transition ${
+                          className={`flex items-start gap-2.5 p-3 rounded-xl border text-left transition ${
                             isSelected
-                              ? 'bg-ink text-white border-ink'
-                              : 'bg-white border-grey/30 text-grey hover:text-ink hover:border-ink'
+                              ? 'bg-surface text-white border-line'
+                              : 'bg-surface border-line text-muted hover:text-ink hover:border-line'
                           }`}
                         >
                           <div>
                             <p className="text-xs font-bold">{t.label}</p>
-                            <p className={`text-[11px] leading-tight mt-0.5 ${isSelected ? 'text-white/80' : 'text-grey'}`}>
+                            <p className={`text-[11px] leading-tight mt-0.5 ${isSelected ? 'text-white/80' : 'text-muted'}`}>
                               {t.description}
                             </p>
                           </div>
@@ -292,7 +292,7 @@ export default function DashboardPage() {
                   <button
                     type="submit"
                     disabled={isGenerating}
-                    className="btn-primary w-full py-3 px-6 rounded-sm text-xs font-medium"
+                    className="btn-primary w-full py-3 px-6 rounded-xl text-xs font-medium"
                   >
                     {isGenerating ? (
                       <div className="flex items-center justify-center gap-2.5">
@@ -313,33 +313,33 @@ export default function DashboardPage() {
 
           {/* Right: Live Prompt Preview & Info */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
-                <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm">
+            <div className="card rounded-xl p-6 border border-line bg-surface">
+              <div className="flex items-center justify-between pb-3 border-b border-line">
+                <span className="text-xs font-mono text-process bg-process-light border border-process-border px-2 py-0.5 rounded-xl">
                   [Prompt Context Memory]
                 </span>
-                <Link href="/brand-kit" className="text-xs font-mono text-grey hover:text-ink underline">
+                <Link href="/brand-kit" className="text-xs font-mono text-muted hover:text-ink underline">
                   Brand Kit
                 </Link>
               </div>
 
               <div className="mt-4 space-y-3 text-xs">
                 <div>
-                  <span className="text-grey block text-[11px] font-mono">Brand Name:</span>
+                  <span className="text-muted block text-[11px] font-mono">Brand Name:</span>
                   <span className="text-ink font-medium">{formData.business_name}</span>
                 </div>
                 <div>
-                  <span className="text-grey block text-[11px] font-mono">Format:</span>
+                  <span className="text-muted block text-[11px] font-mono">Format:</span>
                   <span className="text-ink font-mono uppercase">{selectedFormat.replace('_', ' ')}</span>
                 </div>
                 <div>
-                  <span className="text-grey block text-[11px] font-mono">Brand Guidelines Injected:</span>
-                  <span className="text-grey line-clamp-2">
+                  <span className="text-muted block text-[11px] font-mono">Brand Guidelines Injected:</span>
+                  <span className="text-muted line-clamp-2">
                     {brandKit.brand_voice_guidelines || 'Active'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-grey block text-[11px] font-mono">Active Brand Rules:</span>
+                  <span className="text-muted block text-[11px] font-mono">Active Brand Rules:</span>
                   <span className="text-ink font-mono">
                     [{brandKit.dos_list.length} Do&apos;s · {brandKit.donts_list.length} Don&apos;ts]
                   </span>
@@ -348,16 +348,16 @@ export default function DashboardPage() {
             </div>
 
             {/* Link to Calendar CTA */}
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-              <h4 className="text-sm font-serif font-bold text-ink">
+            <div className="card rounded-xl p-6 border border-line bg-surface">
+              <h4 className="text-sm font-sans font-bold text-ink">
                 30-Day Content Calendar
               </h4>
-              <p className="text-xs text-grey mt-2 leading-relaxed">
+              <p className="text-xs text-muted mt-2 leading-relaxed">
                 Plan ahead with automatically generated seasonal campaigns for Fall Launch, Pitch Day, and local festivals.
               </p>
               <Link
                 href="/calendar"
-                className="inline-flex items-center gap-2 mt-4 px-3.5 py-2 rounded-sm border border-grey/30 text-ink text-xs font-medium hover:border-ink transition"
+                className="inline-flex items-center gap-2 mt-4 px-3.5 py-2 rounded-xl border border-line text-ink text-xs font-medium hover:border-line transition"
               >
                 <span>Open Calendar</span>
                 <ArrowRight className="w-3.5 h-3.5" />

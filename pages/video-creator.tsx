@@ -272,27 +272,27 @@ export default function VideoCreatorPage() {
       <div className="max-w-5xl mx-auto space-y-6 py-2 sm:py-4 px-2 sm:px-0">
         
         {/* Top Header Card */}
-        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-surface rounded-xl p-6 sm:p-8 border border-line flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-mono text-xs text-grey">
+              <span className="font-mono text-xs text-muted">
                 [Gemini Multimodal Director]
               </span>
-              <span className="font-mono text-xs text-grey border-l border-grey/30 pl-2">
+              <span className="font-mono text-xs text-muted border-l border-line pl-2">
                 [Step {currentStep} of 3]
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-2 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink mt-2 tracking-tight">
               Guided Video Creator
             </h1>
-            <p className="text-xs sm:text-sm text-grey mt-1 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-xl leading-relaxed">
               MarkAI guides you to capture real photos and clips, reviews composition with Gemini Vision, and compiles an editorial vertical Reel.
             </p>
           </div>
 
           <Link
             href="/dashboard"
-            className="btn-secondary px-4 py-2 rounded-sm text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[40px]"
+            className="btn-secondary px-4 py-2 rounded-xl text-xs font-medium flex items-center gap-2 self-start sm:self-auto min-h-[40px]"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Post Studio</span>
@@ -302,11 +302,11 @@ export default function VideoCreatorPage() {
         {/* STEP 1: TEMPLATE SELECTION */}
         {currentStep === 1 && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between border-b border-grey/30 pb-3">
-              <h2 className="text-lg sm:text-xl font-serif font-bold text-ink">
+            <div className="flex items-center justify-between border-b border-line pb-3">
+              <h2 className="text-lg sm:text-xl font-sans font-bold text-ink">
                 1. Select Storyboard Archetype
               </h2>
-              <span className="text-xs font-mono text-grey">
+              <span className="text-xs font-mono text-muted">
                 Tailored for {currentProfile.business_name}
               </span>
             </div>
@@ -319,32 +319,32 @@ export default function VideoCreatorPage() {
                   <button
                     key={tpl.id}
                     onClick={() => setSelectedTemplate(tpl.id)}
-                    className={`bg-white rounded-sm p-5 border text-left transition flex flex-col justify-between space-y-4 ${
+                    className={`bg-surface rounded-xl p-5 border text-left transition flex flex-col justify-between space-y-4 ${
                       isSelected
-                        ? 'border-ink ring-1 ring-ink'
-                        : 'border-grey/30 hover:border-grey'
+                        ? 'border-ai-violet ring-2 ring-process/30 shadow-ai-glow'
+                        : 'border-line hover:border-line hover:border-ai-violet/40'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <div className={`p-2 rounded-sm ${isSelected ? 'bg-ink text-white' : 'border border-grey/30 text-ink'}`}>
+                        <div className={`p-2 rounded-xl ${isSelected ? 'ai-gradient text-white shadow-sm' : 'border border-line text-ink'}`}>
                           <Icon className="w-5 h-5" />
                         </div>
                         {isSelected && (
-                          <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-1.5 py-0.5 rounded-sm">
+                          <span className="font-mono text-[10px] text-ai-cyan bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-full font-semibold">
                             [Recommended]
                           </span>
                         )}
                       </div>
-                      <h3 className="text-base font-serif font-bold text-ink">
+                      <h3 className="text-base font-sans font-bold text-ink">
                         {tpl.label}
                       </h3>
-                      <p className="text-xs text-grey mt-2 leading-relaxed">
+                      <p className="text-xs text-muted mt-2 leading-relaxed">
                         {tpl.desc}
                       </p>
                     </div>
 
-                    <div className="pt-3 border-t border-grey/20 text-[11px] text-grey font-mono">
+                    <div className="pt-3 border-t border-line text-[11px] text-muted font-mono">
                       Target: <span className="text-ink">{tpl.recommendedFor}</span>
                     </div>
                   </button>
@@ -356,7 +356,7 @@ export default function VideoCreatorPage() {
               <button
                 onClick={() => handleGenerateShotGuide()}
                 disabled={isGeneratingShots}
-                className="btn-primary w-full sm:w-auto px-6 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[44px]"
+                className="btn-primary w-full sm:w-auto px-6 py-3 rounded-xl text-xs font-medium flex items-center justify-center gap-2 min-h-[44px]"
               >
                 {isGeneratingShots ? (
                   <>
@@ -378,18 +378,18 @@ export default function VideoCreatorPage() {
         {/* STEP 2: GUIDED SHOT CHECKLIST & UPLOAD WITH GEMINI FEEDBACK */}
         {currentStep === 2 && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-grey/30">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-line">
               <div>
-                <span className="font-mono text-xs text-grey">
+                <span className="font-mono text-xs text-muted">
                   [Step 2 of 3 — Checklist & Review]
                 </span>
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-ink mt-1">
+                <h2 className="text-xl sm:text-2xl font-sans font-bold text-ink mt-1">
                   Capture & Review Shots
                 </h2>
               </div>
               <button
                 onClick={() => setCurrentStep(1)}
-                className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
+                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Change Archetype</span>
@@ -401,21 +401,21 @@ export default function VideoCreatorPage() {
               {shots.map((shot, idx) => (
                 <div
                   key={idx}
-                  className={`bg-white rounded-sm p-5 border transition space-y-4 ${
-                    shot.uploaded_image ? 'border-success/50 ring-1 ring-success/20' : 'border-grey/30'
+                  className={`bg-surface rounded-xl p-5 border transition space-y-4 ${
+                    shot.uploaded_image ? 'border-success/50 ring-1 ring-success/20' : 'border-line'
                   }`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="space-y-2 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="font-mono text-xs text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                        <span className="font-mono text-xs text-ink border border-line px-2 py-0.5 rounded-xl">
                           Shot 0{shot.shot_number}
                         </span>
-                        <h3 className="text-base font-serif font-bold text-ink">
+                        <h3 className="text-base font-sans font-bold text-ink">
                           {shot.title}
                         </h3>
                         {shot.status === 'approved' && (
-                          <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm flex items-center gap-1">
+                          <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-xl flex items-center gap-1">
                             <Check className="w-3 h-3 text-success" /> [Approved]
                           </span>
                         )}
@@ -425,7 +425,7 @@ export default function VideoCreatorPage() {
                         {shot.instruction}
                       </p>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-grey pt-1 font-mono">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-muted pt-1 font-mono">
                         <div className="flex items-center gap-1.5">
                           <Camera className="w-3.5 h-3.5 text-ink" />
                           <span>Angle: <strong className="text-ink">{shot.camera_angle}</strong></span>
@@ -436,24 +436,24 @@ export default function VideoCreatorPage() {
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-sm bg-white border border-grey/30 text-xs">
-                        <span className="font-mono text-[10px] text-grey uppercase block mb-0.5">
+                      <div className="p-3 rounded-xl bg-surface border border-line text-xs">
+                        <span className="font-mono text-[10px] text-muted uppercase block mb-0.5">
                           Voiceover Script / Caption:
                         </span>
-                        <span className="text-ink font-serif italic">"{shot.voiceover_script}"</span>
+                        <span className="text-ink font-sans italic">"{shot.voiceover_script}"</span>
                       </div>
                     </div>
 
                     {/* Upload Controls & Preview */}
                     <div className="flex sm:flex-col items-center gap-2 flex-shrink-0">
                       {shot.uploaded_image ? (
-                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-sm overflow-hidden border border-success group">
+                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-success group">
                           <img
                             src={shot.uploaded_image}
                             alt={shot.title}
                             className="w-full h-full object-cover"
                           />
-                          <label className="absolute inset-0 bg-ink/70 opacity-0 group-hover:opacity-100 flex items-center justify-center text-[10px] font-mono text-white transition cursor-pointer">
+                          <label className="absolute inset-0 bg-surface/70 opacity-0 group-hover:opacity-100 flex items-center justify-center text-[10px] font-mono text-white transition cursor-pointer">
                             [Retake]
                             <input
                               type="file"
@@ -465,7 +465,7 @@ export default function VideoCreatorPage() {
                         </div>
                       ) : (
                         <div className="flex flex-col gap-2 w-full sm:w-auto">
-                          <label className="btn-primary px-4 py-2 rounded-sm text-xs font-medium cursor-pointer flex items-center justify-center gap-1.5 min-h-[38px]">
+                          <label className="btn-primary px-4 py-2 rounded-xl text-xs font-medium cursor-pointer flex items-center justify-center gap-1.5 min-h-[38px]">
                             <Upload className="w-3.5 h-3.5" />
                             <span>Upload Media</span>
                             <input
@@ -479,7 +479,7 @@ export default function VideoCreatorPage() {
                           <button
                             type="button"
                             onClick={() => handleUseDemoPresetPhoto(idx)}
-                            className="btn-secondary px-3 py-1.5 rounded-sm text-[11px] font-mono text-grey hover:text-ink flex items-center justify-center gap-1"
+                            className="btn-secondary px-3 py-1.5 rounded-xl text-[11px] font-mono text-muted hover:text-ink flex items-center justify-center gap-1"
                           >
                             <ImageIcon className="w-3 h-3" />
                             <span>[Demo Preset]</span>
@@ -491,24 +491,24 @@ export default function VideoCreatorPage() {
 
                   {/* Gemini Multimodal Feedback Pill */}
                   {analyzingShotIdx === idx && (
-                    <div className="p-3 rounded-sm border border-process-border bg-process-light flex items-center gap-2 text-xs font-mono text-process">
+                    <div className="p-3 rounded-xl border border-process-border bg-process-light flex items-center gap-2 text-xs font-mono text-process">
                       <div className="w-3.5 h-3.5 border-2 border-process border-t-transparent rounded-full animate-spin"></div>
                       <span>Gemini Vision evaluating composition & lighting...</span>
                     </div>
                   )}
 
                   {shot.ai_feedback && (
-                    <div className="p-3.5 rounded-sm bg-white border border-success-border space-y-1.5 text-xs">
+                    <div className="p-3.5 rounded-xl bg-surface border border-success-border space-y-1.5 text-xs">
                       <div className="flex items-center justify-between">
                         <span className="font-medium text-success flex items-center gap-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-success" />
                           {shot.ai_feedback.feedback}
                         </span>
-                        <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm">
+                        <span className="font-mono text-[10px] text-success bg-success-light border border-success-border px-2 py-0.5 rounded-xl">
                           [{shot.ai_feedback.score}/100 Quality]
                         </span>
                       </div>
-                      <p className="text-grey text-[11px] font-mono">
+                      <p className="text-muted text-[11px] font-mono">
                         Note: {shot.ai_feedback.tip}
                       </p>
                     </div>
@@ -518,13 +518,13 @@ export default function VideoCreatorPage() {
             </div>
 
             {/* Assemble Video CTA */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-grey/30">
-              <span className="text-xs font-mono text-grey">
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-line">
+              <span className="text-xs font-mono text-muted">
                 All frames verified. MarkAI will apply typographic overlays and pan sequence.
               </span>
               <button
                 onClick={handleAssembleVideo}
-                className="btn-primary w-full sm:w-auto px-6 py-3 rounded-sm text-xs font-medium flex items-center justify-center gap-2 min-h-[44px]"
+                className="btn-primary w-full sm:w-auto px-6 py-3 rounded-xl text-xs font-medium flex items-center justify-center gap-2 min-h-[44px]"
               >
                 <Film className="w-4 h-4" />
                 <span>Assemble Vertical Reel</span>
@@ -537,20 +537,20 @@ export default function VideoCreatorPage() {
         {/* STEP 3: FINISHED ASSEMBLED VIDEO PREVIEW & DOWNLOAD */}
         {currentStep === 3 && (
           <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-grey/30">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-line">
               <div>
-                <span className="font-mono text-xs text-grey flex items-center gap-1.5">
+                <span className="font-mono text-xs text-muted flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-ink" />
                   [Step 3 of 3 — Compiled Reel]
                 </span>
-                <h2 className="text-xl sm:text-2xl font-serif font-bold text-ink mt-1">
+                <h2 className="text-xl sm:text-2xl font-sans font-bold text-ink mt-1">
                   Preview & Export
                 </h2>
               </div>
 
               <button
                 onClick={() => setCurrentStep(2)}
-                className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
+                className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto min-h-[36px]"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Adjust Shots</span>
@@ -562,7 +562,7 @@ export default function VideoCreatorPage() {
               
               {/* Left Column: 9:16 Vertical Video Player */}
               <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="w-full max-w-[320px] aspect-[9/16] rounded-sm border border-ink relative overflow-hidden flex flex-col justify-between text-white select-none bg-black">
+                <div className="w-full max-w-[320px] aspect-[9/16] rounded-xl border border-line relative overflow-hidden flex flex-col justify-between text-white select-none bg-black">
                   
                   {/* Real Customer Uploaded Image with Ken Burns Zoom/Pan */}
                   {currentShot?.uploaded_image && (
@@ -580,18 +580,18 @@ export default function VideoCreatorPage() {
 
                   {/* Top Bar inside Video */}
                   <div className="relative z-10 p-4 flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase border border-white/30 bg-black/60 px-2 py-0.5 rounded-sm">
+                    <span className="font-mono text-[10px] uppercase border border-white/30 bg-black/60 px-2 py-0.5 rounded-xl">
                       {currentProfile.business_name}
                     </span>
-                    <span className="font-mono text-[10px] bg-black/60 px-2 py-0.5 rounded-sm border border-white/20">
+                    <span className="font-mono text-[10px] bg-black/60 px-2 py-0.5 rounded-xl border border-white/20">
                       Shot {activeShotIdx + 1}/{shots.length}
                     </span>
                   </div>
 
                   {/* Bottom Text Overlay Captions */}
                   <div className="relative z-10 p-4 space-y-3">
-                    <div className="p-3 rounded-sm bg-black/70 border border-white/20 text-center">
-                      <p className="text-xs sm:text-sm font-serif italic text-white leading-snug">
+                    <div className="p-3 rounded-xl bg-black/70 border border-white/20 text-center">
+                      <p className="text-xs sm:text-sm font-sans italic text-white leading-snug">
                         "{currentShot?.voiceover_script}"
                       </p>
                     </div>
@@ -601,8 +601,8 @@ export default function VideoCreatorPage() {
                       {shots.map((_, i) => (
                         <div
                           key={i}
-                          className={`h-0.5 rounded-none transition-all duration-300 ${
-                            i === activeShotIdx ? 'bg-pending' : i < activeShotIdx ? 'bg-white/80' : 'bg-white/20'
+                          className={`h-0.5 rounded-lg transition-all duration-300 ${
+                            i === activeShotIdx ? 'bg-pending' : i < activeShotIdx ? 'bg-surface/80' : 'bg-surface/20'
                           }`}
                         />
                       ))}
@@ -619,10 +619,10 @@ export default function VideoCreatorPage() {
                 </div>
 
                 {/* Video Player Controls */}
-                <div className="w-full max-w-[320px] mt-4 flex items-center justify-between p-3 rounded-sm bg-white border border-grey/30">
+                <div className="w-full max-w-[320px] mt-4 flex items-center justify-between p-3 rounded-xl bg-surface border border-line">
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="p-2 rounded-sm bg-ink hover:bg-black text-white transition"
+                    className="p-2 rounded-xl bg-surface hover:bg-black text-white transition"
                     title={isPlaying ? 'Pause' : 'Play'}
                   >
                     {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white" />}
@@ -630,7 +630,7 @@ export default function VideoCreatorPage() {
 
                   <button
                     onClick={() => { setActiveShotIdx(0); setIsPlaying(true); }}
-                    className="p-2 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+                    className="p-2 rounded-xl border border-line text-muted hover:text-ink transition"
                     title="Restart"
                   >
                     <RotateCcw className="w-4 h-4" />
@@ -638,7 +638,7 @@ export default function VideoCreatorPage() {
 
                   <button
                     onClick={() => setAudioMuted(!audioMuted)}
-                    className="p-2 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+                    className="p-2 rounded-xl border border-line text-muted hover:text-ink transition"
                     title={audioMuted ? 'Unmute' : 'Mute'}
                   >
                     {audioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-ink" />}
@@ -647,7 +647,7 @@ export default function VideoCreatorPage() {
                   <button
                     onClick={handleDownload}
                     disabled={downloading}
-                    className="btn-primary px-3 py-1.5 rounded-sm text-xs font-medium flex items-center gap-1.5"
+                    className="btn-primary px-3 py-1.5 rounded-xl text-xs font-medium flex items-center gap-1.5"
                   >
                     {downloading ? (
                       <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -661,13 +661,13 @@ export default function VideoCreatorPage() {
 
               {/* Right Column: Shot Storyboard Breakdown & Actions */}
               <div className="lg:col-span-7 space-y-6">
-                <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
-                  <div className="flex items-center justify-between border-b border-grey/30 pb-3">
-                    <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+                <div className="bg-surface rounded-xl p-6 border border-line space-y-4">
+                  <div className="flex items-center justify-between border-b border-line pb-3">
+                    <h3 className="text-base font-sans font-bold text-ink flex items-center gap-2">
                       <Layers className="w-4 h-4" />
                       <span>Assembled Sequence</span>
                     </h3>
-                    <span className="font-mono text-xs text-grey">[{shots.length} Frames]</span>
+                    <span className="font-mono text-xs text-muted">[{shots.length} Frames]</span>
                   </div>
 
                   <div className="space-y-3">
@@ -675,17 +675,17 @@ export default function VideoCreatorPage() {
                       <div
                         key={idx}
                         onClick={() => { setActiveShotIdx(idx); setIsPlaying(false); }}
-                        className={`p-3 rounded-sm border transition cursor-pointer flex items-center gap-4 ${
+                        className={`p-3 rounded-xl border transition cursor-pointer flex items-center gap-4 ${
                           activeShotIdx === idx
-                            ? 'border-ink bg-white ring-1 ring-ink'
-                            : 'border-grey/30 hover:border-grey'
+                            ? 'border-line bg-surface ring-1 ring-ink'
+                            : 'border-line hover:border-line'
                         }`}
                       >
                         {shot.uploaded_image && (
                           <img
                             src={shot.uploaded_image}
                             alt={shot.title}
-                            className="w-12 h-12 rounded-sm object-cover border border-grey/30 flex-shrink-0"
+                            className="w-12 h-12 rounded-xl object-cover border border-line flex-shrink-0"
                           />
                         )}
                         <div className="flex-1 space-y-0.5">
@@ -693,11 +693,11 @@ export default function VideoCreatorPage() {
                             <span className="text-xs font-medium text-ink">
                               Shot 0{shot.shot_number}: {shot.title}
                             </span>
-                            <span className="text-[10px] font-mono text-grey">
+                            <span className="text-[10px] font-mono text-muted">
                               [{shot.duration_seconds}s]
                             </span>
                           </div>
-                          <p className="text-xs text-grey font-serif italic">
+                          <p className="text-xs text-muted font-sans italic">
                             "{shot.voiceover_script}"
                           </p>
                         </div>
@@ -707,18 +707,18 @@ export default function VideoCreatorPage() {
                 </div>
 
                 {/* Ready to Publish CTA */}
-                <div className="bg-white rounded-sm p-5 border border-grey/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="bg-surface rounded-xl p-5 border border-line flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
-                    <h4 className="text-sm font-serif font-bold text-ink">
+                    <h4 className="text-sm font-sans font-bold text-ink">
                       Publish to Social Channels
                     </h4>
-                    <p className="text-xs text-grey mt-0.5 font-mono">
+                    <p className="text-xs text-muted mt-0.5 font-mono">
                       Queue this video into Post Studio for scheduling
                     </p>
                   </div>
                   <Link
                     href="/preview"
-                    className="btn-primary px-4 py-2 rounded-sm text-xs font-medium flex items-center gap-1.5 flex-shrink-0"
+                    className="btn-primary px-4 py-2 rounded-xl text-xs font-medium flex items-center gap-1.5 flex-shrink-0"
                   >
                     <span>Send to Cockpit</span>
                     <ArrowRight className="w-3.5 h-3.5" />

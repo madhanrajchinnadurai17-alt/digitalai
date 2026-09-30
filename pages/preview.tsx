@@ -150,11 +150,11 @@ export default function PreviewPage() {
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         
         {/* Navigation & Header Breadcrumb */}
-        <div className="card rounded-sm p-5 sm:p-6 border border-grey/30 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="card rounded-xl p-5 sm:p-6 border border-line bg-surface flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Link
               href="/dashboard"
-              className="p-2 rounded-sm border border-grey/30 text-grey hover:text-ink transition"
+              className="p-2 rounded-xl border border-line text-muted hover:text-ink transition"
               title="Back to Dashboard"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -168,7 +168,7 @@ export default function PreviewPage() {
                   <StatusBadge status={currentPostRecord.status} size="sm" />
                 )}
               </div>
-              <h1 className="text-xl sm:text-2xl font-serif font-bold text-ink mt-1">
+              <h1 className="text-xl sm:text-2xl font-sans font-bold text-ink mt-1">
                 Post Studio — {currentProfile.business_name}
               </h1>
             </div>
@@ -177,7 +177,7 @@ export default function PreviewPage() {
           <div className="flex items-center gap-2.5">
             <button
               onClick={handleSaveDraft}
-              className="btn-secondary px-3.5 py-2 rounded-sm text-xs font-medium"
+              className="btn-secondary px-3.5 py-2 rounded-xl text-xs font-medium"
             >
               {saveSuccess ? (
                 <span className="text-success font-mono font-semibold">[Saved]</span>
@@ -189,7 +189,7 @@ export default function PreviewPage() {
             <button
               onClick={handlePublish}
               disabled={isPosting}
-              className="btn-primary px-5 py-2 rounded-sm text-xs font-medium"
+              className="btn-primary px-5 py-2 rounded-xl text-xs font-medium"
             >
               {isPosting ? (
                 <div className="flex items-center gap-2">
@@ -205,8 +205,8 @@ export default function PreviewPage() {
 
         {/* AI Insight Metadata Chips */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="card p-4 rounded-sm border border-grey/30 bg-white">
-            <span className="text-xs font-mono text-grey block">
+          <div className="card p-4 rounded-xl border border-line bg-surface">
+            <span className="text-xs font-mono text-muted block">
               [Theme Hook]
             </span>
             <p className="text-xs font-medium text-ink mt-1 line-clamp-1">
@@ -214,8 +214,8 @@ export default function PreviewPage() {
             </p>
           </div>
 
-          <div className="card p-4 rounded-sm border border-grey/30 bg-white">
-            <span className="text-xs font-mono text-grey block">
+          <div className="card p-4 rounded-xl border border-line bg-surface">
+            <span className="text-xs font-mono text-muted block">
               [Posting Window]
             </span>
             <p className="text-xs font-medium text-ink mt-1">
@@ -223,8 +223,8 @@ export default function PreviewPage() {
             </p>
           </div>
 
-          <div className="card p-4 rounded-sm border border-grey/30 bg-white">
-            <span className="text-xs font-mono text-grey block">
+          <div className="card p-4 rounded-xl border border-line bg-surface">
+            <span className="text-xs font-mono text-muted block">
               [Creative Angle]
             </span>
             <p className="text-xs font-medium text-ink mt-1 line-clamp-1">
@@ -237,8 +237,8 @@ export default function PreviewPage() {
         {format === 'carousel' ? (
           /* Multi-Slide Carousel Outline View */
           <div className="space-y-6">
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-              <div className="flex items-center justify-between pb-4 border-b border-grey/30 mb-6">
+            <div className="card rounded-xl p-6 border border-line bg-surface">
+              <div className="flex items-center justify-between pb-4 border-b border-line mb-6">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono text-ink">
                     [Carousel Deck: {activePost.carousel_slides?.length || 5} Slides]
@@ -246,7 +246,7 @@ export default function PreviewPage() {
                 </div>
                 <button
                   onClick={handleCopySlides}
-                  className="btn-secondary px-3 py-1.5 rounded-sm text-xs font-medium"
+                  className="btn-secondary px-3 py-1.5 rounded-xl text-xs font-medium"
                 >
                   {copiedSlides ? 'Deck Copied' : 'Copy Slide Outline'}
                 </button>
@@ -257,10 +257,10 @@ export default function PreviewPage() {
                 {activePost.carousel_slides?.map((slide) => (
                   <div
                     key={slide.slide_number}
-                    className="p-4 rounded-sm border border-grey/30 bg-white flex flex-col justify-between space-y-3"
+                    className="p-4 rounded-xl border border-line bg-surface flex flex-col justify-between space-y-3"
                   >
                     <div>
-                      <div className="flex items-center justify-between text-xs font-mono text-grey mb-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-muted mb-2">
                         <span>SLIDE 0{slide.slide_number}</span>
                         {slide.slide_number === 1 && (
                           <span className="text-[10px] font-mono text-ink">
@@ -273,15 +273,15 @@ export default function PreviewPage() {
                           </span>
                         )}
                       </div>
-                      <h4 className="text-xs font-serif font-bold text-ink leading-snug">
+                      <h4 className="text-xs font-sans font-bold text-ink leading-snug">
                         {slide.headline}
                       </h4>
-                      <p className="text-[11px] text-grey mt-2 leading-relaxed">
+                      <p className="text-[11px] text-muted mt-2 leading-relaxed">
                         {slide.body}
                       </p>
                     </div>
 
-                    <div className="pt-3 border-t border-grey/20 text-[10px] text-grey font-mono">
+                    <div className="pt-3 border-t border-line text-[10px] text-muted font-mono">
                       Visual: {slide.visual_cue}
                     </div>
                   </div>
@@ -290,14 +290,14 @@ export default function PreviewPage() {
             </div>
 
             {/* Accompanying Caption Editor */}
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30 mb-3">
+            <div className="card rounded-xl p-6 border border-line bg-surface">
+              <div className="flex items-center justify-between pb-3 border-b border-line mb-3">
                 <span className="text-xs font-mono text-ink">
                   [Carousel Intro Caption]
                 </span>
                 <button
                   onClick={handleCopyCaption}
-                  className="text-xs text-grey hover:text-ink underline transition"
+                  className="text-xs text-muted hover:text-ink underline transition"
                 >
                   {copied ? 'Copied' : 'Copy Caption'}
                 </button>
@@ -306,18 +306,18 @@ export default function PreviewPage() {
                 rows={5}
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="w-full bg-white border border-grey/30 rounded-sm p-3.5 text-xs sm:text-sm text-ink leading-relaxed focus:outline-none focus:border-ink resize-none font-sans"
+                className="w-full bg-surface border border-line rounded-xl p-3.5 text-xs sm:text-sm text-ink leading-relaxed focus:outline-none focus:border-line resize-none font-sans"
               />
             </div>
           </div>
         ) : format === 'reels_script' ? (
           /* Reels / Video Script Storyboard View */
           <div className="space-y-6">
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-grey/30">
+            <div className="card rounded-xl p-6 border border-line bg-surface space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-line">
                 <div>
-                  <h3 className="text-base font-serif font-bold text-ink">Reels Video Storyboard</h3>
-                  <div className="flex items-center gap-3 text-xs font-mono text-grey mt-0.5">
+                  <h3 className="text-base font-sans font-bold text-ink">Reels Video Storyboard</h3>
+                  <div className="flex items-center gap-3 text-xs font-mono text-muted mt-0.5">
                     <span>Duration: {activePost.reels_script?.duration || '20s'}</span>
                     <span>·</span>
                     <span>Music: {activePost.reels_script?.music_suggestion || 'Upbeat Kinetic Lofi'}</span>
@@ -326,14 +326,14 @@ export default function PreviewPage() {
 
                 <button
                   onClick={handleCopySlides}
-                  className="btn-secondary px-3 py-1.5 rounded-sm text-xs font-medium"
+                  className="btn-secondary px-3 py-1.5 rounded-xl text-xs font-medium"
                 >
                   {copiedSlides ? 'Script Copied' : 'Copy Script'}
                 </button>
               </div>
 
               {/* 3-Second Hook Callout */}
-              <div className="p-3.5 rounded-sm border border-grey/30 bg-white flex items-start gap-3">
+              <div className="p-3.5 rounded-xl border border-line bg-surface flex items-start gap-3">
                 <span className="text-xs font-mono text-ink shrink-0">
                   [Hook]
                 </span>
@@ -344,7 +344,7 @@ export default function PreviewPage() {
 
               {/* Scene Breakdown Storyboard */}
               <div className="space-y-2">
-                <span className="text-xs font-mono text-grey block">
+                <span className="text-xs font-mono text-muted block">
                   [Scene Timeline]
                 </span>
 
@@ -352,7 +352,7 @@ export default function PreviewPage() {
                   {activePost.reels_script?.scenes?.map((scene, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-sm border border-grey/30 bg-white grid grid-cols-1 md:grid-cols-12 gap-3 items-center"
+                      className="p-3.5 rounded-xl border border-line bg-surface grid grid-cols-1 md:grid-cols-12 gap-3 items-center"
                     >
                       <div className="md:col-span-2">
                         <span className="text-xs font-mono text-ink">
@@ -360,11 +360,11 @@ export default function PreviewPage() {
                         </span>
                       </div>
                       <div className="md:col-span-4 text-xs text-ink">
-                        <span className="text-grey font-mono block text-[10px]">VISUAL:</span>
+                        <span className="text-muted font-mono block text-[10px]">VISUAL:</span>
                         {scene.visual_action}
                       </div>
-                      <div className="md:col-span-4 text-xs text-grey">
-                        <span className="text-grey font-mono block text-[10px]">VOICEOVER:</span>
+                      <div className="md:col-span-4 text-xs text-muted">
+                        <span className="text-muted font-mono block text-[10px]">VOICEOVER:</span>
                         {scene.spoken_audio}
                       </div>
                       <div className="md:col-span-2 text-xs font-mono text-ink text-right">
@@ -377,14 +377,14 @@ export default function PreviewPage() {
             </div>
 
             {/* Accompanying Caption */}
-            <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30 mb-3">
+            <div className="card rounded-xl p-6 border border-line bg-surface">
+              <div className="flex items-center justify-between pb-3 border-b border-line mb-3">
                 <span className="text-xs font-mono text-ink">
                   [Reels Caption &amp; Hashtags]
                 </span>
                 <button
                   onClick={handleCopyCaption}
-                  className="text-xs text-grey hover:text-ink underline transition"
+                  className="text-xs text-muted hover:text-ink underline transition"
                 >
                   {copied ? 'Copied' : 'Copy'}
                 </button>
@@ -393,7 +393,7 @@ export default function PreviewPage() {
                 rows={4}
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
-                className="w-full bg-white border border-grey/30 rounded-sm p-3.5 text-xs sm:text-sm text-ink leading-relaxed focus:outline-none focus:border-ink resize-none font-sans"
+                className="w-full bg-surface border border-line rounded-xl p-3.5 text-xs sm:text-sm text-ink leading-relaxed focus:outline-none focus:border-line resize-none font-sans"
               />
             </div>
           </div>
@@ -401,14 +401,14 @@ export default function PreviewPage() {
           /* Default: Single Image Post with HTML5 Canvas Studio */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             <div className="lg:col-span-6 space-y-4">
-              <div className="card rounded-sm p-6 border border-grey/30 bg-white flex flex-col h-full">
-                <div className="flex items-center justify-between pb-3.5 border-b border-grey/30 mb-3">
+              <div className="card rounded-xl p-6 border border-line bg-surface flex flex-col h-full">
+                <div className="flex items-center justify-between pb-3.5 border-b border-line mb-3">
                   <span className="text-xs font-mono text-ink">
                     [Instagram Caption &amp; Copy]
                   </span>
                   <button
                     onClick={handleCopyCaption}
-                    className="text-xs text-grey hover:text-ink underline transition"
+                    className="text-xs text-muted hover:text-ink underline transition"
                   >
                     {copied ? 'Copied' : 'Copy'}
                   </button>
@@ -419,12 +419,12 @@ export default function PreviewPage() {
                     rows={14}
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}
-                    className="w-full h-full min-h-[330px] bg-white border border-grey/30 rounded-sm p-3.5 text-xs sm:text-sm text-ink leading-relaxed placeholder-grey focus:outline-none focus:border-ink transition resize-none font-sans"
+                    className="w-full h-full min-h-[330px] bg-surface border border-line rounded-xl p-3.5 text-xs sm:text-sm text-ink leading-relaxed placeholder-muted focus:outline-none focus:border-line transition resize-none font-sans"
                     placeholder="Your generated caption will appear here..."
                   />
                 </div>
 
-                <div className="mt-3 flex items-center justify-between text-xs font-mono text-grey">
+                <div className="mt-3 flex items-center justify-between text-xs font-mono text-muted">
                   <span>[{activePost.hashtags?.length || 0} Hashtags]</span>
                   <span>{caption.length} characters</span>
                 </div>
@@ -432,8 +432,8 @@ export default function PreviewPage() {
             </div>
 
             <div className="lg:col-span-6 space-y-4">
-              <div className="card rounded-sm p-6 border border-grey/30 bg-white">
-                <div className="flex items-center justify-between pb-3.5 border-b border-grey/30 mb-4">
+              <div className="card rounded-xl p-6 border border-line bg-surface">
+                <div className="flex items-center justify-between pb-3.5 border-b border-line mb-4">
                   <span className="text-xs font-mono text-ink">
                     [Canvas Graphic Viewport · 1080 × 1080]
                   </span>
@@ -451,21 +451,21 @@ export default function PreviewPage() {
 
         {/* Post Result Feedback Modal */}
         {postResult.open && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm animate-fadeIn">
-            <div className="bg-white rounded-sm max-w-md w-full p-6 text-center border border-ink">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
+            <div className="bg-surface rounded-xl max-w-md w-full p-6 text-center border border-line shadow-ai-glow">
               {postResult.success ? (
                 <>
                   <div className="w-10 h-10 rounded-full bg-success-light border border-success-border text-success flex items-center justify-center mx-auto mb-3">
                     <CheckCircle2 className="w-5 h-5 text-success" />
                   </div>
-                  <h3 className="text-xl font-serif font-bold text-ink">Post Dispatched</h3>
-                  <p className="text-xs text-grey mt-2">
+                  <h3 className="text-xl font-sans font-bold text-ink">Post Dispatched</h3>
+                  <p className="text-xs text-muted mt-2">
                     {postResult.message}
                   </p>
                   
                   {postResult.mediaId && (
-                    <div className="mt-4 p-3 rounded-sm bg-success-light/40 border border-success-border text-left">
-                      <span className="text-[10px] text-grey font-mono block">Media ID:</span>
+                    <div className="mt-4 p-3 rounded-xl bg-success-light/40 border border-success-border text-left">
+                      <span className="text-[10px] text-muted font-mono block">Media ID:</span>
                       <code className="text-xs font-mono text-ink break-all">{postResult.mediaId}</code>
                     </div>
                   )}
@@ -473,13 +473,13 @@ export default function PreviewPage() {
                   <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
                     <Link
                       href="/history"
-                      className="btn-primary flex-1 py-2 px-4 rounded-sm text-xs font-medium text-center"
+                      className="btn-primary flex-1 py-2 px-4 rounded-xl text-xs font-medium text-center"
                     >
                       View Ledger
                     </Link>
                     <button
                       onClick={() => setPostResult({ open: false, success: false })}
-                      className="btn-secondary flex-1 py-2 px-4 rounded-sm text-xs font-medium"
+                      className="btn-secondary flex-1 py-2 px-4 rounded-xl text-xs font-medium"
                     >
                       Dismiss
                     </button>
@@ -490,13 +490,13 @@ export default function PreviewPage() {
                   <div className="w-10 h-10 rounded-full bg-danger-light border border-danger-border text-danger flex items-center justify-center mx-auto mb-3">
                     <AlertCircle className="w-5 h-5 text-danger" />
                   </div>
-                  <h3 className="text-xl font-serif font-bold text-danger">Publishing Notice</h3>
-                  <p className="text-xs text-grey mt-2">
+                  <h3 className="text-xl font-sans font-bold text-danger">Publishing Notice</h3>
+                  <p className="text-xs text-muted mt-2">
                     {postResult.error}
                   </p>
                   <button
                     onClick={() => setPostResult({ open: false, success: false })}
-                    className="btn-secondary mt-6 w-full py-2 px-4 rounded-sm text-xs font-medium"
+                    className="btn-secondary mt-6 w-full py-2 px-4 rounded-xl text-xs font-medium"
                   >
                     Dismiss
                   </button>

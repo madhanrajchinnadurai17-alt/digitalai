@@ -74,33 +74,33 @@ export default function AgentPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header */}
-        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-surface rounded-xl p-6 sm:p-8 border border-line flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono text-xs text-grey mb-2">
+            <div className="inline-flex items-center gap-2 font-mono text-xs text-muted mb-2">
               <Bot className="w-3.5 h-3.5 text-ink" />
               <span>[Virtual CMO Agent]</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink tracking-tight flex items-center gap-3">
               Autonomous Marketing Agent
             </h1>
-            <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
               MarkAI audits post performance across channels and operates an autonomous closed-loop campaign engine that plans, optimizes, and schedules your entire month of marketing.
             </p>
           </div>
         </div>
 
         {/* 1-Click Autopilot Hero Banner */}
-        <div className="bg-white rounded-sm p-6 sm:p-8 border border-grey/30 relative overflow-hidden">
+        <div className="bg-surface rounded-xl p-6 sm:p-8 border border-line relative overflow-hidden">
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-3 max-w-xl">
-              <div className="inline-flex items-center gap-1.5 font-mono text-xs text-grey">
+              <div className="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
                 <Zap className="w-3.5 h-3.5 text-ink" />
                 <span>[One-Click Full-Month Autopilot]</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
+              <h2 className="text-2xl sm:text-3xl font-sans font-bold text-ink">
                 Autonomous Marketing System
               </h2>
-              <p className="text-xs sm:text-sm text-grey leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted leading-relaxed">
                 MarkAI will craft 16 seasonal campaigns, adapt copy per channel, and schedule them across optimal engagement windows for {currentProfile.business_name}.
               </p>
             </div>
@@ -109,7 +109,7 @@ export default function AgentPage() {
               <button
                 onClick={handleLaunchAutopilot}
                 disabled={isLaunching}
-                className={`py-3 px-6 rounded-sm text-xs font-medium flex items-center gap-2 transition ${
+                className={`py-3 px-6 rounded-xl text-xs font-medium flex items-center gap-2 transition ${
                   launchSuccess
                     ? 'bg-success text-white border border-success'
                     : 'btn-primary'
@@ -132,9 +132,9 @@ export default function AgentPage() {
                   </>
                 )}
               </button>
-              <span className="text-[11px] font-mono text-grey flex items-center gap-1.5">
+              <span className="text-[11px] font-mono text-muted flex items-center gap-1.5">
                 Status:{' '}
-                <strong className="text-success uppercase bg-success-light border border-success-border px-1.5 py-0.5 rounded-sm font-semibold">
+                <strong className="text-success uppercase bg-success-light border border-success-border px-1.5 py-0.5 rounded-xl font-semibold">
                   [{campaign.status}]
                 </strong>{' '}
                 <span className="text-process font-medium">(16/16 scheduled)</span>
@@ -148,13 +148,13 @@ export default function AgentPage() {
           
           {/* Left: Strategic Recommendations */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
-                <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+            <div className="bg-surface rounded-xl p-6 sm:p-7 border border-line space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-line">
+                <h3 className="text-base font-sans font-bold text-ink flex items-center gap-2">
                   <TrendingUp className="w-4 h-4 text-process" />
                   <span>Strategy Recommendations</span>
                 </h3>
-                <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-2 py-0.5 rounded-sm font-medium">
+                <span className="font-mono text-[10px] text-process bg-process-light border border-process-border px-2 py-0.5 rounded-xl font-medium">
                   [Closed-Loop Optimization]
                 </span>
               </div>
@@ -163,26 +163,26 @@ export default function AgentPage() {
                 {recommendations.map((rec) => (
                   <div
                     key={rec.id}
-                    className="p-4 rounded-sm bg-white border border-grey/30 space-y-2"
+                    className="p-4 rounded-xl bg-surface border border-line space-y-2"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-serif font-bold text-ink flex items-center gap-2">
-                        <span className="px-1.5 py-0.5 rounded-sm bg-process-light text-process border border-process-border text-[10px] font-mono uppercase font-semibold">
+                      <span className="text-xs font-sans font-bold text-ink flex items-center gap-2">
+                        <span className="px-1.5 py-0.5 rounded-xl bg-process-light text-process border border-process-border text-[10px] font-mono uppercase font-semibold">
                           {rec.category}
                         </span>
                         {rec.title}
                       </span>
-                      <span className="text-[10px] font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-sm font-semibold">
+                      <span className="text-[10px] font-mono text-success bg-success-light border border-success-border px-2 py-0.5 rounded-xl font-semibold">
                         [{rec.impact_score}/100 Impact]
                       </span>
                     </div>
 
-                    <p className="text-xs text-grey leading-relaxed">
+                    <p className="text-xs text-muted leading-relaxed">
                       {rec.insight}
                     </p>
 
-                    <div className="pt-2 border-t border-grey/20 flex items-center justify-between text-[11px] font-mono">
-                      <span className="text-grey">Action: <strong className="text-ink font-normal">{rec.action_item}</strong></span>
+                    <div className="pt-2 border-t border-line flex items-center justify-between text-[11px] font-mono">
+                      <span className="text-muted">Action: <strong className="text-ink font-normal">{rec.action_item}</strong></span>
                       <span className="text-success font-semibold">[{rec.expected_impact}]</span>
                     </div>
                   </div>
@@ -193,23 +193,23 @@ export default function AgentPage() {
 
           {/* Right: Weekly Executive Digest */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-sm p-6 sm:p-7 border border-grey/30 space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
-                <h3 className="text-base font-serif font-bold text-ink flex items-center gap-2">
+            <div className="bg-surface rounded-xl p-6 sm:p-7 border border-line space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-line">
+                <h3 className="text-base font-sans font-bold text-ink flex items-center gap-2">
                   <FileText className="w-4 h-4 text-ink" />
                   <span>Weekly Executive Digest</span>
                 </h3>
-                <span className="text-[10px] font-mono text-grey">[Week 36, 2026]</span>
+                <span className="text-[10px] font-mono text-muted">[Week 36, 2026]</span>
               </div>
 
-              <div className="p-4 rounded-sm bg-white border border-grey/30 space-y-3 text-xs leading-relaxed text-grey">
-                <p className="font-serif font-bold text-ink text-sm">
+              <div className="p-4 rounded-xl bg-surface border border-line space-y-3 text-xs leading-relaxed text-muted">
+                <p className="font-sans font-bold text-ink text-sm">
                   Executive Summary for {currentProfile.business_name}:
                 </p>
-                <p className="font-serif">
+                <p className="font-sans">
                   {campaign.weekly_digest_summary || 'MarkAI has generated and scheduled 16 monthly campaigns. Carousel educational formats are delivering 3.4x higher save rates.'}
                 </p>
-                <div className="pt-2 border-t border-grey/20 text-[11px] font-mono space-y-1 text-grey">
+                <div className="pt-2 border-t border-line text-[11px] font-mono space-y-1 text-muted">
                   <div>Channel: <strong className="text-ink font-normal">Instagram [7.8% Eng.]</strong></div>
                   <div>Optimal Window: <strong className="text-ink font-normal">Tuesdays at 08:15 AM</strong></div>
                   <div>Momentum: <strong className="text-ink font-normal">[+18.5% Growth]</strong></div>

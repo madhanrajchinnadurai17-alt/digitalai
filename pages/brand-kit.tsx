@@ -78,15 +78,15 @@ export default function BrandKitPage() {
       <div className="max-w-6xl mx-auto space-y-8">
         
         {/* Header Bar */}
-        <div className="bg-white rounded-sm p-6 border border-grey/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-surface rounded-xl p-6 border border-line flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="text-xs font-mono text-grey mb-1.5">
+            <div className="text-xs font-mono text-muted mb-1.5">
               [Brand Identity &amp; Voice Engine]
             </div>
-            <h1 className="text-2xl sm:text-3xl font-serif font-bold text-ink tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-sans font-bold text-ink tracking-tight">
               Brand Kit Guidelines
             </h1>
-            <p className="text-xs sm:text-sm text-grey mt-1 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl leading-relaxed">
               Define your brand once. MarkAI automatically injects your colors, voice guidelines, and mandatory Do&apos;s &amp; Don&apos;ts into every future AI generation.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function BrandKitPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="btn-primary px-5 py-2.5 rounded-sm text-xs font-medium self-start sm:self-auto"
+            className="btn-primary px-5 py-2.5 rounded-xl text-xs font-medium self-start sm:self-auto"
           >
             {saving ? (
               <span>Saving...</span>
@@ -113,8 +113,8 @@ export default function BrandKitPage() {
           <div className="lg:col-span-7 space-y-6">
             
             {/* Color Palette Card */}
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
-              <h3 className="text-sm font-serif font-bold text-ink">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-4">
+              <h3 className="text-sm font-sans font-bold text-ink">
                 1. Brand Color Specifications
               </h3>
 
@@ -123,12 +123,12 @@ export default function BrandKitPage() {
                   <label className="block text-xs font-mono text-ink mb-1.5">
                     Primary
                   </label>
-                  <div className="flex items-center gap-2 p-2 rounded-sm bg-white border border-grey/30">
+                  <div className="flex items-center gap-2 p-2 rounded-xl bg-surface border border-line">
                     <input
                       type="color"
                       value={formData.primary_color}
                       onChange={(e) => handleColorChange('primary_color', e.target.value)}
-                      className="w-6 h-6 rounded-none border-0 cursor-pointer bg-transparent"
+                      className="w-6 h-6 rounded-lg border-0 cursor-pointer bg-transparent"
                     />
                     <input
                       type="text"
@@ -143,12 +143,12 @@ export default function BrandKitPage() {
                   <label className="block text-xs font-mono text-ink mb-1.5">
                     Secondary
                   </label>
-                  <div className="flex items-center gap-2 p-2 rounded-sm bg-white border border-grey/30">
+                  <div className="flex items-center gap-2 p-2 rounded-xl bg-surface border border-line">
                     <input
                       type="color"
                       value={formData.secondary_color}
                       onChange={(e) => handleColorChange('secondary_color', e.target.value)}
-                      className="w-6 h-6 rounded-none border-0 cursor-pointer bg-transparent"
+                      className="w-6 h-6 rounded-lg border-0 cursor-pointer bg-transparent"
                     />
                     <input
                       type="text"
@@ -163,12 +163,12 @@ export default function BrandKitPage() {
                   <label className="block text-xs font-mono text-ink mb-1.5">
                     Accent
                   </label>
-                  <div className="flex items-center gap-2 p-2 rounded-sm bg-white border border-grey/30">
+                  <div className="flex items-center gap-2 p-2 rounded-xl bg-surface border border-line">
                     <input
                       type="color"
                       value={formData.accent_color}
                       onChange={(e) => handleColorChange('accent_color', e.target.value)}
-                      className="w-6 h-6 rounded-none border-0 cursor-pointer bg-transparent"
+                      className="w-6 h-6 rounded-lg border-0 cursor-pointer bg-transparent"
                     />
                     <input
                       type="text"
@@ -182,8 +182,8 @@ export default function BrandKitPage() {
             </div>
 
             {/* Voice & Guidelines */}
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-4">
-              <h3 className="text-sm font-serif font-bold text-ink">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-4">
+              <h3 className="text-sm font-sans font-bold text-ink">
                 2. Brand Voice &amp; Tone Guidelines
               </h3>
 
@@ -196,7 +196,7 @@ export default function BrandKitPage() {
                   value={formData.brand_voice_guidelines}
                   onChange={(e) => setFormData({ ...formData, brand_voice_guidelines: e.target.value })}
                   placeholder="e.g. Warm, artisanal, passionate, neighborly, prioritizing organic craft quality over generic sales hype..."
-                  className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs sm:text-sm text-ink placeholder-grey focus:outline-none focus:border-ink resize-none font-sans"
+                  className="w-full bg-surface border border-line rounded-xl p-3 text-xs sm:text-sm text-ink placeholder-muted focus:outline-none focus:border-line resize-none font-sans"
                 />
               </div>
 
@@ -209,14 +209,14 @@ export default function BrandKitPage() {
                   value={formData.logo_badge_text}
                   onChange={(e) => setFormData({ ...formData, logo_badge_text: e.target.value })}
                   placeholder="e.g. BREW & BEAN CO."
-                  className="w-full bg-white border border-grey/30 rounded-sm px-3.5 py-2 text-xs sm:text-sm text-ink placeholder-grey focus:outline-none focus:border-ink"
+                  className="w-full bg-surface border border-line rounded-xl px-3.5 py-2 text-xs sm:text-sm text-ink placeholder-muted focus:outline-none focus:border-line"
                 />
               </div>
             </div>
 
             {/* Mandatory Do's and Don'ts */}
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-5">
-              <h3 className="text-sm font-serif font-bold text-ink">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-5">
+              <h3 className="text-sm font-sans font-bold text-ink">
                 3. Mandatory Do&apos;s &amp; Don&apos;ts
               </h3>
 
@@ -226,20 +226,20 @@ export default function BrandKitPage() {
                   <span className="text-xs font-mono text-ink">
                     [Mandatory Do&apos;s]
                   </span>
-                  <span className="text-[10px] font-mono text-grey">{formData.dos_list.length} rules</span>
+                  <span className="text-[10px] font-mono text-muted">{formData.dos_list.length} rules</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {formData.dos_list.map((item, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-white border border-grey/30 text-xs font-mono text-ink"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface border border-line text-xs font-mono text-ink"
                     >
                       <span>+ {item}</span>
                       <button
                         type="button"
                         onClick={() => handleRemoveDo(idx)}
-                        className="text-grey hover:text-ink transition ml-1"
+                        className="text-muted hover:text-ink transition ml-1"
                       >
                         ×
                       </button>
@@ -253,11 +253,11 @@ export default function BrandKitPage() {
                     value={newDo}
                     onChange={(e) => setNewDo(e.target.value)}
                     placeholder="Add a brand Do..."
-                    className="flex-1 bg-white border border-grey/30 rounded-sm px-3 py-1.5 text-xs text-ink placeholder-grey focus:outline-none focus:border-ink"
+                    className="flex-1 bg-surface border border-line rounded-xl px-3 py-1.5 text-xs text-ink placeholder-muted focus:outline-none focus:border-line"
                   />
                   <button
                     type="submit"
-                    className="px-3 py-1.5 rounded-sm btn-secondary text-xs font-medium"
+                    className="px-3 py-1.5 rounded-xl btn-secondary text-xs font-medium"
                   >
                     Add
                   </button>
@@ -265,25 +265,25 @@ export default function BrandKitPage() {
               </div>
 
               {/* Don'ts List */}
-              <div className="space-y-3 pt-4 border-t border-grey/20">
+              <div className="space-y-3 pt-4 border-t border-line">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-mono text-ink">
                     [Strict Don&apos;ts]
                   </span>
-                  <span className="text-[10px] font-mono text-grey">{formData.donts_list.length} rules</span>
+                  <span className="text-[10px] font-mono text-muted">{formData.donts_list.length} rules</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   {formData.donts_list.map((item, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-white border border-grey/30 text-xs font-mono text-grey"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface border border-line text-xs font-mono text-muted"
                     >
                       <span>- {item}</span>
                       <button
                         type="button"
                         onClick={() => handleRemoveDont(idx)}
-                        className="text-grey hover:text-ink transition ml-1"
+                        className="text-muted hover:text-ink transition ml-1"
                       >
                         ×
                       </button>
@@ -297,11 +297,11 @@ export default function BrandKitPage() {
                     value={newDont}
                     onChange={(e) => setNewDont(e.target.value)}
                     placeholder="Add a brand Don't..."
-                    className="flex-1 bg-white border border-grey/30 rounded-sm px-3 py-1.5 text-xs text-ink placeholder-grey focus:outline-none focus:border-ink"
+                    className="flex-1 bg-surface border border-line rounded-xl px-3 py-1.5 text-xs text-ink placeholder-muted focus:outline-none focus:border-line"
                   />
                   <button
                     type="submit"
-                    className="px-3 py-1.5 rounded-sm btn-secondary text-xs font-medium"
+                    className="px-3 py-1.5 rounded-xl btn-secondary text-xs font-medium"
                   >
                     Add
                   </button>
@@ -312,43 +312,43 @@ export default function BrandKitPage() {
 
           {/* Right Column: Live Brand Identity Preview */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-sm p-6 border border-grey/30 space-y-5">
-              <div className="flex items-center justify-between pb-3 border-b border-grey/30">
+            <div className="bg-surface rounded-xl p-6 border border-line space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-line">
                 <span className="text-xs font-mono text-ink">
                   [Brand Preview Card]
                 </span>
-                <span className="text-xs font-mono text-grey">
+                <span className="text-xs font-mono text-muted">
                   [Active]
                 </span>
               </div>
 
               {/* Clean Preview Frame */}
-              <div className="w-full aspect-square rounded-sm p-6 border border-ink bg-white flex flex-col justify-between text-ink">
-                <div className="text-[10px] font-mono uppercase tracking-wider text-grey">
+              <div className="w-full aspect-square rounded-xl p-6 border border-line bg-surface flex flex-col justify-between text-ink">
+                <div className="text-[10px] font-mono uppercase tracking-wider text-muted">
                   [{formData.logo_badge_text || currentProfile.business_name}]
                 </div>
 
                 <div>
-                  <p className="text-lg font-serif font-bold leading-snug">
+                  <p className="text-lg font-sans font-bold leading-snug">
                     {currentProfile.business_name}
                   </p>
-                  <p className="text-xs text-grey mt-2 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-muted mt-2 line-clamp-3 leading-relaxed">
                     {formData.brand_voice_guidelines || 'Crafted with authentic intention and premium quality.'}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between text-[9px] font-mono text-grey uppercase pt-2 border-t border-grey/20">
+                <div className="flex items-center justify-between text-[9px] font-mono text-muted uppercase pt-2 border-t border-line">
                   <span>BRAND GUIDELINES APPLIED</span>
                   <span>MARKAI</span>
                 </div>
               </div>
 
               {/* Memory Context Injection Summary */}
-              <div className="p-4 rounded-sm bg-white border border-grey/30 space-y-1.5 text-xs">
+              <div className="p-4 rounded-xl bg-surface border border-line space-y-1.5 text-xs">
                 <span className="text-xs font-mono text-ink block">
                   [Prompt Memory Engine]
                 </span>
-                <p className="text-grey leading-relaxed">
+                <p className="text-muted leading-relaxed">
                   Every time content is generated, these rules are injected directly into the Claude prompt to enforce consistent voice and brand governance.
                 </p>
               </div>

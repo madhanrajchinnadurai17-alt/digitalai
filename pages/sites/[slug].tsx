@@ -73,27 +73,27 @@ export default function HostedSitePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-ink font-sans antialiased selection:bg-ink selection:text-white">
+    <div className="min-h-screen bg-surface text-ink font-sans antialiased selection:bg-ink selection:text-white">
       <Head>
         <title>{site.business_name} — Official Site</title>
         <meta name="description" content={site.hero.tagline} />
       </Head>
 
       {/* Top Banner Navigation */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-grey/30">
+      <header className="sticky top-0 z-40 bg-surface/95 backdrop-blur-md border-b border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-sm bg-ink text-white flex items-center justify-center font-serif font-bold text-sm">
+            <div className="w-8 h-8 rounded-xl bg-ink text-white flex items-center justify-center font-sans font-bold text-sm">
               {site.business_name.charAt(0)}
             </div>
-            <span className="font-serif font-bold text-lg tracking-tight text-ink">
+            <span className="font-sans font-bold text-lg tracking-tight text-ink">
               {site.business_name}
             </span>
           </div>
 
           <a
             href="#contact"
-            className="btn-primary px-3.5 py-1.5 rounded-sm text-xs font-medium transition"
+            className="btn-primary px-3.5 py-1.5 rounded-xl text-xs font-medium transition"
           >
             Contact & Order
           </a>
@@ -102,28 +102,28 @@ export default function HostedSitePage() {
 
       {/* Hero Section */}
       <section className="py-20 sm:py-28 text-center px-4 max-w-4xl mx-auto relative">
-        <div className="inline-flex items-center gap-2 font-mono text-xs text-grey mb-6">
+        <div className="inline-flex items-center gap-2 font-mono text-xs text-muted mb-6">
           <span>[{site.industry}]</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-serif font-bold text-ink tracking-tight leading-[1.12]">
+        <h1 className="text-4xl sm:text-6xl font-sans font-bold text-ink tracking-tight leading-[1.12]">
           {site.hero.headline}
         </h1>
 
-        <p className="text-base sm:text-lg text-grey max-w-2xl mx-auto mt-6 leading-relaxed">
+        <p className="text-base sm:text-lg text-muted max-w-2xl mx-auto mt-6 leading-relaxed">
           {site.hero.tagline}
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="#offerings"
-            className="btn-primary px-6 py-3 rounded-sm text-xs font-medium"
+            className="btn-primary px-6 py-3 rounded-xl text-xs font-medium"
           >
             {site.hero.cta_button_text}
           </a>
           <a
             href="#contact"
-            className="btn-secondary px-6 py-3 rounded-sm text-xs font-medium"
+            className="btn-secondary px-6 py-3 rounded-xl text-xs font-medium"
           >
             Get In Touch
           </a>
@@ -131,23 +131,23 @@ export default function HostedSitePage() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-white border-y border-grey/30">
+      <section className="py-16 bg-surface border-y border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-6 space-y-4">
-            <span className="font-mono text-xs text-grey uppercase block">
+            <span className="font-mono text-xs text-muted uppercase block">
               [Our Story & Craft]
             </span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
+            <h2 className="text-2xl sm:text-3xl font-sans font-bold text-ink">
               {site.about.title}
             </h2>
-            <p className="text-xs sm:text-sm text-grey leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted leading-relaxed">
               {site.about.story}
             </p>
           </div>
 
           <div className="md:col-span-6 space-y-2.5">
             {site.about.bullet_points.map((point, idx) => (
-              <div key={idx} className="p-3.5 rounded-sm bg-white border border-grey/30 flex items-start gap-3">
+              <div key={idx} className="p-3.5 rounded-xl bg-surface border border-line flex items-start gap-3">
                 <CheckCircle2 className="w-4 h-4 text-ink flex-shrink-0 mt-0.5" />
                 <span className="text-xs font-medium text-ink">{point}</span>
               </div>
@@ -159,10 +159,10 @@ export default function HostedSitePage() {
       {/* Offerings / Catalog Grid */}
       <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6" id="offerings">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="font-mono text-xs text-grey uppercase">
+          <span className="font-mono text-xs text-muted uppercase">
             [Featured Offerings]
           </span>
-          <h2 className="text-3xl font-serif font-bold text-ink mt-2">
+          <h2 className="text-3xl font-sans font-bold text-ink mt-2">
             Signature Menu & Catalog
           </h2>
         </div>
@@ -171,23 +171,23 @@ export default function HostedSitePage() {
           {site.offerings.map((item) => (
             <div
               key={item.id}
-              className="p-5 rounded-sm bg-white border border-grey/30 flex flex-col justify-between"
+              className="p-5 rounded-xl bg-surface border border-line flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-base font-serif font-bold text-ink">{item.name}</h3>
-                  <span className="text-xs font-mono text-ink border border-grey/30 px-2 py-0.5 rounded-sm">
+                  <h3 className="text-base font-sans font-bold text-ink">{item.name}</h3>
+                  <span className="text-xs font-mono text-ink border border-line px-2 py-0.5 rounded-xl">
                     {item.price}
                   </span>
                 </div>
-                <p className="text-xs text-grey leading-relaxed mt-2">
+                <p className="text-xs text-muted leading-relaxed mt-2">
                   {item.description}
                 </p>
               </div>
 
               {item.badge && (
-                <div className="mt-4 pt-3 border-t border-grey/20">
-                  <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-sm">
+                <div className="mt-4 pt-3 border-t border-line">
+                  <span className="font-mono text-[10px] text-ink border border-ink px-2 py-0.5 rounded-xl">
                     [{item.badge}]
                   </span>
                 </div>
@@ -198,25 +198,25 @@ export default function HostedSitePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 bg-white border-y border-grey/30">
+      <section className="py-16 bg-surface border-y border-line">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="font-mono text-xs text-grey uppercase block">[Community Reviews]</span>
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1">What Customers Say</h2>
+            <span className="font-mono text-xs text-muted uppercase block">[Community Reviews]</span>
+            <h2 className="text-2xl sm:text-3xl font-sans font-bold text-ink mt-1">What Customers Say</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {site.testimonials.map((t, i) => (
-              <div key={i} className="p-5 rounded-sm bg-white border border-grey/30 space-y-3">
+              <div key={i} className="p-5 rounded-xl bg-surface border border-line space-y-3">
                 <div className="flex text-ink gap-0.5">
                   {Array.from({ length: t.rating }).map((_, r) => (
                     <Star key={r} className="w-3.5 h-3.5 fill-ink" />
                   ))}
                 </div>
-                <p className="text-xs text-grey font-serif italic leading-relaxed">"{t.comment}"</p>
-                <div className="pt-2 border-t border-grey/20">
+                <p className="text-xs text-muted font-sans italic leading-relaxed">"{t.comment}"</p>
+                <div className="pt-2 border-t border-line">
                   <span className="text-xs font-medium text-ink block">{t.name}</span>
-                  <span className="text-[10px] font-mono text-grey">{t.role}</span>
+                  <span className="text-[10px] font-mono text-muted">{t.role}</span>
                 </div>
               </div>
             ))}
@@ -231,21 +231,21 @@ export default function HostedSitePage() {
           {/* Business Info */}
           <div className="md:col-span-5 space-y-6">
             <div>
-              <span className="font-mono text-xs text-grey uppercase block">[Visit & Connect]</span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink mt-1">Get In Touch</h2>
-              <p className="text-xs text-grey mt-2">Have a question or custom catering inquiry? Send us a message.</p>
+              <span className="font-mono text-xs text-muted uppercase block">[Visit & Connect]</span>
+              <h2 className="text-2xl sm:text-3xl font-sans font-bold text-ink mt-1">Get In Touch</h2>
+              <p className="text-xs text-muted mt-2">Have a question or custom catering inquiry? Send us a message.</p>
             </div>
 
             <div className="space-y-2.5 text-xs text-ink">
-              <div className="flex items-center gap-3 p-3 rounded-sm bg-white border border-grey/30">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-surface border border-line">
                 <MapPin className="w-4 h-4 text-ink" />
                 <span>{site.address}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-sm bg-white border border-grey/30">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-surface border border-line">
                 <Clock className="w-4 h-4 text-ink" />
                 <span>{site.hours}</span>
               </div>
-              <div className="flex items-center gap-3 p-3 rounded-sm bg-white border border-grey/30">
+              <div className="flex items-center gap-3 p-3 rounded-xl bg-surface border border-line">
                 <Phone className="w-4 h-4 text-ink" />
                 <span>{site.contact_phone}</span>
               </div>
@@ -254,14 +254,14 @@ export default function HostedSitePage() {
 
           {/* Interactive Lead Capture Form */}
           <div className="md:col-span-7">
-            <div className="p-6 sm:p-7 rounded-sm bg-white border border-grey/30">
+            <div className="p-6 sm:p-7 rounded-xl bg-surface border border-line">
               {submitted ? (
                 <div className="py-10 text-center space-y-3">
-                  <div className="w-10 h-10 rounded-sm bg-success text-white flex items-center justify-center mx-auto shadow-sm">
+                  <div className="w-10 h-10 rounded-xl bg-success text-white flex items-center justify-center mx-auto shadow-sm">
                     <Check className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-serif font-bold text-ink">Inquiry Sent Successfully</h3>
-                  <p className="text-xs text-grey max-w-xs mx-auto">Your inquiry has been received. Our team will contact you shortly.</p>
+                  <h3 className="text-lg font-sans font-bold text-ink">Inquiry Sent Successfully</h3>
+                  <p className="text-xs text-muted max-w-xs mx-auto">Your inquiry has been received. Our team will contact you shortly.</p>
                   <button
                     onClick={() => setSubmitted(false)}
                     className="mt-4 text-xs font-mono text-process hover:underline"
@@ -273,36 +273,36 @@ export default function HostedSitePage() {
                 <form onSubmit={handleSubmitLead} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-grey mb-1 uppercase">Your Name *</label>
+                      <label className="block text-xs font-mono text-muted mb-1 uppercase">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
-                        className="w-full bg-white border border-grey/30 rounded-sm px-3 py-2 text-xs text-ink placeholder:text-grey focus:outline-none focus:border-ink transition"
+                        className="w-full bg-surface border border-line rounded-xl px-3 py-2 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-ink transition"
                         placeholder="Jane Doe"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-grey mb-1 uppercase">Email Address *</label>
+                      <label className="block text-xs font-mono text-muted mb-1 uppercase">Email Address *</label>
                       <input
                         type="email"
                         required
                         value={formEmail}
                         onChange={(e) => setFormEmail(e.target.value)}
-                        className="w-full bg-white border border-grey/30 rounded-sm px-3 py-2 text-xs text-ink placeholder:text-grey focus:outline-none focus:border-ink transition"
+                        className="w-full bg-surface border border-line rounded-xl px-3 py-2 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-ink transition"
                         placeholder="jane@example.com"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono text-grey mb-1 uppercase">Message / Inquiry</label>
+                    <label className="block text-xs font-mono text-muted mb-1 uppercase">Message / Inquiry</label>
                     <textarea
                       rows={3}
                       value={formMessage}
                       onChange={(e) => setFormMessage(e.target.value)}
-                      className="w-full bg-white border border-grey/30 rounded-sm p-3 text-xs text-ink placeholder:text-grey focus:outline-none focus:border-ink transition resize-none"
+                      className="w-full bg-surface border border-line rounded-xl p-3 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-ink transition resize-none"
                       placeholder="Tell us what you need..."
                     />
                   </div>
@@ -310,7 +310,7 @@ export default function HostedSitePage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="btn-primary w-full py-2.5 px-4 rounded-sm text-xs font-medium"
+                    className="btn-primary w-full py-2.5 px-4 rounded-xl text-xs font-medium"
                   >
                     {submitting ? 'Submitting...' : 'Send Customer Inquiry'}
                   </button>
@@ -322,7 +322,7 @@ export default function HostedSitePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-grey/30 text-center text-xs font-mono text-grey">
+      <footer className="py-8 border-t border-line text-center text-xs font-mono text-muted">
         <p>© 2026 {site.business_name}. Powered by MarkAI.</p>
       </footer>
     </div>
