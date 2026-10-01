@@ -24,7 +24,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (geminiApiKey && geminiApiKey.trim() !== '' && geminiApiKey !== 'your_gemini_api_key_here') {
     try {
       const genAI = new GoogleGenerativeAI(geminiApiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const modelName = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+      let model = genAI.getGenerativeModel({ model: modelName });
 
       const prompt = `You are MarkAI's expert Video Director.
 Generate a structured 3-shot filming checklist for a small business owner to capture their own photos or video clips using their smartphone.
@@ -66,7 +67,25 @@ Return STRICTLY a valid JSON array of 3 shots with no markdown ticks or text for
   }
 ]`;
 
-      const result = await model.generateContent(prompt);
+      const candidateModels = [modelName, 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-1.5-flash'];
+      let result: any = null;
+      let usedModel = modelName;
+
+      for (const m of candidateModels) {
+        try {
+          const mod = genAI.getGenerativeModel({ model: m });
+          result = await mod.generateContent(prompt);
+          usedModel = m;
+          break;
+        } catch (err: any) {
+          console.warn(`Gemini model ${m} attempt failed, trying next:`, err?.message || err);
+        }
+      }
+
+      if (!result) {
+        throw new Error('All Gemini model candidates failed');
+      }
+
       const text = result.response.text().trim().replace(/^```(json)?\n?/, '').replace(/\n?```$/, '');
       const parsed = JSON.parse(text);
 
@@ -85,7 +104,7 @@ Return STRICTLY a valid JSON array of 3 shots with no markdown ticks or text for
         success: true, 
         source: 'live',
         data: shots, 
-        generated_via: 'gemini-1.5-flash' 
+        generated_via: usedModel 
       });
     } catch (e: any) {
       console.warn('Gemini shot generation fallback:', e?.message || e);

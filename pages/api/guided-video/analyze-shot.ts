@@ -26,7 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (geminiApiKey && geminiApiKey.trim() !== '' && geminiApiKey !== 'your_gemini_api_key_here') {
     try {
       const genAI = new GoogleGenerativeAI(geminiApiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const modelName = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+      let model = genAI.getGenerativeModel({ model: modelName });
 
       // Strip mime prefix if present
       const match = imageBase64.match(/^data:(image\/[a-zA-Z+]+);base64,(.+)$/);
@@ -55,7 +56,25 @@ Return STRICTLY a valid JSON object without markdown ticks or backticks:
   "tip": "To make it pop even more, wipe your camera lens clean and angle 10% lower."
 }`;
 
-      const result = await model.generateContent([prompt, imagePart]);
+      const candidateModels = [modelName, 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-1.5-flash'];
+      let result: any = null;
+      let usedModel = modelName;
+
+      for (const m of candidateModels) {
+        try {
+          const mod = genAI.getGenerativeModel({ model: m });
+          result = await mod.generateContent([prompt, imagePart]);
+          usedModel = m;
+          break;
+        } catch (err: any) {
+          console.warn(`Gemini vision model ${m} attempt failed, trying next:`, err?.message || err);
+        }
+      }
+
+      if (!result) {
+        throw new Error('All Gemini vision model candidates failed');
+      }
+
       const text = result.response.text().trim().replace(/^```(json)?\n?/, '').replace(/\n?```$/, '');
       const parsed = JSON.parse(text);
 
@@ -70,7 +89,7 @@ Return STRICTLY a valid JSON object without markdown ticks or backticks:
         success: true,
         source: 'live',
         data: feedback,
-        evaluated_via: 'gemini-1.5-flash-vision'
+        evaluated_via: usedModel
       });
     } catch (e: any) {
       console.warn('Gemini vision evaluation fallback:', e?.message || e);
