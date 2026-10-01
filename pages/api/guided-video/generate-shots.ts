@@ -81,7 +81,12 @@ Return STRICTLY a valid JSON array of 3 shots with no markdown ticks or text for
         status: 'pending' as const
       }));
 
-      return res.status(200).json({ success: true, data: shots, generated_via: 'gemini-1.5-flash' });
+      return res.status(200).json({ 
+        success: true, 
+        source: 'live',
+        data: shots, 
+        generated_via: 'gemini-1.5-flash' 
+      });
     } catch (e: any) {
       console.warn('Gemini shot generation fallback:', e?.message || e);
     }
@@ -118,7 +123,12 @@ Output STRICT JSON array only with keys: shot_number, title, instruction, camera
           voiceover_script: s.voiceover_script,
           status: 'pending' as const
         }));
-        return res.status(200).json({ success: true, data: shots, generated_via: 'claude-3-5-sonnet' });
+        return res.status(200).json({ 
+          success: true, 
+          source: 'live',
+          data: shots, 
+          generated_via: 'claude-3-5-sonnet' 
+        });
       }
     } catch (e) {
       console.warn('Claude shot fallback:', e);
@@ -233,6 +243,7 @@ Output STRICT JSON array only with keys: shot_number, title, instruction, camera
 
   return res.status(200).json({
     success: true,
+    source: 'mock',
     data: shots,
     generated_via: 'smart-template-engine'
   });

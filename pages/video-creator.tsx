@@ -108,6 +108,7 @@ export default function VideoCreatorPage() {
       });
 
       const json = await res.json();
+      console.log('[Video Creator] Shot generation source:', json.source);
       if (json.data && Array.isArray(json.data)) {
         setShots(json.data);
         setCurrentStep(2);
@@ -148,6 +149,7 @@ export default function VideoCreatorPage() {
       });
 
       const json = await res.json();
+      console.log('[Video Creator] Vision analysis source:', json.source);
       const feedback: ShotFeedback = json.data || {
         matches: true,
         score: 94,

@@ -68,6 +68,7 @@ Return STRICTLY a valid JSON object without markdown ticks or backticks:
 
       return res.status(200).json({
         success: true,
+        source: 'live',
         data: feedback,
         evaluated_via: 'gemini-1.5-flash-vision'
       });
@@ -86,6 +87,7 @@ Return STRICTLY a valid JSON object without markdown ticks or backticks:
 
   return res.status(200).json({
     success: true,
+    source: 'mock',
     data: feedback,
     evaluated_via: 'vision-heuristics-engine'
   });
